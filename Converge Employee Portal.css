@@ -1,0 +1,112 @@
+body{
+background-image: url("/Pictures/Medical.jpg");
+background-repeat: no-repeat;
+background-attachment: center;
+background-position: center; 
+background-size: auto;
+border: 10px solid ;
+border-style: ridge;
+padding: absolute;
+background-position-x: center;
+
+
+
+}
+h1 {text-align: center;}
+p {text-align: center;}
+div {text-align: center;}
+
+.button {
+  border: none;
+  color: white;
+  padding: 16px 100px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  width: 400px;
+  border-radius: 45px;
+  font-family: "Trebuchet MS", Helvetica, sans-serif;
+
+}
+
+.button1 {
+  background-color: green; 
+  color: whitesmoke; 
+  
+}
+
+.button1:hover {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.button2 {
+  background-color: green; 
+  color: whitesmoke; 
+  
+}
+
+.button2:hover {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.button3 {
+  background-color: green; 
+  color: whitesmoke; 
+  
+}
+
+.button3:hover {
+  background-color: #4CAF50;
+  color: white;
+}
+.button {
+  background-color: green; 
+  color: whitesmoke; 
+  
+}
+
+.button4:hover {
+  background-color: #4CAF50;
+  color: white;
+  
+}
+
+.button4:focus{
+  background-color:red;
+}
+
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#myDIV {
+  position: center;
+  height:5px;
+  background-color:#FFFFFF;
+  text-align: right;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  width: 400px;
+  border-radius: 45px;
+  font-family: "Arial";
+}
+
+.p1 {
+  font-family: "Arial";
+  
+}
+
+.register {
+  font-family: "Trebuchet MS", Helvetica, sans-serif;
+}
