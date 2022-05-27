@@ -2,7 +2,16 @@
 h1, h2  {text-align: center;}
 p {text-align: center;}
 
+/*ADD*/
+div.a {
+   
+  width: 200px; 
+  padding-left: 285px
+}
 
+
+
+/* Button*/
 .button {
     background-color: #f70000; /* Green */
     border: none;

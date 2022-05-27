@@ -1,76 +1,12 @@
-//CHECKBOX parent child
-var toggleChecks = function () {
-  var isMaster = this.hasAttribute("data-master-checkbox");
-  var group = this.closest("[checkbox-group]");
-  var boxes = group.querySelectorAll(
-    "input[type=checkbox]:not([data-master-checkbox])"
-  );
-  var master = isMaster
-    ? this
-    : group.querySelector("input[type=checkbox][data-master-checkbox]");
-
-  if (isMaster) {
-    // Set all children to the value of the parent
-    for (var i = 0; i < boxes.length; i++) {
-      boxes[i].checked = this.checked;
-    }
-  } else {
-    // Toggle all children to the state of the master
-    var checkedCount = 0;
-    for (var i = 0; i < boxes.length; i++) {
-      if (boxes[i].checked) {
-        checkedCount += 1;
-      }
-    }
-
-    master.checked = checkedCount == boxes.length;
-    master.indeterminate = !master.checked && !checkedCount == 0;
-  }
-};
-
-var nodes = document.querySelectorAll("[checkbox-group] input[type=checkbox]");
-for (var i = 0; i < nodes.length; i++) {
-  nodes[i].addEventListener("change", toggleChecks);
-}
-//CHECKBOX
-
-//Radio Button
-
-const sizes = ["Yes", "No"];
-
-// generate the radio groups
-const group = document.querySelector("#group");
-if (group) {
-  group.innerHTML = sizes
-    .map(
-      (size) => `<div>
-          <input type="radio" name="size" value="${size}" id="${size}
-           ${size}">${size}
-      </div>`
-    )
-    .join(" ");
-}
-
-// add an event listener for the change event
-const checkboxButtons = document.querySelectorAll('input[name="size"]');
-for (const checkboxButton of checkboxButtons) {
-  checkboxButton.addEventListener("change", showSelected);
-}
-
-function showSelected(e) {
-  console.log(e);
-  if (this.checked) {
-    document.querySelector("#output").innerText = ` ${this.value}`;
-  }
-}
-
+//Radio Button parent child
 function myFunction(type, option) {
-  let checkBox = document.getElementById(type);
+  let radio = document.getElementById(type);
   let text = document.getElementById(option);
-  if (checkBox.checked == true) {
+  if (radio.checked == true) {
     text.style.display = "block";
   } else {
     text.style.display = "none";
+    return;
   }
 }
 
@@ -100,6 +36,34 @@ async function modifyPdf() {
   const names1 = document.getElementById("firstName1");
   let fileName = `EARF_${names.value},${names1.value} ${names2.value}.pdf`;
 
+  let reqdate = new Date();
+
+  // Get full date.
+  let date =
+    reqdate.getDate() +
+    "/" +
+    (reqdate.getMonth() + 1) +
+    "/" +
+    reqdate.getFullYear();
+
+  // Get full time.
+  let hrs = reqdate.getHours();
+  let min = reqdate.getMinutes();
+  //let sec = reqdate.getSeconds();
+  let ampm = hrs >= 12 ? "PM" : "AM";
+  hrs = hrs % 12;
+  hrs = hrs ? hrs : 12;
+
+  let time = hrs + ":" + min + " " + ampm;
+
+  let header = date + " " + "(" + time + ")";
+  firstPage.drawText(header, {
+    x: 105,
+    y: 641,
+    size: 7,
+    font: helveticaFont,
+  });
+
   //Employee Account Request Form
   //Employee Number
   const employeenumber = document.getElementById("employeenumber");
@@ -107,6 +71,14 @@ async function modifyPdf() {
     x: 160,
     y: 706,
     size: 8,
+    font: helveticaFont,
+  });
+  //Ticket No.
+  const ticket = document.getElementById("ticketno");
+  firstPage.drawText(ticket.value, {
+    x: 420,
+    y: 731.5,
+    size: 6.5,
     font: helveticaFont,
   });
   //Last Name
@@ -164,23 +136,6 @@ async function modifyPdf() {
     size: 6,
     font: helveticaFont,
   });
-  //Location
-  const loc = document.getElementById("location");
-  firstPage.drawText(loc.value, {
-    x: 434,
-    y: 660,
-    size: 6,
-    font: helveticaFont,
-  });
-  //Immediate Head (Buddy partner)
-  const budd = document.getElementById("buddy");
-  firstPage.drawText(budd.value, {
-    x: 150,
-    y: 653,
-    size: 6,
-    font: helveticaFont,
-  });
-
   //Workstation:to be filled by BUH
   //Windows Desktop
   const desktop = document.getElementById("desktop");
@@ -209,8 +164,62 @@ async function modifyPdf() {
     font: helveticaFont,
   });
 
-  //Applications
+  //Justification
+  const justify = document.getElementById("justification");
+  firstPage.drawText(justify.value, {
+    x: 140,
+    y: 601,
+    size: 6,
+    font: helveticaFont,
+  });
 
+  //Enterprise Access Request
+  //NT Login
+  const ntlogin = document.getElementById("ntLogin");
+  firstPage.drawText(ntlogin.value, {
+    x: 250,
+    y: 582,
+    size: 6,
+    font: helveticaFont,
+  });
+
+  //Email ID
+  const emailid = document.getElementById("emailid");
+  firstPage.drawText(emailid.value, {
+    x: 250,
+    y: 575,
+    size: 6,
+    font: helveticaFont,
+  });
+
+  //File Server Access
+  const fsa = document.getElementById("fsa");
+  firstPage.drawText(fsa.value, {
+    x: 250,
+    y: 567,
+    size: 6,
+    font: helveticaFont,
+  });
+
+  //VPN
+  const vpn = document.getElementById("vpn");
+  firstPage.drawText(vpn.value, {
+    x: 250,
+    y: 559,
+    size: 6,
+    font: helveticaFont,
+  });
+
+  //Remarks On Application
+  const remarks = document.getElementById("remarks");
+  firstPage.drawText(remarks.value, {
+    x: 370,
+    y: 535,
+    size: 6,
+    font: helveticaFont,
+  });
+
+  //Applications
   //BSS Checkbox
   const svgPath = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18px" height="18px" viewBox="0 0 18 18" version="1.1">
   <g id="surface1">
@@ -218,15 +227,15 @@ async function modifyPdf() {
   </g>
   </svg>`;
 
-  var array = [];
+  var arraybss = [];
   var checkboxes = document.querySelectorAll("input[name=bss-options]:checked");
 
   for (var i = 0; i < checkboxes.length; i++) {
-    array.push(checkboxes[i].value);
+    arraybss.push(checkboxes[i].value);
   }
 
   //VIEW BSS
-  if (array.includes("view")) {
+  if (arraybss.includes("view")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 188,
@@ -235,7 +244,7 @@ async function modifyPdf() {
     });
   }
   //ADD BSS
-  if (array.includes("add")) {
+  if (arraybss.includes("add")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 214.5,
@@ -245,7 +254,7 @@ async function modifyPdf() {
   }
 
   //EDIT BSS
-  if (array.includes("edit")) {
+  if (arraybss.includes("edit")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 240.5,
@@ -255,7 +264,7 @@ async function modifyPdf() {
   }
 
   //DELETE BSS
-  if (array.includes("delete")) {
+  if (arraybss.includes("delete")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 265.5,
@@ -265,7 +274,7 @@ async function modifyPdf() {
   }
 
   //EXPORT BSS
-  if (array.includes("export")) {
+  if (arraybss.includes("export")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 290.5,
@@ -275,7 +284,7 @@ async function modifyPdf() {
   }
 
   //IMPORT BSS
-  if (array.includes("import")) {
+  if (arraybss.includes("import")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 316.5,
@@ -285,7 +294,7 @@ async function modifyPdf() {
   }
 
   //ADMIN BSS
-  if (array.includes("admin")) {
+  if (arraybss.includes("admin")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 342.5,
@@ -294,16 +303,118 @@ async function modifyPdf() {
     });
   }
 
+  //Radio Button Location
+  var arrayloc = [];
+  var radioButton = document.querySelectorAll("input[name=location]:checked");
+  for (var i = 0; i < radioButton.length; i++) {
+    arrayloc.push(radioButton[i].value);
+  }
+  //METRO MANILA
+  if (arrayloc.includes("Metro Manila")) {
+    {
+      firstPage.drawSvgPath(svgPath, {
+        color: rgb(0, 0, 0),
+        x: 388.5,
+        y: 667,
+        scale: 0.5,
+      });
+    }
+    //OTHERS
+  } else if (arrayloc.includes("others")) {
+    firstPage.drawSvgPath(svgPath, {
+      color: rgb(0, 0, 0),
+      x: 388.5,
+      y: 660,
+      scale: 0.5,
+    });
+  }
+  //Enter Location
+  const location = document.getElementById("otherlocation");
+  if (arrayloc.includes("others")) {
+    firstPage.drawText(location.value, {
+      x: 387,
+      y: 643,
+      size: 7,
+      font: helveticaFont,
+    });
+  }
+
+  //Metro Manila
+  const location1 = document.getElementById("loc");
+  if (arrayloc.includes("Metro Manila")) {
+    firstPage.drawText(location1.value, {
+      x: 434.5,
+      y: 660,
+      size: 6,
+      font: helveticaFont,
+    });
+  }
+  //Radio Button New Account
+  var arraynewaccount = [];
+  var radioButton = document.querySelectorAll("input[name=account]:checked");
+  for (var i = 0; i < radioButton.length; i++) {
+    arraynewaccount.push(radioButton[i].value);
+  }
+
+  //Yes
+  if (arraynewaccount.includes("Yes")) {
+    {
+      firstPage.drawSvgPath(svgPath, {
+        color: rgb(0, 0, 0),
+        x: 284.5,
+        y: 716.5,
+        scale: 0.7,
+      });
+    }
+
+    //No
+  } else if (arraynewaccount.includes("No")) {
+    firstPage.drawSvgPath(svgPath, {
+      color: rgb(0, 0, 0),
+      x: 386.5,
+      y: 716.5,
+      scale: 0.7,
+    });
+  }
+
+  //Radio Button Converge and Subsidiary
+  var arraycon = [];
+  var radioButton = document.querySelectorAll("input[name=radio1]:checked");
+  for (var i = 0; i < radioButton.length; i++) {
+    arraycon.push(radioButton[i].value);
+  }
+
+  //Converge
+  if (arraycon.includes("Converge")) {
+    {
+      firstPage.drawSvgPath(svgPath, {
+        color: rgb(0, 0, 0),
+        x: 387.5,
+        y: 731.8,
+        scale: 0.6,
+      });
+    }
+
+    //Subsidiary
+  } else if (arraycon.includes("Subsidiary")) {
+    firstPage.drawSvgPath(svgPath, {
+      color: rgb(0, 0, 0),
+      x: 387.5,
+      y: 724.3,
+      scale: 0.6,
+    });
+  }
+
   //OSS Checkbox
-  var array = [];
+  var arrayoss = [];
   var checkboxes = document.querySelectorAll("input[name=oss-options]:checked");
 
   for (var i = 0; i < checkboxes.length; i++) {
-    array.push(checkboxes[i].value);
+    arrayoss.push(checkboxes[i].value);
   }
 
   //VIEW OSS
-  if (array.includes("view")) {
+  if (arrayoss.includes("view")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 188,
@@ -312,7 +423,7 @@ async function modifyPdf() {
     });
   }
   //ADD OSS
-  if (array.includes("add")) {
+  if (arrayoss.includes("add")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 214.5,
@@ -322,7 +433,7 @@ async function modifyPdf() {
   }
 
   //EDIT OSS
-  if (array.includes("edit")) {
+  if (arrayoss.includes("edit")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 240.5,
@@ -332,7 +443,7 @@ async function modifyPdf() {
   }
 
   //DELETE OSS
-  if (array.includes("delete")) {
+  if (arrayoss.includes("delete")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 265.5,
@@ -342,7 +453,7 @@ async function modifyPdf() {
   }
 
   //EXPORT OSS
-  if (array.includes("export")) {
+  if (arrayoss.includes("export")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 290.5,
@@ -352,7 +463,7 @@ async function modifyPdf() {
   }
 
   //IMPORT OSS
-  if (array.includes("import")) {
+  if (arrayoss.includes("import")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 316.5,
@@ -362,7 +473,7 @@ async function modifyPdf() {
   }
 
   //ADMIN OSS
-  if (array.includes("admin")) {
+  if (arrayoss.includes("admin")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 342.5,
@@ -372,15 +483,15 @@ async function modifyPdf() {
   }
 
   //SSP Checkbox
-  var array = [];
+  var arrayssp = [];
   var checkboxes = document.querySelectorAll("input[name=ssp-options]:checked");
 
   for (var i = 0; i < checkboxes.length; i++) {
-    array.push(checkboxes[i].value);
+    arrayssp.push(checkboxes[i].value);
   }
 
   //VIEW SSP
-  if (array.includes("view")) {
+  if (arrayssp.includes("view")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 188,
@@ -389,7 +500,7 @@ async function modifyPdf() {
     });
   }
   //ADD SSP
-  if (array.includes("add")) {
+  if (arrayssp.includes("add")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 214.5,
@@ -399,7 +510,7 @@ async function modifyPdf() {
   }
 
   //EDIT SSP
-  if (array.includes("edit")) {
+  if (arrayssp.includes("edit")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 240.5,
@@ -409,7 +520,7 @@ async function modifyPdf() {
   }
 
   //DELETE SSP
-  if (array.includes("delete")) {
+  if (arrayssp.includes("delete")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 265.5,
@@ -419,7 +530,7 @@ async function modifyPdf() {
   }
 
   //EXPORT SSP
-  if (array.includes("export")) {
+  if (arrayssp.includes("export")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 290.5,
@@ -429,7 +540,7 @@ async function modifyPdf() {
   }
 
   //IMPORT SSP
-  if (array.includes("import")) {
+  if (arrayssp.includes("import")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 316.5,
@@ -439,161 +550,7 @@ async function modifyPdf() {
   }
 
   //ADMIN SSP
-  if (array.includes("admin")) {
-    firstPage.drawSvgPath(svgPath, {
-      color: rgb(0, 0, 0),
-      x: 342.5,
-      y: 529,
-      scale: 0.5,
-    });
-  }
-
-  //SSP Checkbox
-  var array = [];
-  var checkboxes = document.querySelectorAll("input[name=ssp-options]:checked");
-
-  for (var i = 0; i < checkboxes.length; i++) {
-    array.push(checkboxes[i].value);
-  }
-
-  //VIEW SSP
-  if (array.includes("view")) {
-    firstPage.drawSvgPath(svgPath, {
-      color: rgb(0, 0, 0),
-      x: 188,
-      y: 529,
-      scale: 0.5,
-    });
-  }
-  //ADD SSP
-  if (array.includes("add")) {
-    firstPage.drawSvgPath(svgPath, {
-      color: rgb(0, 0, 0),
-      x: 214.5,
-      y: 529,
-      scale: 0.5,
-    });
-  }
-
-  //EDIT SSP
-  if (array.includes("edit")) {
-    firstPage.drawSvgPath(svgPath, {
-      color: rgb(0, 0, 0),
-      x: 240.5,
-      y: 529,
-      scale: 0.5,
-    });
-  }
-
-  //DELETE SSP
-  if (array.includes("delete")) {
-    firstPage.drawSvgPath(svgPath, {
-      color: rgb(0, 0, 0),
-      x: 265.5,
-      y: 529,
-      scale: 0.5,
-    });
-  }
-
-  //EXPORT SSP
-  if (array.includes("export")) {
-    firstPage.drawSvgPath(svgPath, {
-      color: rgb(0, 0, 0),
-      x: 290.5,
-      y: 529,
-      scale: 0.5,
-    });
-  }
-
-  //IMPORT SSP
-  if (array.includes("import")) {
-    firstPage.drawSvgPath(svgPath, {
-      color: rgb(0, 0, 0),
-      x: 316.5,
-      y: 529,
-      scale: 0.5,
-    });
-  }
-
-  //ADMIN SSP
-  if (array.includes("admin")) {
-    firstPage.drawSvgPath(svgPath, {
-      color: rgb(0, 0, 0),
-      x: 342.5,
-      y: 529,
-      scale: 0.5,
-    });
-  }
-
-  //SSP Checkbox
-  var array = [];
-  var checkboxes = document.querySelectorAll("input[name=ssp-options]:checked");
-
-  for (var i = 0; i < checkboxes.length; i++) {
-    array.push(checkboxes[i].value);
-  }
-
-  //VIEW SSP
-  if (array.includes("view")) {
-    firstPage.drawSvgPath(svgPath, {
-      color: rgb(0, 0, 0),
-      x: 188,
-      y: 529,
-      scale: 0.5,
-    });
-  }
-  //ADD SSP
-  if (array.includes("add")) {
-    firstPage.drawSvgPath(svgPath, {
-      color: rgb(0, 0, 0),
-      x: 214.5,
-      y: 529,
-      scale: 0.5,
-    });
-  }
-
-  //EDIT SSP
-  if (array.includes("edit")) {
-    firstPage.drawSvgPath(svgPath, {
-      color: rgb(0, 0, 0),
-      x: 240.5,
-      y: 529,
-      scale: 0.5,
-    });
-  }
-
-  //DELETE SSP
-  if (array.includes("delete")) {
-    firstPage.drawSvgPath(svgPath, {
-      color: rgb(0, 0, 0),
-      x: 265.5,
-      y: 529,
-      scale: 0.5,
-    });
-  }
-
-  //EXPORT SSP
-  if (array.includes("export")) {
-    firstPage.drawSvgPath(svgPath, {
-      color: rgb(0, 0, 0),
-      x: 290.5,
-      y: 529,
-      scale: 0.5,
-    });
-  }
-
-  //IMPORT SSP
-  if (array.includes("import")) {
-    firstPage.drawSvgPath(svgPath, {
-      color: rgb(0, 0, 0),
-      x: 316.5,
-      y: 529,
-      scale: 0.5,
-    });
-  }
-
-  //ADMIN SSP
-  if (array.includes("admin")) {
+  if (arrayssp.includes("admin")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 342.5,
@@ -603,17 +560,17 @@ async function modifyPdf() {
   }
 
   //OTRS Checkbox
-  var array = [];
+  var arrayotrs = [];
   var checkboxes = document.querySelectorAll(
     "input[name=otrs-options]:checked"
   );
 
   for (var i = 0; i < checkboxes.length; i++) {
-    array.push(checkboxes[i].value);
+    arrayotrs.push(checkboxes[i].value);
   }
 
   //VIEW OTRS
-  if (array.includes("view")) {
+  if (arrayotrs.includes("view")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 188,
@@ -622,7 +579,7 @@ async function modifyPdf() {
     });
   }
   //ADD OTRS
-  if (array.includes("add")) {
+  if (arrayotrs.includes("add")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 214.5,
@@ -632,7 +589,7 @@ async function modifyPdf() {
   }
 
   //EDIT OTRS
-  if (array.includes("edit")) {
+  if (arrayotrs.includes("edit")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 240.5,
@@ -642,7 +599,7 @@ async function modifyPdf() {
   }
 
   //DELETE OTRS
-  if (array.includes("delete")) {
+  if (arrayotrs.includes("delete")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 265.5,
@@ -652,7 +609,7 @@ async function modifyPdf() {
   }
 
   //EXPORT OTRS
-  if (array.includes("export")) {
+  if (arrayotrs.includes("export")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 290.5,
@@ -662,7 +619,7 @@ async function modifyPdf() {
   }
 
   //IMPORT OTRS
-  if (array.includes("import")) {
+  if (arrayotrs.includes("import")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 316.5,
@@ -672,7 +629,7 @@ async function modifyPdf() {
   }
 
   //ADMIN OTRS
-  if (array.includes("admin")) {
+  if (arrayotrs.includes("admin")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 342.5,
@@ -682,15 +639,15 @@ async function modifyPdf() {
   }
 
   //USP Checkbox
-  var array = [];
+  var arrayusp = [];
   var checkboxes = document.querySelectorAll("input[name=usp-options]:checked");
 
   for (var i = 0; i < checkboxes.length; i++) {
-    array.push(checkboxes[i].value);
+    arrayusp.push(checkboxes[i].value);
   }
 
   //VIEW USP
-  if (array.includes("view")) {
+  if (arrayusp.includes("view")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 188,
@@ -699,7 +656,7 @@ async function modifyPdf() {
     });
   }
   //ADD USP
-  if (array.includes("add")) {
+  if (arrayusp.includes("add")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 214.5,
@@ -709,7 +666,7 @@ async function modifyPdf() {
   }
 
   //EDIT USP
-  if (array.includes("edit")) {
+  if (arrayusp.includes("edit")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 240.5,
@@ -719,7 +676,7 @@ async function modifyPdf() {
   }
 
   //DELETE USP
-  if (array.includes("delete")) {
+  if (arrayusp.includes("delete")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 265.5,
@@ -729,7 +686,7 @@ async function modifyPdf() {
   }
 
   //EXPORT USP
-  if (array.includes("export")) {
+  if (arrayusp.includes("export")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 290.5,
@@ -739,7 +696,7 @@ async function modifyPdf() {
   }
 
   //IMPORT USP
-  if (array.includes("import")) {
+  if (arrayusp.includes("import")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 316.5,
@@ -749,7 +706,7 @@ async function modifyPdf() {
   }
 
   //ADMIN USP
-  if (array.includes("admin")) {
+  if (arrayusp.includes("admin")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 342.5,
@@ -759,17 +716,17 @@ async function modifyPdf() {
   }
 
   //iBASS Checkbox
-  var array = [];
+  var arrayiBASS = [];
   var checkboxes = document.querySelectorAll(
     "input[name=ibass-options]:checked"
   );
 
   for (var i = 0; i < checkboxes.length; i++) {
-    array.push(checkboxes[i].value);
+    arrayiBASS.push(checkboxes[i].value);
   }
 
   //VIEW iBASS
-  if (array.includes("view")) {
+  if (arrayiBASS.includes("view")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 188,
@@ -778,7 +735,7 @@ async function modifyPdf() {
     });
   }
   //ADD iBASS
-  if (array.includes("add")) {
+  if (arrayiBASS.includes("add")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 214.5,
@@ -788,7 +745,7 @@ async function modifyPdf() {
   }
 
   //EDIT iBASS
-  if (array.includes("edit")) {
+  if (arrayiBASS.includes("edit")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 240.5,
@@ -798,7 +755,7 @@ async function modifyPdf() {
   }
 
   //DELETE iBASS
-  if (array.includes("delete")) {
+  if (arrayiBASS.includes("delete")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 265.5,
@@ -808,7 +765,7 @@ async function modifyPdf() {
   }
 
   //EXPORT iBASS
-  if (array.includes("export")) {
+  if (arrayiBASS.includes("export")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 290.5,
@@ -818,7 +775,7 @@ async function modifyPdf() {
   }
 
   //IMPORT iBASS
-  if (array.includes("import")) {
+  if (arrayiBASS.includes("import")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 316.5,
@@ -828,7 +785,7 @@ async function modifyPdf() {
   }
 
   //ADMIN iBASS
-  if (array.includes("admin")) {
+  if (arrayiBASS.includes("admin")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 342.5,
@@ -838,17 +795,17 @@ async function modifyPdf() {
   }
 
   //DOCSIS Checkbox
-  var array = [];
+  var arrayDOCSIS = [];
   var checkboxes = document.querySelectorAll(
     "input[name=docsis-options]:checked"
   );
 
   for (var i = 0; i < checkboxes.length; i++) {
-    array.push(checkboxes[i].value);
+    arrayDOCSIS.push(checkboxes[i].value);
   }
 
   //VIEW DOCSIS
-  if (array.includes("view")) {
+  if (arrayDOCSIS.includes("view")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 188,
@@ -857,7 +814,7 @@ async function modifyPdf() {
     });
   }
   //ADD DOCSIS
-  if (array.includes("add")) {
+  if (arrayDOCSIS.includes("add")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 214.5,
@@ -867,7 +824,7 @@ async function modifyPdf() {
   }
 
   //EDIT DOCSIS
-  if (array.includes("edit")) {
+  if (arrayDOCSIS.includes("edit")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 240.5,
@@ -877,7 +834,7 @@ async function modifyPdf() {
   }
 
   //DELETE DOCSIS
-  if (array.includes("delete")) {
+  if (arrayDOCSIS.includes("delete")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 265.5,
@@ -887,7 +844,7 @@ async function modifyPdf() {
   }
 
   //EXPORT DOCSIS
-  if (array.includes("export")) {
+  if (arrayDOCSIS.includes("export")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 290.5,
@@ -897,7 +854,7 @@ async function modifyPdf() {
   }
 
   //IMPORT DOCSIS
-  if (array.includes("import")) {
+  if (arrayDOCSIS.includes("import")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 316.5,
@@ -907,7 +864,7 @@ async function modifyPdf() {
   }
 
   //ADMIN DOCSIS
-  if (array.includes("admin")) {
+  if (arrayDOCSIS.includes("admin")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 342.5,
@@ -917,17 +874,17 @@ async function modifyPdf() {
   }
 
   //U2000 Checkbox
-  var array = [];
+  var arrayU2000 = [];
   var checkboxes = document.querySelectorAll(
     "input[name=u2000-options]:checked"
   );
 
   for (var i = 0; i < checkboxes.length; i++) {
-    array.push(checkboxes[i].value);
+    arrayU2000.push(checkboxes[i].value);
   }
 
   //VIEW U2000
-  if (array.includes("view")) {
+  if (arrayU2000.includes("view")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 188,
@@ -936,7 +893,7 @@ async function modifyPdf() {
     });
   }
   //ADD U2000
-  if (array.includes("add")) {
+  if (arrayU2000.includes("add")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 214.5,
@@ -946,7 +903,7 @@ async function modifyPdf() {
   }
 
   //EDIT U2000
-  if (array.includes("edit")) {
+  if (arrayU2000.includes("edit")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 240.5,
@@ -956,7 +913,7 @@ async function modifyPdf() {
   }
 
   //DELETE U2000
-  if (array.includes("delete")) {
+  if (arrayU2000.includes("delete")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 265.5,
@@ -966,7 +923,7 @@ async function modifyPdf() {
   }
 
   //EXPORT U2000
-  if (array.includes("export")) {
+  if (arrayU2000.includes("export")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 290.5,
@@ -976,7 +933,7 @@ async function modifyPdf() {
   }
 
   //IMPORT U2000
-  if (array.includes("import")) {
+  if (arrayU2000.includes("import")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 316.5,
@@ -986,7 +943,7 @@ async function modifyPdf() {
   }
 
   //ADMIN U2000
-  if (array.includes("admin")) {
+  if (arrayU2000.includes("admin")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 342.5,
@@ -996,17 +953,17 @@ async function modifyPdf() {
   }
 
   //AVSystem Checkbox
-  var array = [];
+  var arrayAVsystem = [];
   var checkboxes = document.querySelectorAll(
     "input[name=avsystem-options]:checked"
   );
 
   for (var i = 0; i < checkboxes.length; i++) {
-    array.push(checkboxes[i].value);
+    arrayAVsystem.push(checkboxes[i].value);
   }
 
   //VIEW AVSystem
-  if (array.includes("view")) {
+  if (arrayAVsystem.includes("view")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 188,
@@ -1015,7 +972,7 @@ async function modifyPdf() {
     });
   }
   //ADD AVSystem
-  if (array.includes("add")) {
+  if (arrayAVsystem.includes("add")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 214.5,
@@ -1025,7 +982,7 @@ async function modifyPdf() {
   }
 
   //EDIT AVSystem
-  if (array.includes("edit")) {
+  if (arrayAVsystem.includes("edit")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 240.5,
@@ -1035,7 +992,7 @@ async function modifyPdf() {
   }
 
   //DELETE AVSystem
-  if (array.includes("delete")) {
+  if (arrayAVsystem.includes("delete")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 265.5,
@@ -1045,7 +1002,7 @@ async function modifyPdf() {
   }
 
   //EXPORT AVSystem
-  if (array.includes("export")) {
+  if (arrayAVsystem.includes("export")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 290.5,
@@ -1055,7 +1012,7 @@ async function modifyPdf() {
   }
 
   //IMPORT AVSystem
-  if (array.includes("import")) {
+  if (arrayAVsystem.includes("import")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 316.5,
@@ -1065,7 +1022,7 @@ async function modifyPdf() {
   }
 
   //ADMIN AVSystem
-  if (array.includes("admin")) {
+  if (arrayAVsystem.includes("admin")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 342.5,
@@ -1075,17 +1032,17 @@ async function modifyPdf() {
   }
 
   //MRTG Checkbox
-  var array = [];
+  var arrayMRTG = [];
   var checkboxes = document.querySelectorAll(
     "input[name=mrtg-options]:checked"
   );
 
   for (var i = 0; i < checkboxes.length; i++) {
-    array.push(checkboxes[i].value);
+    arrayMRTG.push(checkboxes[i].value);
   }
 
   //VIEW MRTG
-  if (array.includes("view")) {
+  if (arrayMRTG.includes("view")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 188,
@@ -1094,7 +1051,7 @@ async function modifyPdf() {
     });
   }
   //ADD MRTG
-  if (array.includes("add")) {
+  if (arrayMRTG.includes("add")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 214.5,
@@ -1104,7 +1061,7 @@ async function modifyPdf() {
   }
 
   //EDIT MRTG
-  if (array.includes("edit")) {
+  if (arrayMRTG.includes("edit")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 240.5,
@@ -1114,7 +1071,7 @@ async function modifyPdf() {
   }
 
   //DELETE MRTG
-  if (array.includes("delete")) {
+  if (arrayMRTG.includes("delete")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 265.5,
@@ -1124,7 +1081,7 @@ async function modifyPdf() {
   }
 
   //EXPORT MRTG
-  if (array.includes("export")) {
+  if (arrayMRTG.includes("export")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 290.5,
@@ -1134,7 +1091,7 @@ async function modifyPdf() {
   }
 
   //IMPORT MRTG
-  if (array.includes("import")) {
+  if (arrayMRTG.includes("import")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 316.5,
@@ -1144,7 +1101,7 @@ async function modifyPdf() {
   }
 
   //ADMIN MRTG
-  if (array.includes("admin")) {
+  if (arrayMRTG.includes("admin")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 342.5,
@@ -1154,17 +1111,17 @@ async function modifyPdf() {
   }
 
   //CORIANT Checkbox
-  var array = [];
+  var arrayCORIANT = [];
   var checkboxes = document.querySelectorAll(
     "input[name=coriant-options]:checked"
   );
 
   for (var i = 0; i < checkboxes.length; i++) {
-    array.push(checkboxes[i].value);
+    arrayCORIANT.push(checkboxes[i].value);
   }
 
   //VIEW CORIANT
-  if (array.includes("view")) {
+  if (arrayCORIANT.includes("view")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 188,
@@ -1173,7 +1130,7 @@ async function modifyPdf() {
     });
   }
   //ADD CORIANT
-  if (array.includes("add")) {
+  if (arrayCORIANT.includes("add")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 214.5,
@@ -1183,7 +1140,7 @@ async function modifyPdf() {
   }
 
   //EDIT CORIANT
-  if (array.includes("edit")) {
+  if (arrayCORIANT.includes("edit")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 240.5,
@@ -1193,7 +1150,7 @@ async function modifyPdf() {
   }
 
   //DELETE CORIANT
-  if (array.includes("delete")) {
+  if (arrayCORIANT.includes("delete")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 265.5,
@@ -1203,7 +1160,7 @@ async function modifyPdf() {
   }
 
   //EXPORT CORIANT
-  if (array.includes("export")) {
+  if (arrayCORIANT.includes("export")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 290.5,
@@ -1213,7 +1170,7 @@ async function modifyPdf() {
   }
 
   //IMPORT CORIANT
-  if (array.includes("import")) {
+  if (arrayCORIANT.includes("import")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 316.5,
@@ -1223,7 +1180,7 @@ async function modifyPdf() {
   }
 
   //ADMIN CORIANT
-  if (array.includes("admin")) {
+  if (arrayCORIANT.includes("admin")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 342.5,
@@ -1233,17 +1190,17 @@ async function modifyPdf() {
   }
 
   //Facebook Checkbox
-  var array = [];
+  var arrayFacebook = [];
   var checkboxes = document.querySelectorAll(
     "input[name=facebook-options]:checked"
   );
 
   for (var i = 0; i < checkboxes.length; i++) {
-    array.push(checkboxes[i].value);
+    arrayFacebook.push(checkboxes[i].value);
   }
 
   //VIEW Facebook
-  if (array.includes("view")) {
+  if (arrayFacebook.includes("view")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 188,
@@ -1252,7 +1209,7 @@ async function modifyPdf() {
     });
   }
   //ADD Facebook
-  if (array.includes("add")) {
+  if (arrayFacebook.includes("add")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 214.5,
@@ -1262,7 +1219,7 @@ async function modifyPdf() {
   }
 
   //EDIT Facebook
-  if (array.includes("edit")) {
+  if (arrayFacebook.includes("edit")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 240.5,
@@ -1272,7 +1229,7 @@ async function modifyPdf() {
   }
 
   //DELETE Facebook
-  if (array.includes("delete")) {
+  if (arrayFacebook.includes("delete")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 265.5,
@@ -1282,7 +1239,7 @@ async function modifyPdf() {
   }
 
   //EXPORT Facebook
-  if (array.includes("export")) {
+  if (arrayFacebook.includes("export")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 290.5,
@@ -1292,7 +1249,7 @@ async function modifyPdf() {
   }
 
   //IMPORT Facebook
-  if (array.includes("import")) {
+  if (arrayFacebook.includes("import")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 316.5,
@@ -1302,7 +1259,7 @@ async function modifyPdf() {
   }
 
   //ADMIN Facebook
-  if (array.includes("admin")) {
+  if (arrayFacebook.includes("admin")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 342.5,
@@ -1312,17 +1269,17 @@ async function modifyPdf() {
   }
 
   //Youtube Checkbox
-  var array = [];
+  var arrayYoutube = [];
   var checkboxes = document.querySelectorAll(
     "input[name=youtube-options]:checked"
   );
 
   for (var i = 0; i < checkboxes.length; i++) {
-    array.push(checkboxes[i].value);
+    arrayYoutube.push(checkboxes[i].value);
   }
 
   //VIEW Youtube
-  if (array.includes("view")) {
+  if (arrayYoutube.includes("view")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 188,
@@ -1331,7 +1288,7 @@ async function modifyPdf() {
     });
   }
   //ADD Youtube
-  if (array.includes("add")) {
+  if (arrayYoutube.includes("add")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 214.5,
@@ -1341,7 +1298,7 @@ async function modifyPdf() {
   }
 
   //EDIT Youtube
-  if (array.includes("edit")) {
+  if (arrayYoutube.includes("edit")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 240.5,
@@ -1351,7 +1308,7 @@ async function modifyPdf() {
   }
 
   //DELETE Youtube
-  if (array.includes("delete")) {
+  if (arrayYoutube.includes("delete")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 265.5,
@@ -1361,7 +1318,7 @@ async function modifyPdf() {
   }
 
   //EXPORT Youtube
-  if (array.includes("export")) {
+  if (arrayYoutube.includes("export")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 290.5,
@@ -1371,7 +1328,7 @@ async function modifyPdf() {
   }
 
   //IMPORT Youtube
-  if (array.includes("import")) {
+  if (arrayYoutube.includes("import")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 316.5,
@@ -1381,7 +1338,7 @@ async function modifyPdf() {
   }
 
   //ADMIN Youtube
-  if (array.includes("admin")) {
+  if (arrayYoutube.includes("admin")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 342.5,
@@ -1391,17 +1348,17 @@ async function modifyPdf() {
   }
 
   //IT Ticketing Tool Checkbox
-  var array = [];
+  var arrayITTicketingTool = [];
   var checkboxes = document.querySelectorAll(
     "input[name=it-ticketing-tool-options]:checked"
   );
 
   for (var i = 0; i < checkboxes.length; i++) {
-    array.push(checkboxes[i].value);
+    arrayITTicketingTool.push(checkboxes[i].value);
   }
 
   //VIEW IT Ticketing Tool
-  if (array.includes("view")) {
+  if (arrayITTicketingTool.includes("view")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 188,
@@ -1410,7 +1367,7 @@ async function modifyPdf() {
     });
   }
   //ADD IT Ticketing Tool
-  if (array.includes("add")) {
+  if (arrayITTicketingTool.includes("add")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 214.5,
@@ -1420,7 +1377,7 @@ async function modifyPdf() {
   }
 
   //EDIT IT Ticketing Tool
-  if (array.includes("edit")) {
+  if (arrayITTicketingTool.includes("edit")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 240.5,
@@ -1430,7 +1387,7 @@ async function modifyPdf() {
   }
 
   //DELETE IT Ticketing Tool
-  if (array.includes("delete")) {
+  if (arrayITTicketingTool.includes("delete")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 265.5,
@@ -1440,7 +1397,7 @@ async function modifyPdf() {
   }
 
   //EXPORT IT Ticketing Tool
-  if (array.includes("export")) {
+  if (arrayITTicketingTool.includes("export")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 290.5,
@@ -1450,7 +1407,7 @@ async function modifyPdf() {
   }
 
   //IMPORT IT Ticketing Tool
-  if (array.includes("import")) {
+  if (arrayITTicketingTool.includes("import")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 316.5,
@@ -1460,7 +1417,7 @@ async function modifyPdf() {
   }
 
   //ADMIN IT Ticketing Tool
-  if (array.includes("admin")) {
+  if (arrayITTicketingTool.includes("admin")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 342.5,
@@ -1470,17 +1427,17 @@ async function modifyPdf() {
   }
 
   //TPD Ticketing Tool Checkbox
-  var array = [];
+  var arrayTPDTicketingTool = [];
   var checkboxes = document.querySelectorAll(
     "input[name=tpd-ticketing-tool-options]:checked"
   );
 
   for (var i = 0; i < checkboxes.length; i++) {
-    array.push(checkboxes[i].value);
+    arrayTPDTicketingTool.push(checkboxes[i].value);
   }
 
   //VIEW TPD Ticketing Tool
-  if (array.includes("view")) {
+  if (arrayTPDTicketingTool.includes("view")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 188,
@@ -1489,7 +1446,7 @@ async function modifyPdf() {
     });
   }
   //ADD TPD Ticketing Tool
-  if (array.includes("add")) {
+  if (arrayTPDTicketingTool.includes("add")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 214.5,
@@ -1499,7 +1456,7 @@ async function modifyPdf() {
   }
 
   //EDIT TPD Ticketing Tool
-  if (array.includes("edit")) {
+  if (arrayTPDTicketingTool.includes("edit")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 240.5,
@@ -1509,7 +1466,7 @@ async function modifyPdf() {
   }
 
   //DELETE TPD Ticketing Tool
-  if (array.includes("delete")) {
+  if (arrayTPDTicketingTool.includes("delete")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 265.5,
@@ -1519,7 +1476,7 @@ async function modifyPdf() {
   }
 
   //EXPORT TPD Ticketing Tool
-  if (array.includes("export")) {
+  if (arrayTPDTicketingTool.includes("export")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 290.5,
@@ -1529,7 +1486,7 @@ async function modifyPdf() {
   }
 
   //IMPORT TPD Ticketing Tool
-  if (array.includes("import")) {
+  if (arrayTPDTicketingTool.includes("import")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 316.5,
@@ -1539,7 +1496,7 @@ async function modifyPdf() {
   }
 
   //ADMIN TPD Ticketing Tool
-  if (array.includes("admin")) {
+  if (arrayTPDTicketingTool.includes("admin")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 342.5,
@@ -1549,15 +1506,15 @@ async function modifyPdf() {
   }
 
   //HCM Checkbox
-  var array = [];
+  var arrayHCM = [];
   var checkboxes = document.querySelectorAll("input[name=hcm-options]:checked");
 
   for (var i = 0; i < checkboxes.length; i++) {
-    array.push(checkboxes[i].value);
+    arrayHCM.push(checkboxes[i].value);
   }
 
   //VIEW HCM
-  if (array.includes("view")) {
+  if (arrayHCM.includes("view")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 188,
@@ -1566,7 +1523,7 @@ async function modifyPdf() {
     });
   }
   //ADD HCM
-  if (array.includes("add")) {
+  if (arrayHCM.includes("add")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 214.5,
@@ -1576,7 +1533,7 @@ async function modifyPdf() {
   }
 
   //EDIT HCM
-  if (array.includes("edit")) {
+  if (arrayHCM.includes("edit")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 240.5,
@@ -1586,7 +1543,7 @@ async function modifyPdf() {
   }
 
   //DELETE HCM
-  if (array.includes("delete")) {
+  if (arrayHCM.includes("delete")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 265.5,
@@ -1596,7 +1553,7 @@ async function modifyPdf() {
   }
 
   //EXPORT HCM
-  if (array.includes("export")) {
+  if (arrayHCM.includes("export")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 290.5,
@@ -1606,7 +1563,7 @@ async function modifyPdf() {
   }
 
   //IMPORT HCM
-  if (array.includes("import")) {
+  if (arrayHCM.includes("import")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 316.5,
@@ -1616,7 +1573,7 @@ async function modifyPdf() {
   }
 
   //ADMIN HCM
-  if (array.includes("admin")) {
+  if (arrayHCM.includes("admin")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 342.5,
@@ -1626,15 +1583,15 @@ async function modifyPdf() {
   }
 
   //ERP Checkbox
-  var array = [];
+  var arrayERP = [];
   var checkboxes = document.querySelectorAll("input[name=erp-options]:checked");
 
   for (var i = 0; i < checkboxes.length; i++) {
-    array.push(checkboxes[i].value);
+    arrayERP.push(checkboxes[i].value);
   }
 
   //VIEW ERP
-  if (array.includes("view")) {
+  if (arrayERP.includes("view")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 188,
@@ -1643,7 +1600,7 @@ async function modifyPdf() {
     });
   }
   //ADD ERP
-  if (array.includes("add")) {
+  if (arrayERP.includes("add")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 214.5,
@@ -1653,7 +1610,7 @@ async function modifyPdf() {
   }
 
   //EDIT ERP
-  if (array.includes("edit")) {
+  if (arrayERP.includes("edit")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 240.5,
@@ -1663,7 +1620,7 @@ async function modifyPdf() {
   }
 
   //DELETE ERP
-  if (array.includes("delete")) {
+  if (arrayERP.includes("delete")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 265.5,
@@ -1673,7 +1630,7 @@ async function modifyPdf() {
   }
 
   //EXPORT ERP
-  if (array.includes("export")) {
+  if (arrayERP.includes("export")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 290.5,
@@ -1683,7 +1640,7 @@ async function modifyPdf() {
   }
 
   //IMPORT ERP
-  if (array.includes("import")) {
+  if (arrayERP.includes("import")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 316.5,
@@ -1693,7 +1650,7 @@ async function modifyPdf() {
   }
 
   //ADMIN ERP
-  if (array.includes("admin")) {
+  if (arrayERP.includes("admin")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 342.5,
@@ -1703,17 +1660,17 @@ async function modifyPdf() {
   }
 
   //Nap Locator Checkbox
-  var array = [];
+  var arrayNapLocator = [];
   var checkboxes = document.querySelectorAll(
     "input[name=naplocator-options]:checked"
   );
 
   for (var i = 0; i < checkboxes.length; i++) {
-    array.push(checkboxes[i].value);
+    arrayNapLocator.push(checkboxes[i].value);
   }
 
   //VIEW Nap Locator
-  if (array.includes("view")) {
+  if (arrayNapLocator.includes("view")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 188,
@@ -1722,7 +1679,7 @@ async function modifyPdf() {
     });
   }
   //ADD Nap Locator
-  if (array.includes("add")) {
+  if (arrayNapLocator.includes("add")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 214.5,
@@ -1732,7 +1689,7 @@ async function modifyPdf() {
   }
 
   //EDIT Nap Locator
-  if (array.includes("edit")) {
+  if (arrayNapLocator.includes("edit")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 240.5,
@@ -1742,7 +1699,7 @@ async function modifyPdf() {
   }
 
   //DELETE Nap Locator
-  if (array.includes("delete")) {
+  if (arrayNapLocator.includes("delete")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 265.5,
@@ -1752,7 +1709,7 @@ async function modifyPdf() {
   }
 
   //EXPORT Nap Locator
-  if (array.includes("export")) {
+  if (arrayNapLocator.includes("export")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 290.5,
@@ -1762,7 +1719,7 @@ async function modifyPdf() {
   }
 
   //IMPORT Nap Locator
-  if (array.includes("import")) {
+  if (arrayNapLocator.includes("import")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 316.5,
@@ -1772,7 +1729,7 @@ async function modifyPdf() {
   }
 
   //ADMIN Nap Locator
-  if (array.includes("admin")) {
+  if (arrayNapLocator.includes("admin")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 342.5,
@@ -1782,17 +1739,17 @@ async function modifyPdf() {
   }
 
   //Gsuite Checkbox
-  var array = [];
+  var arrayGsuite = [];
   var checkboxes = document.querySelectorAll(
     "input[name=gsuite-options]:checked"
   );
 
   for (var i = 0; i < checkboxes.length; i++) {
-    array.push(checkboxes[i].value);
+    arrayGsuite.push(checkboxes[i].value);
   }
 
   //VIEW Gsuite
-  if (array.includes("view")) {
+  if (arrayGsuite.includes("view")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 188,
@@ -1801,7 +1758,7 @@ async function modifyPdf() {
     });
   }
   //ADD Gsuite
-  if (array.includes("add")) {
+  if (arrayGsuite.includes("add")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 214.5,
@@ -1811,7 +1768,7 @@ async function modifyPdf() {
   }
 
   //EDIT Gsuite
-  if (array.includes("edit")) {
+  if (arrayGsuite.includes("edit")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 240.5,
@@ -1821,7 +1778,7 @@ async function modifyPdf() {
   }
 
   //DELETE Gsuite
-  if (array.includes("delete")) {
+  if (arrayGsuite.includes("delete")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 265.5,
@@ -1831,7 +1788,7 @@ async function modifyPdf() {
   }
 
   //EXPORT Gsuite
-  if (array.includes("export")) {
+  if (arrayGsuite.includes("export")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 290.5,
@@ -1841,7 +1798,7 @@ async function modifyPdf() {
   }
 
   //IMPORT Gsuite
-  if (array.includes("import")) {
+  if (arrayGsuite.includes("import")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 316.5,
@@ -1851,7 +1808,7 @@ async function modifyPdf() {
   }
 
   //ADMIN Gsuite
-  if (array.includes("admin")) {
+  if (arrayGsuite.includes("admin")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 342.5,
@@ -1861,17 +1818,17 @@ async function modifyPdf() {
   }
 
   //Domain Controller Checkbox
-  var array = [];
+  var arrayDomainController = [];
   var checkboxes = document.querySelectorAll(
     "input[name=domain-controller-options]:checked"
   );
 
   for (var i = 0; i < checkboxes.length; i++) {
-    array.push(checkboxes[i].value);
+    arrayDomainController.push(checkboxes[i].value);
   }
 
   //VIEW Domain Controller
-  if (array.includes("view")) {
+  if (arrayDomainController.includes("view")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 188,
@@ -1880,7 +1837,7 @@ async function modifyPdf() {
     });
   }
   //ADD Domain Controller
-  if (array.includes("add")) {
+  if (arrayDomainController.includes("add")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 214.5,
@@ -1890,7 +1847,7 @@ async function modifyPdf() {
   }
 
   //EDIT Domain Controller
-  if (array.includes("edit")) {
+  if (arrayDomainController.includes("edit")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 240.5,
@@ -1900,7 +1857,7 @@ async function modifyPdf() {
   }
 
   //DELETE Domain Controller
-  if (array.includes("delete")) {
+  if (arrayDomainController.includes("delete")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 265.5,
@@ -1910,7 +1867,7 @@ async function modifyPdf() {
   }
 
   //EXPORT Domain Controller
-  if (array.includes("export")) {
+  if (arrayDomainController.includes("export")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 290.5,
@@ -1920,7 +1877,7 @@ async function modifyPdf() {
   }
 
   //IMPORT Domain Controller
-  if (array.includes("import")) {
+  if (arrayDomainController.includes("import")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 316.5,
@@ -1930,7 +1887,7 @@ async function modifyPdf() {
   }
 
   //ADMIN Domain Controller
-  if (array.includes("admin")) {
+  if (arrayDomainController.includes("admin")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 342.5,
@@ -1940,17 +1897,17 @@ async function modifyPdf() {
   }
 
   //OSS User Management Checkbox
-  var array = [];
+  var arrayOSSUserManagement = [];
   var checkboxes = document.querySelectorAll(
-    "input[name=oss-user-management-options]:checked"
+    "input[name=oss-user-mangement-options]:checked"
   );
 
   for (var i = 0; i < checkboxes.length; i++) {
-    array.push(checkboxes[i].value);
+    arrayOSSUserManagement.push(checkboxes[i].value);
   }
 
   //VIEW OSS User Management
-  if (array.includes("view")) {
+  if (arrayOSSUserManagement.includes("view")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 188,
@@ -1959,7 +1916,7 @@ async function modifyPdf() {
     });
   }
   //ADD OSS User Management
-  if (array.includes("add")) {
+  if (arrayOSSUserManagement.includes("add")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 214.5,
@@ -1969,7 +1926,7 @@ async function modifyPdf() {
   }
 
   //EDIT OSS User Management
-  if (array.includes("edit")) {
+  if (arrayOSSUserManagement.includes("edit")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 240.5,
@@ -1979,7 +1936,7 @@ async function modifyPdf() {
   }
 
   //DELETE OSS User Management
-  if (array.includes("delete")) {
+  if (arrayOSSUserManagement.includes("delete")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 265.5,
@@ -1989,7 +1946,7 @@ async function modifyPdf() {
   }
 
   //EXPORT OSS User Management
-  if (array.includes("export")) {
+  if (arrayOSSUserManagement.includes("export")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 290.5,
@@ -1999,7 +1956,7 @@ async function modifyPdf() {
   }
 
   //IMPORT OSS User Management
-  if (array.includes("import")) {
+  if (arrayOSSUserManagement.includes("import")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 316.5,
@@ -2009,7 +1966,7 @@ async function modifyPdf() {
   }
 
   //ADMIN OSS User Management
-  if (array.includes("admin")) {
+  if (arrayOSSUserManagement.includes("admin")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 342.5,
@@ -2019,17 +1976,17 @@ async function modifyPdf() {
   }
 
   //Vcenter Checkbox
-  var array = [];
+  var arrayVcenter = [];
   var checkboxes = document.querySelectorAll(
     "input[name=vcenter-options]:checked"
   );
 
   for (var i = 0; i < checkboxes.length; i++) {
-    array.push(checkboxes[i].value);
+    arrayVcenter.push(checkboxes[i].value);
   }
 
   //VIEW Vcenter
-  if (array.includes("view")) {
+  if (arrayVcenter.includes("view")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 188,
@@ -2038,7 +1995,7 @@ async function modifyPdf() {
     });
   }
   //ADD Vcenter
-  if (array.includes("add")) {
+  if (arrayVcenter.includes("add")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 214.5,
@@ -2048,7 +2005,7 @@ async function modifyPdf() {
   }
 
   //EDIT Vcenter
-  if (array.includes("edit")) {
+  if (arrayVcenter.includes("edit")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 240.5,
@@ -2058,7 +2015,7 @@ async function modifyPdf() {
   }
 
   //DELETE Vcenter
-  if (array.includes("delete")) {
+  if (arrayVcenter.includes("delete")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 265.5,
@@ -2068,7 +2025,7 @@ async function modifyPdf() {
   }
 
   //EXPORT Vcenter
-  if (array.includes("export")) {
+  if (arrayVcenter.includes("export")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 290.5,
@@ -2078,7 +2035,7 @@ async function modifyPdf() {
   }
 
   //IMPORT Vcenter
-  if (array.includes("import")) {
+  if (arrayVcenter.includes("import")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 316.5,
@@ -2088,7 +2045,7 @@ async function modifyPdf() {
   }
 
   //ADMIN Vcenter
-  if (array.includes("admin")) {
+  if (arrayVcenter.includes("admin")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 342.5,
@@ -2098,17 +2055,17 @@ async function modifyPdf() {
   }
 
   //Smart Sheet Checkbox
-  var array = [];
+  var arraySmartSheet = [];
   var checkboxes = document.querySelectorAll(
     "input[name=smartsheet-options]:checked"
   );
 
   for (var i = 0; i < checkboxes.length; i++) {
-    array.push(checkboxes[i].value);
+    arraySmartSheet.push(checkboxes[i].value);
   }
 
   //VIEW Smart Sheet
-  if (array.includes("view")) {
+  if (arraySmartSheet.includes("view")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 188,
@@ -2117,7 +2074,7 @@ async function modifyPdf() {
     });
   }
   //ADD Smart Sheet
-  if (array.includes("add")) {
+  if (arraySmartSheet.includes("add")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 214.5,
@@ -2127,7 +2084,7 @@ async function modifyPdf() {
   }
 
   //EDIT Smart Sheet
-  if (array.includes("edit")) {
+  if (arraySmartSheet.includes("edit")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 240.5,
@@ -2137,7 +2094,7 @@ async function modifyPdf() {
   }
 
   //DELETE Smart Sheet
-  if (array.includes("delete")) {
+  if (arraySmartSheet.includes("delete")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 265.5,
@@ -2147,7 +2104,7 @@ async function modifyPdf() {
   }
 
   //EXPORT Smart Sheet
-  if (array.includes("export")) {
+  if (arraySmartSheet.includes("export")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 290.5,
@@ -2157,7 +2114,7 @@ async function modifyPdf() {
   }
 
   //IMPORT Smart Sheet
-  if (array.includes("import")) {
+  if (arraySmartSheet.includes("import")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 316.5,
@@ -2167,7 +2124,7 @@ async function modifyPdf() {
   }
 
   //ADMIN Smart Sheet
-  if (array.includes("admin")) {
+  if (arraySmartSheet.includes("admin")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 342.5,
@@ -2177,17 +2134,17 @@ async function modifyPdf() {
   }
 
   //Tableau Checkbox
-  var array = [];
+  var arrayTableau = [];
   var checkboxes = document.querySelectorAll(
     "input[name=tableau-options]:checked"
   );
 
   for (var i = 0; i < checkboxes.length; i++) {
-    array.push(checkboxes[i].value);
+    arrayTableau.push(checkboxes[i].value);
   }
 
   //VIEW Tableau
-  if (array.includes("view")) {
+  if (arrayTableau.includes("view")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 188,
@@ -2196,7 +2153,7 @@ async function modifyPdf() {
     });
   }
   //ADD Tableau
-  if (array.includes("add")) {
+  if (arrayTableau.includes("add")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 214.5,
@@ -2206,7 +2163,7 @@ async function modifyPdf() {
   }
 
   //EDIT Tableau
-  if (array.includes("edit")) {
+  if (arrayTableau.includes("edit")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 240.5,
@@ -2216,7 +2173,7 @@ async function modifyPdf() {
   }
 
   //DELETE Tableau
-  if (array.includes("delete")) {
+  if (arrayTableau.includes("delete")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 265.5,
@@ -2226,7 +2183,7 @@ async function modifyPdf() {
   }
 
   //EXPORT Tableau
-  if (array.includes("export")) {
+  if (arrayTableau.includes("export")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 290.5,
@@ -2236,7 +2193,7 @@ async function modifyPdf() {
   }
 
   //IMPORT Tableau
-  if (array.includes("import")) {
+  if (arrayTableau.includes("import")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 316.5,
@@ -2246,7 +2203,8 @@ async function modifyPdf() {
   }
 
   //ADMIN Tableau
-  if (array.includes("admin")) {
+
+  if (arrayTableau.includes("admin")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 342.5,
