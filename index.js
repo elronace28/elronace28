@@ -2212,6 +2212,41 @@ async function modifyPdf() {
       scale: 0.5,
     });
   }
+  //Application MS Office Checkbox
+  var arraymsapplication = [];
+  var checkboxes = document.querySelectorAll("input[name=msoffice]:checked");
+
+  for (var i = 0; i < checkboxes.length; i++) {
+    arraymsapplication.push(checkboxes[i].value);
+  }
+
+  //Application MS OFFICE
+  if (arraymsapplication.includes("msOffice")) {
+    firstPage.drawSvgPath(svgPath, {
+      color: rgb(0, 0, 0),
+      x: 188,
+      y: 543.5,
+      scale: 0.5,
+    });
+  }
+  //Application Instant Message check Box
+  var arraymsapplication = [];
+  var checkboxes = document.querySelectorAll(
+    "input[name=instantmessage]:checked"
+  );
+
+  for (var i = 0; i < checkboxes.length; i++) {
+    arraymsapplication.push(checkboxes[i].value);
+  }
+  //Application Instant Message
+  if (arraymsapplication.includes("instantMessage")) {
+    firstPage.drawSvgPath(svgPath, {
+      color: rgb(0, 0, 0),
+      x: 188,
+      y: 543.5,
+      scale: 0.5,
+    });
+  }
 
   // Serialize the PDFDocument to bytes (a Uint8Array)
   const pdfBytes = await pdfDoc.save();
