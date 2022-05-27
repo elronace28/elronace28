@@ -89,15 +89,21 @@ async function modifyPdf() {
     font: helveticaFont,
   });
   //First Name
-
   firstPage.drawText(names1.value, {
     x: 280,
     y: 685,
     size: 8,
     font: helveticaFont,
   });
+  let nameCopy = `${names1.value} ${names2.value} ${names.value} `;
+  //First NameCopy
+  firstPage.drawText(nameCopy, {
+    x: 130,
+    y: 115,
+    size: 6,
+    font: helveticaFont,
+  });
   //Middle Name
-
   firstPage.drawText(names2.value, {
     x: 420,
     y: 685,
@@ -2219,16 +2225,16 @@ async function modifyPdf() {
   for (var i = 0; i < checkboxes.length; i++) {
     arraymsapplication.push(checkboxes[i].value);
   }
-
   //Application MS OFFICE
   if (arraymsapplication.includes("msOffice")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
-      x: 188,
-      y: 543.5,
+      x: 265.5,
+      y: 342.5,
       scale: 0.5,
     });
   }
+
   //Application Instant Message check Box
   var arraymsapplication = [];
   var checkboxes = document.querySelectorAll(
@@ -2242,8 +2248,78 @@ async function modifyPdf() {
   if (arraymsapplication.includes("instantMessage")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
-      x: 188,
-      y: 543.5,
+      x: 265.5,
+      y: 335,
+      scale: 0.5,
+    });
+  }
+
+  //Application Auto CAD check Box
+  var arraymsapplication = [];
+  var checkboxes = document.querySelectorAll("input[name=autocad]:checked");
+
+  for (var i = 0; i < checkboxes.length; i++) {
+    arraymsapplication.push(checkboxes[i].value);
+  }
+  //Application Auto CAD
+  if (arraymsapplication.includes("autoCad")) {
+    firstPage.drawSvgPath(svgPath, {
+      color: rgb(0, 0, 0),
+      x: 265.5,
+      y: 328,
+      scale: 0.5,
+    });
+  }
+
+  //Application WinSCP check Box
+  var arraymsapplication = [];
+  var checkboxes = document.querySelectorAll("input[name=winscp]:checked");
+
+  for (var i = 0; i < checkboxes.length; i++) {
+    arraymsapplication.push(checkboxes[i].value);
+  }
+  //Application WinSCP
+  if (arraymsapplication.includes("winScp")) {
+    firstPage.drawSvgPath(svgPath, {
+      color: rgb(0, 0, 0),
+      x: 265.5,
+      y: 321,
+      scale: 0.5,
+    });
+  }
+
+  //Application Foxit Reader check Box
+  var arraymsapplication = [];
+  var checkboxes = document.querySelectorAll("input[name=foxitreader]:checked");
+
+  for (var i = 0; i < checkboxes.length; i++) {
+    arraymsapplication.push(checkboxes[i].value);
+  }
+  //Application Foxit Reader
+  if (arraymsapplication.includes("foxitReader")) {
+    firstPage.drawSvgPath(svgPath, {
+      color: rgb(0, 0, 0),
+      x: 265.5,
+      y: 314,
+      scale: 0.5,
+    });
+  }
+
+  //Application BI Application check Box
+  var arraymsapplication = [];
+  var checkboxes = document.querySelectorAll(
+    "input[name=biapplication]:checked"
+  );
+
+  for (var i = 0; i < checkboxes.length; i++) {
+    arraymsapplication.push(checkboxes[i].value);
+  }
+  //Application BI Application
+  if (arraymsapplication.includes("biApplication")) {
+    firstPage.drawSvgPath(svgPath, {
+      color: rgb(0, 0, 0),
+      x: 265.5,
+      y: 307,
       scale: 0.5,
     });
   }
