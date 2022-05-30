@@ -1,3 +1,20 @@
+function addinput(type, addinput) {
+  let input = document.getElementById(type);
+  let text = document.getElementById(addinput);
+  if (input.click) {
+    text.style.display = "block";
+  } else text.style.display = "none";
+}
+
+function removeinput(type, removeinput) {
+  let input = document.getElementById(type);
+  let text = document.getElementById(removeinput);
+  if (input.click) {
+    text.style.display = "none";
+    return;
+  }
+}
+
 //Radio Button parent child
 function myFunction(type, option) {
   let radio = document.getElementById(type);
@@ -12,7 +29,6 @@ function myFunction(type, option) {
 
 //PDF COORDINATE
 const { degrees, PDFDocument, StandardFonts, rgb } = PDFLib;
-
 async function modifyPdf() {
   // Fetch an existing PDF document
   const url =
@@ -73,6 +89,9 @@ async function modifyPdf() {
     size: 8,
     font: helveticaFont,
   });
+  if (employeenumber.value == "") {
+    return false;
+  }
   //Ticket No.
   const ticket = document.getElementById("ticketno");
   firstPage.drawText(ticket.value, {
@@ -81,6 +100,9 @@ async function modifyPdf() {
     size: 6.5,
     font: helveticaFont,
   });
+  if (ticket.value == "") {
+    return false;
+  }
   //Last Name
   firstPage.drawText(names.value, {
     x: 160,
@@ -88,6 +110,9 @@ async function modifyPdf() {
     size: 8,
     font: helveticaFont,
   });
+  if (names.value == "") {
+    return false;
+  }
   //First Name
   firstPage.drawText(names1.value, {
     x: 280,
@@ -95,6 +120,9 @@ async function modifyPdf() {
     size: 8,
     font: helveticaFont,
   });
+  if (names1.value == "") {
+    return false;
+  }
   let nameCopy = `${names1.value} ${names2.value} ${names.value} `;
   //First NameCopy
   firstPage.drawText(nameCopy, {
@@ -110,6 +138,9 @@ async function modifyPdf() {
     size: 8,
     font: helveticaFont,
   });
+  if (names2.value == "") {
+    return false;
+  }
   //Email
   const email = document.getElementById("email");
   firstPage.drawText(email.value, {
@@ -118,6 +149,9 @@ async function modifyPdf() {
     size: 6,
     font: helveticaFont,
   });
+  if (email.value == "") {
+    return false;
+  }
   //Department
   const department = document.getElementById("department");
   firstPage.drawText(department.value, {
@@ -126,6 +160,9 @@ async function modifyPdf() {
     size: 6,
     font: helveticaFont,
   });
+  if (department.value == "") {
+    return false;
+  }
   //Contact Number
   const contactnumber = document.getElementById("contactnumber");
   firstPage.drawText(contactnumber.value, {
@@ -134,6 +171,9 @@ async function modifyPdf() {
     size: 6,
     font: helveticaFont,
   });
+  if (contactnumber.value == "") {
+    return false;
+  }
   //JobTitle Number
   const jobtitle = document.getElementById("jobtitle");
   firstPage.drawText(jobtitle.value, {
@@ -142,6 +182,9 @@ async function modifyPdf() {
     size: 6,
     font: helveticaFont,
   });
+  if (jobtitle.value == "") {
+    return false;
+  }
   //Workstation:to be filled by BUH
   //Windows Desktop
   const desktop = document.getElementById("desktop");
@@ -221,6 +264,47 @@ async function modifyPdf() {
   firstPage.drawText(remarks.value, {
     x: 370,
     y: 535,
+    size: 6,
+    font: helveticaFont,
+  });
+  //Tools Specify Here
+  //Other Tools
+  const tools = document.getElementById("tools");
+  firstPage.drawText(tools.value, {
+    x: 285,
+    y: 339,
+    size: 6,
+    font: helveticaFont,
+  });
+  //Other Tools1
+  const tools1 = document.getElementById("tools1");
+  firstPage.drawText(tools1.value, {
+    x: 285,
+    y: 333,
+    size: 6,
+    font: helveticaFont,
+  });
+  //Other Tools2
+  const tools2 = document.getElementById("tools2");
+  firstPage.drawText(tools2.value, {
+    x: 285,
+    y: 327,
+    size: 6,
+    font: helveticaFont,
+  });
+  //Other Tools3
+  const tools3 = document.getElementById("tools3");
+  firstPage.drawText(tools3.value, {
+    x: 285,
+    y: 321,
+    size: 6,
+    font: helveticaFont,
+  });
+  //Other Tools4
+  const tools4 = document.getElementById("tools4");
+  firstPage.drawText(tools4.value, {
+    x: 285,
+    y: 315,
     size: 6,
     font: helveticaFont,
   });
@@ -2323,7 +2407,7 @@ async function modifyPdf() {
       scale: 0.5,
     });
   }
-
+  alert("Download PDF Success");
   // Serialize the PDFDocument to bytes (a Uint8Array)
   const pdfBytes = await pdfDoc.save();
 
