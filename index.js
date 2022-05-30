@@ -418,6 +418,10 @@ async function modifyPdf() {
       scale: 0.5,
     });
   }
+  if (arrayloc == "") {
+    alert("sdfu");
+    return false;
+  }
   //Enter Location
   const location = document.getElementById("otherlocation");
   if (arrayloc.includes("others")) {
