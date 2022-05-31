@@ -75,17 +75,17 @@
             <h3>Location</h3>
             <div id="shalala">
                 <input type="radio" name="location" value="Metro Manila" id="loc"
-                    onclick="modifyPdf('Others', 'option-radio')" required>Metro Manila<br>
+                    onclick="myFunction('Others', 'option-radio')" required>Metro Manila<br>
 
                 <input type="radio" class="radiolocation" name="location" value="others" id="Others"
-                    onclick="modifyPdf('Others', 'option-radio')" required>Others
+                    onclick="myFunction('Others', 'option-radio')" required>Others
                 <div id="option-radio" style="display:none">
-                    <label for="input">Enter Location:</label>
-                    <input id="otherlocation" type="input" name="option-radio" required value="">
+                    <label for="input" required>Enter Location:</label>
+                    <input id="otherlocation" type="input" name="option-radio" value="">
                 </div>
-                <br><br><button class="button button1" onclick="modifyPdf()" id="copyBtn">Modify PDF</button>
+
             </div>
-        </form>
+
 
 
 
@@ -449,16 +449,17 @@
 
     <div input-group id="add-input" style="display:none">
         <h3><label for="input" name="checklist">(Specify Here):</label><br></h3>
-        Enter Here:<input type="text" name="add-input" id="tools" value="" required><br><br>
-        Enter Here:<input type="text" name="add-input" id="tools1" value="" required><br><br>
-        Enter Here:<input type="text" name="add-input" id="tools2" value="" required><br><br>
-        Enter Here:<input type="text" name="add-input" id="tools3" value="" required><br><br>
-        Enter Here:<input type="text" name="add-input" id="tools4" value="" required>
+        Enter Here:<input type="text" name="add-input" id="tools" value=""><br><br>
+        Enter Here:<input type="text" name="add-input" id="tools1" value=""><br><br>
+        Enter Here:<input type="text" name="add-input" id="tools2" value=""><br><br>
+        Enter Here:<input type="text" name="add-input" id="tools3" value=""><br><br>
+        Enter Here:<input type="text" name="add-input" id="tools4" value="">
     </div>
 
 
 
-
+    <br><br><button class="button button1" onclick="modifyPdf()" id="copyBtn">Modify PDF</button>
+    </form>
 
     <script src="index.js"></script>
 

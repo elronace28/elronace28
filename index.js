@@ -419,8 +419,7 @@ async function modifyPdf() {
     });
   }
   if (arrayloc == "") {
-    alert("sdfu");
-    return false;
+    return;
   }
   //Enter Location
   const location = document.getElementById("otherlocation");
