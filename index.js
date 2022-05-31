@@ -9,9 +9,10 @@ function addinput(type, addinput) {
 function removeinput(type, removeinput) {
   let input = document.getElementById(type);
   let text = document.getElementById(removeinput);
+
   if (input.click) {
     text.style.display = "none";
-    return;
+    return false;
   }
 }
 
@@ -123,9 +124,9 @@ async function modifyPdf() {
   if (names1.value == "") {
     return false;
   }
+  //FullName Copy
   let nameCopy = `${names1.value} ${names2.value} ${names.value} `;
-  //First NameCopy
-  firstPage.drawText(nameCopy, {
+  firstPage.drawText(nameCopy.toUpperCase(), {
     x: 130,
     y: 115,
     size: 6,
@@ -270,12 +271,14 @@ async function modifyPdf() {
   //Tools Specify Here
   //Other Tools
   const tools = document.getElementById("tools");
+
   firstPage.drawText(tools.value, {
     x: 285,
     y: 339,
     size: 6,
     font: helveticaFont,
   });
+
   //Other Tools1
   const tools1 = document.getElementById("tools1");
   firstPage.drawText(tools1.value, {

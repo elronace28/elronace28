@@ -19,9 +19,10 @@
 
 
 
-    <h1>Employee Account Request Form</h1>
+    <div class="header">
+        <h1>Employee Account Request Form</h1>
 
-
+    </div>
 
 
 
@@ -409,30 +410,30 @@
     </div>
     <table>
         <tbody>
-
-            <h3>Productivity Tools</h3>
             <tr>
+                <h3>Productivity Tools</h3>
+
                 <td>MS Office</td>
                 <td><input type="checkbox" name="msoffice" value="msOffice" /></td>
-            </tr>
-            <tr>
+
+
                 <td>Instant Message</td>
                 <td><input type="checkbox" name="instantmessage" value="instantMessage" /></td>
-            </tr>
-            <tr>
+
+
                 <td>Auto CAD</td>
                 <td><input type="checkbox" name="autocad" value="autoCad" /></td>
-            </tr>
-            <tr>
+
+
                 <td>WinSCP</td>
                 <td><input type="checkbox" name="winscp" value="winScp" /></td>
-            </tr>
-            <tr>
+
+
                 <td>Foxit Reader</td>
                 <td><input type="checkbox" name="foxitreader" value="foxitReader" /></td>
 
-            </tr>
-            <tr>
+
+
                 <td>BI Application</td>
                 <td><input type="checkbox" name="biapplication" value="biApplication" /></td>
             </tr>
@@ -443,8 +444,14 @@
 
 
 
-    <input type="button" id="add" onclick="addinput('add', 'add-input')" value="Add Tools" />
-    <input type="button" id="add" onclick="removeinput('add', 'add-input')" value="Remove" />
+    <a class="addinput" type="button" class="addinput" id="add" onclick="addinput('add', 'add-input')"
+        value="Add Tools">Add
+        Tools</a>
+
+
+    <!---->
+
+    <!---->
 
 
     <div input-group id="add-input" style="display:none">
@@ -458,7 +465,14 @@
 
 
 
-    <br><br><button class="button button1" onclick="modifyPdf()" id="copyBtn">Modify PDF</button>
+    <br><br><button class="btn" onclick="modifyPdf()" id="copyBtn">Modify PDF</button>
+
+
+
+
+
+
+
     </form>
 
     <script src="index.js"></script>
