@@ -1,3 +1,8 @@
+var loadFile = function (event) {
+  var image = document.getElementById("output");
+  image.src = URL.createObjectURL(event.target.files[0]);
+};
+
 function addinput(type, addinput) {
   let input = document.getElementById(type);
   let text = document.getElementById(addinput);
@@ -48,9 +53,9 @@ async function modifyPdf() {
 
   // Get the width and height of the first page
   const { width, height } = firstPage.getSize();
-  const names2 = document.getElementById("middleName1");
-  const names = document.getElementById("lastName1");
-  const names1 = document.getElementById("firstName1");
+  const names2 = document.getElementById("middleName");
+  const names = document.getElementById("lastName");
+  const names1 = document.getElementById("firstName");
   let fileName = `EARF_${names.value},${names1.value} ${names2.value}.pdf`;
 
   let reqdate = new Date();
@@ -83,7 +88,7 @@ async function modifyPdf() {
 
   //Employee Account Request Form
   //Employee Number
-  const employeenumber = document.getElementById("employeenumber");
+  const employeenumber = document.getElementById("employeeNumber");
   firstPage.drawText(employeenumber.value, {
     x: 160,
     y: 706,
@@ -93,8 +98,9 @@ async function modifyPdf() {
   if (employeenumber.value == "") {
     return false;
   }
+
   //Ticket No.
-  const ticket = document.getElementById("ticketno");
+  const ticket = document.getElementById("ticketNumber");
   firstPage.drawText(ticket.value, {
     x: 420,
     y: 731.5,
@@ -165,7 +171,7 @@ async function modifyPdf() {
     return false;
   }
   //Contact Number
-  const contactnumber = document.getElementById("contactnumber");
+  const contactnumber = document.getElementById("contactNumber");
   firstPage.drawText(contactnumber.value, {
     x: 387,
     y: 674,
@@ -217,7 +223,7 @@ async function modifyPdf() {
   //Justification
   const justify = document.getElementById("justification");
   firstPage.drawText(justify.value, {
-    x: 140,
+    x: 147,
     y: 601,
     size: 6,
     font: helveticaFont,
@@ -453,7 +459,7 @@ async function modifyPdf() {
   }
 
   //Yes
-  if (arraynewaccount.includes("Yes")) {
+  if (arraynewaccount.includes("yes")) {
     {
       firstPage.drawSvgPath(svgPath, {
         color: rgb(0, 0, 0),
@@ -464,7 +470,7 @@ async function modifyPdf() {
     }
 
     //No
-  } else if (arraynewaccount.includes("No")) {
+  } else if (arraynewaccount.includes("no")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 386.5,
@@ -481,7 +487,7 @@ async function modifyPdf() {
   }
 
   //Converge
-  if (arraycon.includes("Converge")) {
+  if (arraycon.includes("converge")) {
     {
       firstPage.drawSvgPath(svgPath, {
         color: rgb(0, 0, 0),
@@ -492,7 +498,7 @@ async function modifyPdf() {
     }
 
     //Subsidiary
-  } else if (arraycon.includes("Subsidiary")) {
+  } else if (arraycon.includes("subsidiary")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
       x: 387.5,
@@ -2413,7 +2419,12 @@ async function modifyPdf() {
       scale: 0.5,
     });
   }
-  alert("Download PDF Success");
+
+  //Option for user to proceed and cancel
+  var result = confirm("Are You Sure?");
+  if (result == false) {
+    return;
+  }
   // Serialize the PDFDocument to bytes (a Uint8Array)
   const pdfBytes = await pdfDoc.save();
 

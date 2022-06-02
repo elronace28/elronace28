@@ -5,448 +5,778 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="index.css">
     <script src="https://unpkg.com/pdf-lib@1.11.0"></script>
     <script src="https://unpkg.com/downloadjs@1.4.7"></script>
 
-
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+        crossorigin="anonymous"></script>
+    <!--<link rel="stylesheet" href="index.css">-->
     <title>Document</title>
-
 </head>
 
 <body>
 
 
-
-
-    <div class="header">
-        <h1>Employee Account Request Form</h1>
-
     </div>
+    <div class="container-sm">
+        <div class="header">
+            <center class="fw-bold fs-1">Employee Account Request Form</center>
+        </div>
 
 
 
 
-    <!--HTML Validation for empty input field-->
-    <div class="container">
+        <!--HTML Validation for empty input field-->
+        <div class="container">
 
-        <form onsubmit="return false">
-
-            <label for="input">Employee Number:</label>
-            <input id="employeenumber" type="text" name="empnumber" value="" required><br>
-
-            <label for="input">Ticket No.</label>
-            <input id="ticketno" type="text" name="ticket" value="" required><br>
-            <div>
-                <h3>New Account?</h3>
-                <input type="radio" name="account" value="Yes" id="yes" required>Yes
-                <input type="radio" name="account" value="No" id="no" required>No
-            </div><br>
-
-            <div>
-                <input type="radio" name="radio1" value="Converge" id="converge" required>Converge<br>
-                <input type="radio" name="radio1" value="Subsidiary" id="subsidiary" required>Subsidiary
-            </div>
+            <form onsubmit="return false">
+                <div class="row">
+                    <div class="col-3 mb-3">
+                        <label for="employeeNumber" class="form-label">Employee Number:</label>
+                        <input type="text" name="employeeNumber" class="form-control" id="employeeNumber" required>
+                    </div>
+                </div>
+                <div class="col-3 mb-3">
+                    <label for="ticketNumber" class="form-label">Ticket Number:</label>
+                    <input type="text" name="ticketNumber" class="form-control" id="ticketNumber" required>
+                </div>
+                <div>
+                    <p class="fw-semibold fs-3">
+                        Account?
+                    </p>
 
 
-            <h2>Full Name</h2>
-            <label for="input">Last Name:</label>
-            <input id="lastName1" type="text" name="lname" value="" required>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="account" value="yes" id="yes" required>
+                        <label class="form-check-label" for="radio">
+                            Yes
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="account" value="no" id="no">
+                        <label class="form-check-label" for="radio" required>
+                            No
+                        </label><br>
 
-            <label for="input">First Name:</label>
-            <input id="firstName1" type="input" name="fname" value="" required>
+                    </div><br>
+                    <p class="text-semibold fs-4">
+                        Select(Converge and Subsidiary)
+                    </p>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="radio1" value="converge" id="converge">
+                        <label class="form-check-label" for="radio1">
+                            Converge
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="radio1" id="subsidiary" value="subsidiary"
+                            required>
+                        <label class="form-check-label" for="radio1">
+                            Subsidiary
+                        </label>
+                    </div>
 
-            <label for="input">Middle Name:</label>
-            <input id="middleName1" type="input" name="mname" value="" required><br>
 
-            <label for="input">Email:</label>
-            <input id="email" type="input" name="em" value="" required><br>
+                    <p class="text-semibold fs-3">
+                        Full Name
+                    </p>
 
-            <label for="input">Department: </label>
-            <input id="department" type="input" name="dpt" value="" required><br>
+                    <div class="row">
+                        <div class="col mb-3">
+                            <label for="lastName" class="form-label">Last Name:</label>
+                            <input type="text" name="lastName" class="form-control" id="lastName" required>
+                        </div>
+                        <div class="col mb-3">
+                            <label for="firstName" class="form-label">First Name:</label>
+                            <input type="text" name="firstName" class="form-control" id="firstName" required>
+                        </div>
+                        <div class="col mb-3">
+                            <label for="middleName" class="form-label">Middle Name:</label>
+                            <input type="text" name="middleName" class="form-control" id="middleName" required>
+                        </div>
 
-            <label for="input">Contact Number:</label>
-            <input id="contactnumber" type="number" name="contnumber" value="" required><br>
+                    </div>
+                    <div class="row">
+                        <div class="col mb-3">
+                            <label for="email" class="form-label">Email:</label>
+                            <input type="text" name="email" placeholder="@example.com" class="form-control" id="email"
+                                required>
+                        </div>
+                        <div class="col mb-3">
+                            <label for="department" class="form-label">Department:</label>
+                            <input type="text" name="department" class="form-control" id="department" required>
+                        </div>
+                        <div class="row">
+                            <div class="col mb-3">
+                                <label for="contactNumber" class="form-label">Contact Number:</label>
+                                <input type="number" name="contactNumber" placeholder="09*********" class="form-control"
+                                    id="contactNumber" required>
+                            </div>
+                            <div class="col mb-3">
+                                <label for="jobtitle" class="form-label">Job Title:</label>
+                                <input type="text" name="jobtitle" class="form-control" id="jobtitle" required>
+                            </div>
 
-            <label for="input">Job Title:</label>
-            <input id="jobtitle" type="input" name="jtitle" value="" required><br>
+                        </div>
+                        <p class="text-semibold fs-2">
+                            Location</p>
 
 
+                    </div>
+                    <div id="shalala">
+                        <input type="radio" name="location" value="Metro Manila" id="loc"
+                            onclick="myFunction('Others', 'option-radio')" required>Metro Manila<br>
 
-            <h3>Location</h3>
-            <div id="shalala">
-                <input type="radio" name="location" value="Metro Manila" id="loc"
-                    onclick="myFunction('Others', 'option-radio')" required>Metro Manila<br>
+                        <input type="radio" class="radiolocation" name="location" value="others" id="Others"
+                            onclick="myFunction('Others', 'option-radio')" required>Others
 
-                <input type="radio" class="radiolocation" name="location" value="others" id="Others"
-                    onclick="myFunction('Others', 'option-radio')" required>Others
-                <div id="option-radio" style="display:none">
-                    <label for="input" required>Enter Location:</label>
-                    <input id="otherlocation" type="input" name="option-radio" value="">
+                        <div class="row" id="option-radio" style="display:none">
+                            <div class="col-3 mb">
+
+                                <span class="input-group-text" id="basic-addon1" required>Enter Location:</span>
+                                <input type="text" class="form-control" id="otherlocation" name="option-radio" value="">
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
-            </div>
+                <div class="container">
+                    <center class="text-semibold fs-1">Workstation:to be filled by BUH</center><br>
+                    <div class="row">
+                        <div class="col mb-3">
+                            <label for="input" class="form-label">Windows Desktop:</label>
+                            <input type="text" name="desktok" class="form-control" id="desktop" value="">
+                        </div>
+                        <div class="col mb-3">
+                            <label for="input" class="form-label">Windows Laptop:</label>
+                            <input type="text" name="laptop" class="form-control" id="laptop" value="">
+                        </div>
+                        <div class="col mb-3">
+                            <label for="input" class="form-label">Apple MAC:</label>
+                            <input type="input" class="form-control" name="applemac" id="applemac" value="">
+                        </div>
+                    </div>
 
 
 
 
-    </div>
+                </div>
 
-    <div class="container1">
-        <h2>Workstation:to be filled by BUH </h2>
-        <label for="input">Windows Desktop:</label>
-        <input id="desktop" type="input" name="windows" value="">
+                <div class="col-md">
+                    <div class="col-6 mb-3">
+                        <label for="floatingTextarea2">Justification(if any):</label>
+                        <textarea class="form-control" placeholder="Leave a comment here" id="justification"
+                            name="justify" style="height: 70px" maxlength="90" value="" rows="5"></textarea>
+                    </div>
 
-        <label for="input">Windows Laptop:</label>
-        <input id="laptop" type="input" name="windows1" value="">
+                    <p class="text-semibold fs-3">
+                        Enterprise Access Request
+                    </p>
+                    <div class="row">
+                        <div class="col-3 mb-3">
+                            <label for="input" class="form-label">NT Login:</label>
+                            <input type="input" class="form-control" name="ntLogin" id="ntLogin" value="">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3 mb-3">
+                            <label for="input" class="form-label"> Email ID::</label>
+                            <input type="input" class="form-control" name="emailid" id="emailid" value="">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3 mb-3">
+                            <label for="input" class="form-label">File Server Access</label>
+                            <input type="input" class="form-control" name="fsa" id="fsa" value="">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3 mb-3">
+                            <label for="input" class="form-label">VPN</label>
+                            <input type="input" class="form-control" name="vpn" id="vpn" value="">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6 mb-3">
+                            <label for="remarks" class="form-label">Remarks</label>
+                            <textarea class="form-control" name="remarks" id="remarks" rows="3"
+                                placeholder="Leave a comment here"></textarea>
+                        </div>
+                    </div>
+                    <!-- <label for="input">Remarks</label><br>
+        <textarea id="remarks" type="textarea" name="remark" value="" rows="10">
+        </textarea><br> -->
 
-        <label for="input">Apple MAC:</label>
-        <input id="applemac" type="input" name="windows2" value=""><br><br>
+                </div>
+                <p class="text-semibold fs-3">
+                    Applications
+                </p>
 
-        <label for="input">Justification(if any):</label><br>
-        <textarea id="justification" type="textarea" name="justify" value="" rows="2" cols="30" maxlength="100">
-        </textarea><br>
 
-        <h3>Enterprise Access Request</h3>
-        <label for="input">NT Login:</label>
-        <input id="ntLogin" type="input" name="ntLogin" value=""><br><br>
 
-        <label for="input">Email ID:</label>
-        <input id="emailid" type="input" name="Emailid" value=""><br><br>
-
-        <label for="input">File Server Access</label>
-        <input id="fsa" type="input" name="FSA" value=""><br><br>
-
-        <label for="input">VPN:</label>
-        <input id="vpn" type="input" name="VPN" value=""><br><br>
-
-        <label for="input">Remarks</label><br>
-        <textarea id="remarks" type="textarea" name="remark" value="" rows="10" cols="50" maxlength="50">
-        </textarea><br>
-
-    </div>
-    <h3>Applications</h3>
-    <div id="app">
+                <thead>
+                    <table>
+                        <thead>
+                            <table class="table table-hover">
+                                <tr>
+                                    <th>List of users</th>
+                                    <th scope="col">View</th>
+                                    <th scope="col">Add</th>
+                                    <th scope="col">Edit</th>
+                                    <th scope="col">Delete</th>
+                                    <th scope="col">Export</th>
+                                    <th scope="col">Import</th>
+                                    <th scope="col">Admin</th>
+                                </tr>
+                        </thead>
+                        <div class="form-check">
+                            <tbody>
+                                <tr>
+                                    <th scope="row">BSS</th>
+                                    <td><input type="checkbox" class="form-check-input" name="bss-options"
+                                            value="view" />
+                                    </td>
+                                    <td><input type="checkbox" class="form-check-input" name="bss-options"
+                                            value="add" />
+                                    </td>
+                                    <td><input type="checkbox" class="form-check-input" name="bss-options"
+                                            value="edit" />
+                                    </td>
+                                    <td><input type="checkbox" class="form-check-input" name="bss-options"
+                                            value="delete" />
+                                    </td>
+                                    <td><input type="checkbox" class="form-check-input" name="bss-options"
+                                            value="export" />
+                                    </td>
+                                    <td><input type="checkbox" class="form-check-input" name="bss-options"
+                                            value="import" />
+                                    </td>
+                                    <td><input type="checkbox" class="form-check-input" name="bss-options"
+                                            value="admin" />
+                                    </td>
+                                </tr>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">OSS</th>
+                                    <td><input type="checkbox" class="form-check-input" name="oss-options"
+                                            value="view" />
+                                    </td>
+                                    <td><input type="checkbox" class="form-check-input" name="oss-options"
+                                            value="add" />
+                                    </td>
+                                    <td><input type="checkbox" class="form-check-input" name="oss-options"
+                                            value="edit" />
+                                    </td>
+                                    <td><input type="checkbox" class="form-check-input" name="oss-options"
+                                            value="delete" />
+                                    </td>
+                                    <td><input type="checkbox" class="form-check-input" name="oss-options"
+                                            value="export" />
+                                    </td>
+                                    <td><input type="checkbox" class="form-check-input" name="oss-options"
+                                            value="import" />
+                                    </td>
+                                    <td><input type="checkbox" class="form-check-input" name="oss-options"
+                                            value="admin" />
+                                    </td>
+                                </tr>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">SSP</th>
+                                    <td><input type="checkbox" class="form-check-input" name="ssp-options"
+                                            value="view" />
+                                    </td>
+                                    <td><input type="checkbox" class="form-check-input" name="ssp-options"
+                                            value="add" />
+                                    </td>
+                                    <td><input type="checkbox" class="form-check-input" name="ssp-options"
+                                            value="edit" />
+                                    </td>
+                                    <td><input type="checkbox" class="form-check-input" name="ssp-options"
+                                            value="delete" />
+                                    </td>
+                                    <td><input type="checkbox" class="form-check-input" name="ssp-options"
+                                            value="export" />
+                                    </td>
+                                    <td><input type="checkbox" class="form-check-input" name="ssp-options"
+                                            value="import" />
+                                    </td>
+                                    <td><input type="checkbox" class="form-check-input" name="ssp-options"
+                                            value="admin" />
+                                    </td>
+                                </tr>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">OTRS</th>
+                                    <td><input type="checkbox" class="form-check-input" name="otrs-options"
+                                            value="view" />
+                                    </td>
+                                    <td><input type="checkbox" class="form-check-input" name="otrs-options"
+                                            value="add" />
+                                    </td>
+                                    <td><input type="checkbox" class="form-check-input" name="otrs-options"
+                                            value="edit" />
+                                    </td>
+                                    <td><input type="checkbox" class="form-check-input" name="otrs-options"
+                                            value="delete" /></td>
+                                    <td><input type="checkbox" class="form-check-input" name="otrs-options"
+                                            value="export" /></td>
+                                    <td><input type="checkbox" class="form-check-input" name="otrs-options"
+                                            value="import" /></td>
+                                    <td><input type="checkbox" class="form-check-input" name="otrs-options"
+                                            value="admin" />
+                                    </td>
+                                </tr>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">USP</th>
+                                    <td><input type="checkbox" class="form-check-input" name="usp-options"
+                                            value="view" />
+                                    </td>
+                                    <td><input type="checkbox" class="form-check-input" name="usp-options"
+                                            value="add" />
+                                    </td>
+                                    <td><input type="checkbox" class="form-check-input" name="usp-options"
+                                            value="edit" />
+                                    </td>
+                                    <td><input type="checkbox" class="form-check-input" name="usp-options"
+                                            value="delete" />
+                                    </td>
+                                    <td><input type="checkbox" class="form-check-input" name="usp-options"
+                                            value="export" />
+                                    </td>
+                                    <td><input type="checkbox" class="form-check-input" name="usp-options"
+                                            value="import" />
+                                    </td>
+                                    <td><input type="checkbox" class="form-check-input" name="usp-options"
+                                            value="admin" />
+                                    </td>
+                                </tr>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">iBASS</th>
+                                    <td><input type="checkbox" class="form-check-input" name="ibass-options"
+                                            value="view" />
+                                    </td>
+                                    <td><input type="checkbox" class="form-check-input" name="ibass-options"
+                                            value="add" />
+                                    </td>
+                                    <td><input type="checkbox" class="form-check-input" name="ibass-options"
+                                            value="edit" />
+                                    </td>
+                                    <td><input type="checkbox" class="form-check-input" name="ibass-options"
+                                            value="delete" /></td>
+                                    <td><input type="checkbox" class="form-check-input" name="ibass-options"
+                                            value="export" /></td>
+                                    <td><input type="checkbox" class="form-check-input" name="ibass-options"
+                                            value="import" /></td>
+                                    <td><input type="checkbox" class="form-check-input" name="ibass-options"
+                                            value="admin" /></td>
+                                </tr>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">DOCSIS</th>
+                                    <td><input type="checkbox" class="form-check-input" name="docsis-options"
+                                            value="view" /></td>
+                                    <td><input type="checkbox" class="form-check-input" name="docsis-options"
+                                            value="add" />
+                                    </td>
+                                    <td><input type="checkbox" class="form-check-input" name="docsis-options"
+                                            value="edit" /></td>
+                                    <td><input type="checkbox" class="form-check-input" name="docsis-options"
+                                            value="delete" /></td>
+                                    <td><input type="checkbox" class="form-check-input" name="docsis-options"
+                                            value="export" /></td>
+                                    <td><input type="checkbox" class="form-check-input" name="docsis-options"
+                                            value="import" /></td>
+                                    <td><input type="checkbox" class="form-check-input" name="docsis-options"
+                                            value="admin" /></td>
+                                </tr>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">U2000</th>
+                                    <td><input type="checkbox" class="form-check-input" name="u2000-options"
+                                            value="view" />
+                                    </td>
+                                    <td><input type="checkbox" class="form-check-input" name="u2000-options"
+                                            value="add" />
+                                    </td>
+                                    <td><input type="checkbox" class="form-check-input" name="u2000-options"
+                                            value="edit" />
+                                    </td>
+                                    <td><input type="checkbox" class="form-check-input" name="u2000-options"
+                                            value="delete" /></td>
+                                    <td><input type="checkbox" class="form-check-input" name="u2000-options"
+                                            value="export" /></td>
+                                    <td><input type="checkbox" class="form-check-input" name="u2000-options"
+                                            value="import" /></td>
+                                    <td><input type="checkbox" class="form-check-input" name="u2000-options"
+                                            value="admin" /></td>
+                                </tr>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">AVSystem</th>
+                                    <td><input type="checkbox" class="form-check-input" name="avsystem-options"
+                                            value="view" /></td>
+                                    <td><input type="checkbox" class="form-check-input" name="avsystem-options"
+                                            value="add" /></td>
+                                    <td><input type="checkbox" class="form-check-input" name="avsystem-options"
+                                            value="edit" /></td>
+                                    <td><input type="checkbox" class="form-check-input" name="avsystem-options"
+                                            value="delete" /></td>
+                                    <td><input type="checkbox" class="form-check-input" name="avsystem-options"
+                                            value="export" /></td>
+                                    <td><input type="checkbox" class="form-check-input" name="avsystem-options"
+                                            value="import" /></td>
+                                    <td><input type="checkbox" class="form-check-input" name="avsystem-options"
+                                            value="admin" /></td>
+                                </tr>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">MRTG</th>
+                                    <td><input type="checkbox" class="form-check-input" name="mrtg-options"
+                                            value="view" />
+                                    </td>
+                                    <td><input type="checkbox" class="form-check-input" name="mrtg-options"
+                                            value="add" />
+                                    </td>
+                                    <td><input type="checkbox" class="form-check-input" name="mrtg-options"
+                                            value="edit" />
+                                    </td>
+                                    <td><input type="checkbox" class="form-check-input" name="mrtg-options"
+                                            value="delete" /></td>
+                                    <td><input type="checkbox" class="form-check-input" name="mrtg-options"
+                                            value="export" /></td>
+                                    <td><input type="checkbox" class="form-check-input" name="mrtg-options"
+                                            value="import" /></td>
+                                    <td><input type="checkbox" class="form-check-input" name="mrtg-options"
+                                            value="admin" />
+                                    </td>
+                                </tr>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">CORIANT</th>
+                                    <td><input type="checkbox" class="form-check-input" name="coriant-options"
+                                            value="view" /></td>
+                                    <td><input type="checkbox" class="form-check-input" name="coriant-options"
+                                            value="add" /></td>
+                                    <td><input type="checkbox" class="form-check-input" name="coriant-options"
+                                            value="edit" /></td>
+                                    <td><input type="checkbox" class="form-check-input" name="coriant-options"
+                                            value="delete" /></td>
+                                    <td><input type="checkbox" class="form-check-input" name="coriant-options"
+                                            value="export" /></td>
+                                    <td><input type="checkbox" class="form-check-input" name="coriant-options"
+                                            value="import" /></td>
+                                    <td><input type="checkbox" class="form-check-input" name="coriant-options"
+                                            value="admin" /></td>
+                                </tr>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">Facebook</th>
+                                    <td><input type="checkbox" class="form-check-input" name="facebook-options"
+                                            value="view" /></td>
+                                    <td><input type="checkbox" class="form-check-input" name="facebook-options"
+                                            value="add" /></td>
+                                    <td><input type="checkbox" class="form-check-input" name="facebook-options"
+                                            value="edit" /></td>
+                                    <td><input type="checkbox" class="form-check-input" name="facebook-options"
+                                            value="delete" /></td>
+                                    <td><input type="checkbox" class="form-check-input" name="facebook-options"
+                                            value="export" /></td>
+                                    <td><input type="checkbox" class="form-check-input" name="facebook-options"
+                                            value="import" /></td>
+                                    <td><input type="checkbox" class="form-check-input" name="facebook-options"
+                                            value="admin" /></td>
+                                </tr>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">Youtube</th>
+                                    <td><input type="checkbox" class="form-check-input" name="youtube-options"
+                                            value="view" /></td>
+                                    <td><input type="checkbox" class="form-check-input" name="youtube-options"
+                                            value="add" /></td>
+                                    <td><input type="checkbox" class="form-check-input" name="youtube-options"
+                                            value="edit" /></td>
+                                    <td><input type="checkbox" class="form-check-input" name="youtube-options"
+                                            value="delete" /></td>
+                                    <td><input type="checkbox" class="form-check-input" name="youtube-options"
+                                            value="export" /></td>
+                                    <td><input type="checkbox" class="form-check-input" name="youtube-options"
+                                            value="import" /></td>
+                                    <td><input type="checkbox" class="form-check-input" name="youtube-options"
+                                            value="admin" /></td>
+                                </tr>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">IT Ticketing Tool</th>
+                                    <td><input type="checkbox" class="form-check-input" name="it-ticketing-tool-options"
+                                            value="view" /></td>
+                                    <td><input type="checkbox" class="form-check-input" name="it-ticketing-tool-options"
+                                            value="add" /></td>
+                                    <td><input type="checkbox" class="form-check-input" name="it-ticketing-tool-options"
+                                            value="edit" /></td>
+                                    <td><input type="checkbox" class="form-check-input" name="it-ticketing-tool-options"
+                                            value="delete" /></td>
+                                    <td><input type="checkbox" class="form-check-input" name="it-ticketing-tool-options"
+                                            value="export" /></td>
+                                    <td><input type="checkbox" class="form-check-input" name="it-ticketing-tool-options"
+                                            value="import" /></td>
+                                    <td><input type="checkbox" class="form-check-input" name="it-ticketing-tool-options"
+                                            value="admin" /></td>
+                                </tr>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">TPD Ticketing Tool</th>
+                                    <td><input type="checkbox" class="form-check-input"
+                                            name="tpd-ticketing-tool-options" value="view" /></td>
+                                    <td><input type="checkbox" class="form-check-input"
+                                            name="tpd-ticketing-tool-options" value="add" /></td>
+                                    <td><input type="checkbox" class="form-check-input"
+                                            name="tpd-ticketing-tool-options" value="edit" /></td>
+                                    <td><input type="checkbox" class="form-check-input"
+                                            name="tpd-ticketing-tool-options" value="delete" /></td>
+                                    <td><input type="checkbox" class="form-check-input"
+                                            name="tpd-ticketing-tool-options" value="export" /></td>
+                                    <td><input type="checkbox" class="form-check-input"
+                                            name="tpd-ticketing-tool-options" value="import" /></td>
+                                    <td><input type="checkbox" class="form-check-input"
+                                            name="tpd-ticketing-tool-options" value="admin" /></td>
+                                </tr>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">HCM</th>
+                                    <td><input type="checkbox" class="form-check-input" name="hcm-options"
+                                            value="view" />
+                                    </td>
+                                    <td><input type="checkbox" class="form-check-input" name="hcm-options"
+                                            value="add" />
+                                    </td>
+                                    <td><input type="checkbox" class="form-check-input" name="hcm-options"
+                                            value="edit" />
+                                    </td>
+                                    <td><input type="checkbox" class="form-check-input" name="hcm-options"
+                                            value="delete" />
+                                    </td>
+                                    <td><input type="checkbox" class="form-check-input" name="hcm-options"
+                                            value="export" />
+                                    </td>
+                                    <td><input type="checkbox" class="form-check-input" name="hcm-options"
+                                            value="import" />
+                                    </td>
+                                    <td><input type="checkbox" class="form-check-input" name="hcm-options"
+                                            value="admin" />
+                                    </td>
+                                </tr>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">ERP</thscope="row">
+                                    <td><input type="checkbox" class="form-check-input" name="erp-options"
+                                            value="view" />
+                                    </td>
+                                    <td><input type="checkbox" class="form-check-input" name="erp-options"
+                                            value="add" />
+                                    </td>
+                                    <td><input type="checkbox" class="form-check-input" name="erp-options"
+                                            value="edit" />
+                                    </td>
+                                    <td><input type="checkbox" class="form-check-input" name="erp-options"
+                                            value="delete" />
+                                    </td>
+                                    <td><input type="checkbox" class="form-check-input" name="erp-options"
+                                            value="export" />
+                                    </td>
+                                    <td><input type="checkbox" class="form-check-input" name="erp-options"
+                                            value="import" />
+                                    </td>
+                                    <td><input type="checkbox" class="form-check-input" name="erp-options"
+                                            value="admin" />
+                                    </td>
+                                </tr>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">NAP Locator</th>
+                                    <td><input type="checkbox" class="form-check-input" name="naplocator-options"
+                                            value="view" /></td>
+                                    <td><input type="checkbox" class="form-check-input" name="naplocator-options"
+                                            value="add" /></td>
+                                    <td><input type="checkbox" class="form-check-input" name="naplocator-options"
+                                            value="edit" /></td>
+                                    <td><input type="checkbox" class="form-check-input" name="naplocator-options"
+                                            value="delete" /></td>
+                                    <td><input type="checkbox" class="form-check-input" name="naplocator-options"
+                                            value="export" /></td>
+                                    <td><input type="checkbox" class="form-check-input" name="naplocator-options"
+                                            value="import" /></td>
+                                    <td><input type="checkbox" class="form-check-input" name="naplocator-options"
+                                            value="admin" /></td>
+                                </tr>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">Gsuite</th>
+                                    <td><input type="checkbox" class="form-check-input" name="gsuite-options"
+                                            value="view" /></td>
+                                    <td><input type="checkbox" class="form-check-input" name="gsuite-options"
+                                            value="add" />
+                                    </td>
+                                    <td><input type="checkbox" class="form-check-input" name="gsuite-options"
+                                            value="edit" /></td>
+                                    <td><input type="checkbox" class="form-check-input" name="gsuite-options"
+                                            value="delete" /></td>
+                                    <td><input type="checkbox" class="form-check-input" name="gsuite-options"
+                                            value="export" /></td>
+                                    <td><input type="checkbox" class="form-check-input" name="gsuite-options"
+                                            value="import" /></td>
+                                    <td><input type="checkbox" class="form-check-input" name="gsuite-options"
+                                            value="admin" /></td>
+                                </tr>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">Domain Controller</th>
+                                    <td><input type="checkbox" class="form-check-input" name="domain-controller-options"
+                                            value="view" /></td>
+                                    <td><input type="checkbox" class="form-check-input" name="domain-controller-options"
+                                            value="add" /></td>
+                                    <td><input type="checkbox" class="form-check-input" name="domain-controller-options"
+                                            value="edit" /></td>
+                                    <td><input type="checkbox" class="form-check-input" name="domain-controller-options"
+                                            value="delete" /></td>
+                                    <td><input type="checkbox" class="form-check-input" name="domain-controller-options"
+                                            value="export" /></td>
+                                    <td><input type="checkbox" class="form-check-input" name="domain-controller-options"
+                                            value="import" /></td>
+                                    <td><input type="checkbox" class="form-check-input" name="domain-controller-options"
+                                            value="admin" /></td>
+                                </tr>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">OSS User management</td>
+                                    <td><input type="checkbox" class="form-check-input"
+                                            name="oss-user-mangement-options" value="view" /></td>
+                                    <td><input type="checkbox" class="form-check-input"
+                                            name="oss-user-mangement-options" value="add" /></td>
+                                    <td><input type="checkbox" class="form-check-input"
+                                            name="oss-user-mangement-options" value="edit" /></td>
+                                    <td><input type="checkbox" class="form-check-input"
+                                            name="oss-user-mangement-options" value="delete" /></td>
+                                    <td><input type="checkbox" class="form-check-input"
+                                            name="oss-user-mangement-options" value="export" /></td>
+                                    <td><input type="checkbox" class="form-check-input"
+                                            name="oss-user-mangement-options" value="import" /></td>
+                                    <td><input type="checkbox" class="form-check-input"
+                                            name="oss-user-mangement-options" value="admin" /></td>
+                                </tr>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">Vcenter</th>
+                                    <td><input type="checkbox" class="form-check-input" name="vcenter-options"
+                                            value="view" /></td>
+                                    <td><input type="checkbox" class="form-check-input" name="vcenter-options"
+                                            value="add" /></td>
+                                    <td><input type="checkbox" class="form-check-input" name="vcenter-options"
+                                            value="edit" /></td>
+                                    <td><input type="checkbox" class="form-check-input" name="vcenter-options"
+                                            value="delete" /></td>
+                                    <td><input type="checkbox" class="form-check-input" name="vcenter-options"
+                                            value="export" /></td>
+                                    <td><input type="checkbox" class="form-check-input" name="vcenter-options"
+                                            value="import" /></td>
+                                    <td><input type="checkbox" class="form-check-input" name="vcenter-options"
+                                            value="admin" /></td>
+                                </tr>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">Smart Sheet</th>
+                                    <td><input type="checkbox" class="form-check-input" name="smartsheet-options"
+                                            value="view" /></td>
+                                    <td><input type="checkbox" class="form-check-input" name="smartsheet-options"
+                                            value="add" /></td>
+                                    <td><input type="checkbox" class="form-check-input" name="smartsheet-options"
+                                            value="edit" /></td>
+                                    <td><input type="checkbox" class="form-check-input" name="smartsheet-options"
+                                            value="delete" /></td>
+                                    <td><input type="checkbox" class="form-check-input" name="smartsheet-options"
+                                            value="export" /></td>
+                                    <td><input type="checkbox" class="form-check-input" name="smartsheet-options"
+                                            value="import" /></td>
+                                    <td><input type="checkbox" class="form-check-input" name="smartsheet-options"
+                                            value="admin" /></td>
+                                </tr>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">Tableau</th>
+                                    <td><input type="checkbox" class="form-check-input" name="tableau-options"
+                                            value="view" /></td>
+                                    <td><input type="checkbox" class="form-check-input" name="tableau-options"
+                                            value="add" /></td>
+                                    <td><input type="checkbox" class="form-check-input" name="tableau-options"
+                                            value="edit" /></td>
+                                    <td><input type="checkbox" class="form-check-input" name="tableau-options"
+                                            value="delete" /></td>
+                                    <td><input type="checkbox" class="form-check-input" name="tableau-options"
+                                            value="export" /></td>
+                                    <td><input type="checkbox" class="form-check-input" name="tableau-options"
+                                            value="import" /></td>
+                                    <td><input type="checkbox" class="form-check-input" name="tableau-options"
+                                            value="admin" /></td>
+                                </tr>
+                            </tbody>
+                        </div>
+                    </table>
+        </div>
         <table>
-            <thead>
+            <tbody>
                 <tr>
-                    <th></th>
-                    <th>View</th>
-                    <th>Add</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
-                    <th>Export</th>
-                    <th>Import</th>
-                    <th>Admin</th>
-                </tr>
-            </thead>
 
-            <tbody>
-                <tr>
-                    <td>BSS</td>
-                    <td><input type="checkbox" name="bss-options" value="view" /></td>
-                    <td><input type="checkbox" name="bss-options" value="add" /></td>
-                    <td><input type="checkbox" name="bss-options" value="edit" /></td>
-                    <td><input type="checkbox" name="bss-options" value="delete" /></td>
-                    <td><input type="checkbox" name="bss-options" value="export" /></td>
-                    <td><input type="checkbox" name="bss-options" value="import" /></td>
-                    <td><input type="checkbox" name="bss-options" value="admin" /></td>
-                </tr>
-            <tbody>
-                <tr>
-                    <td>OSS</td>
-                    <td><input type="checkbox" name="oss-options" value="view" /></td>
-                    <td><input type="checkbox" name="oss-options" value="add" /></td>
-                    <td><input type="checkbox" name="oss-options" value="edit" /></td>
-                    <td><input type="checkbox" name="oss-options" value="delete" /></td>
-                    <td><input type="checkbox" name="oss-options" value="export" /></td>
-                    <td><input type="checkbox" name="oss-options" value="import" /></td>
-                    <td><input type="checkbox" name="oss-options" value="admin" /></td>
-                </tr>
-            <tbody>
-                <tr>
-                    <td>SSP</td>
-                    <td><input type="checkbox" name="ssp-options" value="view" /></td>
-                    <td><input type="checkbox" name="ssp-options" value="add" /></td>
-                    <td><input type="checkbox" name="ssp-options" value="edit" /></td>
-                    <td><input type="checkbox" name="ssp-options" value="delete" /></td>
-                    <td><input type="checkbox" name="ssp-options" value="export" /></td>
-                    <td><input type="checkbox" name="ssp-options" value="import" /></td>
-                    <td><input type="checkbox" name="ssp-options" value="admin" /></td>
-                </tr>
-            <tbody>
-                <tr>
-                    <td>OTRS</td>
-                    <td><input type="checkbox" name="otrs-options" value="view" /></td>
-                    <td><input type="checkbox" name="otrs-options" value="add" /></td>
-                    <td><input type="checkbox" name="otrs-options" value="edit" /></td>
-                    <td><input type="checkbox" name="otrs-options" value="delete" /></td>
-                    <td><input type="checkbox" name="otrs-options" value="export" /></td>
-                    <td><input type="checkbox" name="otrs-options" value="import" /></td>
-                    <td><input type="checkbox" name="otrs-options" value="admin" /></td>
-                </tr>
-            <tbody>
-                <tr>
-                    <td>USP</td>
-                    <td><input type="checkbox" name="usp-options" value="view" /></td>
-                    <td><input type="checkbox" name="usp-options" value="add" /></td>
-                    <td><input type="checkbox" name="usp-options" value="edit" /></td>
-                    <td><input type="checkbox" name="usp-options" value="delete" /></td>
-                    <td><input type="checkbox" name="usp-options" value="export" /></td>
-                    <td><input type="checkbox" name="usp-options" value="import" /></td>
-                    <td><input type="checkbox" name="usp-options" value="admin" /></td>
-                </tr>
-            <tbody>
-                <tr>
-                    <td>iBASS</td>
-                    <td><input type="checkbox" name="ibass-options" value="view" /></td>
-                    <td><input type="checkbox" name="ibass-options" value="add" /></td>
-                    <td><input type="checkbox" name="ibass-options" value="edit" /></td>
-                    <td><input type="checkbox" name="ibass-options" value="delete" /></td>
-                    <td><input type="checkbox" name="ibass-options" value="export" /></td>
-                    <td><input type="checkbox" name="ibass-options" value="import" /></td>
-                    <td><input type="checkbox" name="ibass-options" value="admin" /></td>
-                </tr>
-            <tbody>
-                <tr>
-                    <td>DOCSIS</td>
-                    <td><input type="checkbox" name="docsis-options" value="view" /></td>
-                    <td><input type="checkbox" name="docsis-options" value="add" /></td>
-                    <td><input type="checkbox" name="docsis-options" value="edit" /></td>
-                    <td><input type="checkbox" name="docsis-options" value="delete" /></td>
-                    <td><input type="checkbox" name="docsis-options" value="export" /></td>
-                    <td><input type="checkbox" name="docsis-options" value="import" /></td>
-                    <td><input type="checkbox" name="docsis-options" value="admin" /></td>
-                </tr>
-            <tbody>
-                <tr>
-                    <td>U2000</td>
-                    <td><input type="checkbox" name="u2000-options" value="view" /></td>
-                    <td><input type="checkbox" name="u2000-options" value="add" /></td>
-                    <td><input type="checkbox" name="u2000-options" value="edit" /></td>
-                    <td><input type="checkbox" name="u2000-options" value="delete" /></td>
-                    <td><input type="checkbox" name="u2000-options" value="export" /></td>
-                    <td><input type="checkbox" name="u2000-options" value="import" /></td>
-                    <td><input type="checkbox" name="u2000-options" value="admin" /></td>
-                </tr>
-            <tbody>
-                <tr>
-                    <td>AVSystem</td>
-                    <td><input type="checkbox" name="avsystem-options" value="view" /></td>
-                    <td><input type="checkbox" name="avsystem-options" value="add" /></td>
-                    <td><input type="checkbox" name="avsystem-options" value="edit" /></td>
-                    <td><input type="checkbox" name="avsystem-options" value="delete" /></td>
-                    <td><input type="checkbox" name="avsystem-options" value="export" /></td>
-                    <td><input type="checkbox" name="avsystem-options" value="import" /></td>
-                    <td><input type="checkbox" name="avsystem-options" value="admin" /></td>
-                </tr>
-            <tbody>
-                <tr>
-                    <td>MRTG</td>
-                    <td><input type="checkbox" name="mrtg-options" value="view" /></td>
-                    <td><input type="checkbox" name="mrtg-options" value="add" /></td>
-                    <td><input type="checkbox" name="mrtg-options" value="edit" /></td>
-                    <td><input type="checkbox" name="mrtg-options" value="delete" /></td>
-                    <td><input type="checkbox" name="mrtg-options" value="export" /></td>
-                    <td><input type="checkbox" name="mrtg-options" value="import" /></td>
-                    <td><input type="checkbox" name="mrtg-options" value="admin" /></td>
-                </tr>
-            <tbody>
-                <tr>
-                    <td>CORIANT</td>
-                    <td><input type="checkbox" name="coriant-options" value="view" /></td>
-                    <td><input type="checkbox" name="coriant-options" value="add" /></td>
-                    <td><input type="checkbox" name="coriant-options" value="edit" /></td>
-                    <td><input type="checkbox" name="coriant-options" value="delete" /></td>
-                    <td><input type="checkbox" name="coriant-options" value="export" /></td>
-                    <td><input type="checkbox" name="coriant-options" value="import" /></td>
-                    <td><input type="checkbox" name="coriant-options" value="admin" /></td>
-                </tr>
-            <tbody>
-                <tr>
-                    <td>Facebook</td>
-                    <td><input type="checkbox" name="facebook-options" value="view" /></td>
-                    <td><input type="checkbox" name="facebook-options" value="add" /></td>
-                    <td><input type="checkbox" name="facebook-options" value="edit" /></td>
-                    <td><input type="checkbox" name="facebook-options" value="delete" /></td>
-                    <td><input type="checkbox" name="facebook-options" value="export" /></td>
-                    <td><input type="checkbox" name="facebook-options" value="import" /></td>
-                    <td><input type="checkbox" name="facebook-options" value="admin" /></td>
-                </tr>
-            <tbody>
-                <tr>
-                    <td>Youtube</td>
-                    <td><input type="checkbox" name="youtube-options" value="view" /></td>
-                    <td><input type="checkbox" name="youtube-options" value="add" /></td>
-                    <td><input type="checkbox" name="youtube-options" value="edit" /></td>
-                    <td><input type="checkbox" name="youtube-options" value="delete" /></td>
-                    <td><input type="checkbox" name="youtube-options" value="export" /></td>
-                    <td><input type="checkbox" name="youtube-options" value="import" /></td>
-                    <td><input type="checkbox" name="youtube-options" value="admin" /></td>
-                </tr>
-            <tbody>
-                <tr>
-                    <td>IT Ticketing Tool</td>
-                    <td><input type="checkbox" name="it-ticketing-tool-options" value="view" /></td>
-                    <td><input type="checkbox" name="it-ticketing-tool-options" value="add" /></td>
-                    <td><input type="checkbox" name="it-ticketing-tool-options" value="edit" /></td>
-                    <td><input type="checkbox" name="it-ticketing-tool-options" value="delete" /></td>
-                    <td><input type="checkbox" name="it-ticketing-tool-options" value="export" /></td>
-                    <td><input type="checkbox" name="it-ticketing-tool-options" value="import" /></td>
-                    <td><input type="checkbox" name="it-ticketing-tool-options" value="admin" /></td>
-                </tr>
-            <tbody>
-                <tr>
-                    <td>TPD Ticketing Tool</td>
-                    <td><input type="checkbox" name="tpd-ticketing-tool-options" value="view" /></td>
-                    <td><input type="checkbox" name="tpd-ticketing-tool-options" value="add" /></td>
-                    <td><input type="checkbox" name="tpd-ticketing-tool-options" value="edit" /></td>
-                    <td><input type="checkbox" name="tpd-ticketing-tool-options" value="delete" /></td>
-                    <td><input type="checkbox" name="tpd-ticketing-tool-options" value="export" /></td>
-                    <td><input type="checkbox" name="tpd-ticketing-tool-options" value="import" /></td>
-                    <td><input type="checkbox" name="tpd-ticketing-tool-options" value="admin" /></td>
-                </tr>
-            <tbody>
-                <tr>
-                    <td>HCM</td>
-                    <td><input type="checkbox" name="hcm-options" value="view" /></td>
-                    <td><input type="checkbox" name="hcm-options" value="add" /></td>
-                    <td><input type="checkbox" name="hcm-options" value="edit" /></td>
-                    <td><input type="checkbox" name="hcm-options" value="delete" /></td>
-                    <td><input type="checkbox" name="hcm-options" value="export" /></td>
-                    <td><input type="checkbox" name="hcm-options" value="import" /></td>
-                    <td><input type="checkbox" name="hcm-options" value="admin" /></td>
-                </tr>
-            <tbody>
-                <tr>
-                    <td>ERP</td>
-                    <td><input type="checkbox" name="erp-options" value="view" /></td>
-                    <td><input type="checkbox" name="erp-options" value="add" /></td>
-                    <td><input type="checkbox" name="erp-options" value="edit" /></td>
-                    <td><input type="checkbox" name="erp-options" value="delete" /></td>
-                    <td><input type="checkbox" name="erp-options" value="export" /></td>
-                    <td><input type="checkbox" name="erp-options" value="import" /></td>
-                    <td><input type="checkbox" name="erp-options" value="admin" /></td>
-                </tr>
-            <tbody>
-                <tr>
-                    <td>NAP Locator</td>
-                    <td><input type="checkbox" name="naplocator-options" value="view" /></td>
-                    <td><input type="checkbox" name="naplocator-options" value="add" /></td>
-                    <td><input type="checkbox" name="naplocator-options" value="edit" /></td>
-                    <td><input type="checkbox" name="naplocator-options" value="delete" /></td>
-                    <td><input type="checkbox" name="naplocator-options" value="export" /></td>
-                    <td><input type="checkbox" name="naplocator-options" value="import" /></td>
-                    <td><input type="checkbox" name="naplocator-options" value="admin" /></td>
-                </tr>
-            <tbody>
-                <tr>
-                    <td>Gsuite</td>
-                    <td><input type="checkbox" name="gsuite-options" value="view" /></td>
-                    <td><input type="checkbox" name="gsuite-options" value="add" /></td>
-                    <td><input type="checkbox" name="gsuite-options" value="edit" /></td>
-                    <td><input type="checkbox" name="gsuite-options" value="delete" /></td>
-                    <td><input type="checkbox" name="gsuite-options" value="export" /></td>
-                    <td><input type="checkbox" name="gsuite-options" value="import" /></td>
-                    <td><input type="checkbox" name="gsuite-options" value="admin" /></td>
-                </tr>
-            <tbody>
-                <tr>
-                    <td>Domain Controller</td>
-                    <td><input type="checkbox" name="domain-controller-options" value="view" /></td>
-                    <td><input type="checkbox" name="domain-controller-options" value="add" /></td>
-                    <td><input type="checkbox" name="domain-controller-options" value="edit" /></td>
-                    <td><input type="checkbox" name="domain-controller-options" value="delete" /></td>
-                    <td><input type="checkbox" name="domain-controller-options" value="export" /></td>
-                    <td><input type="checkbox" name="domain-controller-options" value="import" /></td>
-                    <td><input type="checkbox" name="domain-controller-options" value="admin" /></td>
-                </tr>
-            <tbody>
-                <tr>
-                    <td>OSS User management</td>
-                    <td><input type="checkbox" name="oss-user-mangement-options" value="view" /></td>
-                    <td><input type="checkbox" name="oss-user-mangement-options" value="add" /></td>
-                    <td><input type="checkbox" name="oss-user-mangement-options" value="edit" /></td>
-                    <td><input type="checkbox" name="oss-user-mangement-options" value="delete" /></td>
-                    <td><input type="checkbox" name="oss-user-mangement-options" value="export" /></td>
-                    <td><input type="checkbox" name="oss-user-mangement-options" value="import" /></td>
-                    <td><input type="checkbox" name="oss-user-mangement-options" value="admin" /></td>
-                </tr>
-            <tbody>
-                <tr>
-                    <td>Vcenter</td>
-                    <td><input type="checkbox" name="vcenter-options" value="view" /></td>
-                    <td><input type="checkbox" name="vcenter-options" value="add" /></td>
-                    <td><input type="checkbox" name="vcenter-options" value="edit" /></td>
-                    <td><input type="checkbox" name="vcenter-options" value="delete" /></td>
-                    <td><input type="checkbox" name="vcenter-options" value="export" /></td>
-                    <td><input type="checkbox" name="vcenter-options" value="import" /></td>
-                    <td><input type="checkbox" name="vcenter-options" value="admin" /></td>
-                </tr>
-            <tbody>
-                <tr>
-                    <td>Smart Sheet</td>
-                    <td><input type="checkbox" name="smartsheet-options" value="view" /></td>
-                    <td><input type="checkbox" name="smartsheet-options" value="add" /></td>
-                    <td><input type="checkbox" name="smartsheet-options" value="edit" /></td>
-                    <td><input type="checkbox" name="smartsheet-options" value="delete" /></td>
-                    <td><input type="checkbox" name="smartsheet-options" value="export" /></td>
-                    <td><input type="checkbox" name="smartsheet-options" value="import" /></td>
-                    <td><input type="checkbox" name="smartsheet-options" value="admin" /></td>
-                </tr>
-            <tbody>
-                <tr>
-                    <td>Tableau</td>
-                    <td><input type="checkbox" name="tableau-options" value="view" /></td>
-                    <td><input type="checkbox" name="tableau-options" value="add" /></td>
-                    <td><input type="checkbox" name="tableau-options" value="edit" /></td>
-                    <td><input type="checkbox" name="tableau-options" value="delete" /></td>
-                    <td><input type="checkbox" name="tableau-options" value="export" /></td>
-                    <td><input type="checkbox" name="tableau-options" value="import" /></td>
-                    <td><input type="checkbox" name="tableau-options" value="admin" /></td>
+
+
+                    </label>
+
+                    <p class="text-semibold fs-3">
+                        Productivity Tools
+                    </p>
+                    <div class="table form-check">
+                        <th scope="row">MS Office</th>
+                        <td><input type="checkbox" class="form-check-input" name="msoffice" value="msOffice" /></td>
+
+                        <th scope="row">Instant Message</th>
+                        <td><input type="checkbox" class="form-check-input" name="instantmessage"
+                                value="instantMessage" /></td>
+
+
+                        <th scope="row">Auto CAD</th>
+                        <td><input type="checkbox" class="form-check-input" name="autocad" value="autoCad" /></td>
+
+
+                        <th scope="row">WinSCP</th>
+                        <td><input type="checkbox" class="form-check-input" name="winscp" value="winScp" /></td>
+
+
+                        <th scope="row">Foxit Reader</th>
+                        <td><input type="checkbox" class="form-check-input" name="foxitreader" value="foxitReader" />
+                        </td>
+
+
+
+                        <th scope="row">BI Application</th>
+                        <td><input type="checkbox" class="form-check-input" name="biapplication"
+                                value="biApplication" /></td>
+                    </div>
                 </tr>
             </tbody>
         </table>
-    </div>
-    <table>
-        <tbody>
-            <tr>
-                <h3>Productivity Tools</h3>
-
-                <td>MS Office</td>
-                <td><input type="checkbox" name="msoffice" value="msOffice" /></td>
-
-
-                <td>Instant Message</td>
-                <td><input type="checkbox" name="instantmessage" value="instantMessage" /></td>
-
-
-                <td>Auto CAD</td>
-                <td><input type="checkbox" name="autocad" value="autoCad" /></td>
-
-
-                <td>WinSCP</td>
-                <td><input type="checkbox" name="winscp" value="winScp" /></td>
-
-
-                <td>Foxit Reader</td>
-                <td><input type="checkbox" name="foxitreader" value="foxitReader" /></td>
-
-
-
-                <td>BI Application</td>
-                <td><input type="checkbox" name="biapplication" value="biApplication" /></td>
-            </tr>
-        </tbody>
-    </table>
     </div><br>
 
 
 
-
-    <a class="addinput" type="button" class="addinput" id="add" onclick="addinput('add', 'add-input')"
-        value="Add Tools">Add
-        Tools</a>
+    <div class="d-grid gap-2 d-md-block">
+        <button type="button" class="addinput btn btn-primary btn-lg btn btn-dark" id="add"
+            onclick="addinput('add', 'add-input')" value="Add Tools">Add
+            Tools+</button>
+    </div>
 
 
     <!---->
@@ -464,20 +794,24 @@
     </div>
 
 
-
-    <br><br><button class="btn" onclick="modifyPdf()" id="copyBtn">Modify PDF</button>
-
-
+    <div class="d-grid gap-2 col-6 mx-auto">
+        <br><br><button class="btn btn-primary btn-lg" onclick="modifyPdf()" id="copyBtn">Generate PDF</button>
 
 
 
 
+    </div>
+    </form>
+
+    <form class="row g-3 needs-validation" novalidate>
 
     </form>
 
+
+
     <script src="index.js"></script>
 
-
+    </div>
 
 
 </body>
