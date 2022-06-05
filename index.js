@@ -1,28 +1,15 @@
-var loadFile = function (event) {
-  var image = document.getElementById("output");
-  image.src = URL.createObjectURL(event.target.files[0]);
-};
-
 function addinput(type, addinput) {
   let input = document.getElementById(type);
   let text = document.getElementById(addinput);
   if (input.click) {
     text.style.display = "block";
-  } else text.style.display = "none";
-}
-
-function removeinput(type, removeinput) {
-  let input = document.getElementById(type);
-  let text = document.getElementById(removeinput);
-
-  if (input.click) {
+  } else {
     text.style.display = "none";
-    return false;
   }
 }
 
-//Radio Button parent child
-function myFunction(type, option) {
+//Radio Button parent child Location
+function toggleLocation(type, option) {
   let radio = document.getElementById(type);
   let text = document.getElementById(option);
   if (radio.checked == true) {
@@ -35,7 +22,7 @@ function myFunction(type, option) {
 
 //PDF COORDINATE
 const { degrees, PDFDocument, StandardFonts, rgb } = PDFLib;
-async function modifyPdf() {
+async function generatePdf() {
   // Fetch an existing PDF document
   const url =
     "https://www.dl.dropboxusercontent.com/s/kmdee75w44goksm/EARF_Template.pdf";
@@ -52,26 +39,25 @@ async function modifyPdf() {
   const firstPage = pages[0];
 
   // Get the width and height of the first page
-  const { width, height } = firstPage.getSize();
-  const names2 = document.getElementById("middleName");
-  const names = document.getElementById("lastName");
-  const names1 = document.getElementById("firstName");
-  let fileName = `EARF_${names.value},${names1.value} ${names2.value}.pdf`;
+  const middleNameElement = document.getElementById("middleName");
+  const lastNameElement = document.getElementById("lastName");
+  const firstNameElement = document.getElementById("firstName");
+  let fileName = `EARF_${lastNameElement.value},${firstNameElement.value} ${middleNameElement.value}.pdf`;
 
-  let reqdate = new Date();
+  let dateNow = new Date();
 
   // Get full date.
   let date =
-    reqdate.getDate() +
+    dateNow.getDate() +
     "/" +
-    (reqdate.getMonth() + 1) +
+    (dateNow.getMonth() + 1) +
     "/" +
-    reqdate.getFullYear();
+    dateNow.getFullYear();
 
   // Get full time.
-  let hrs = reqdate.getHours();
-  let min = reqdate.getMinutes();
-  //let sec = reqdate.getSeconds();
+  let hrs = dateNow.getHours();
+  let min = dateNow.getMinutes();
+  //let sec = dateNow.getSeconds();
   let ampm = hrs >= 12 ? "PM" : "AM";
   hrs = hrs % 12;
   hrs = hrs ? hrs : 12;
@@ -88,114 +74,111 @@ async function modifyPdf() {
 
   //Employee Account Request Form
   //Employee Number
-  const employeenumber = document.getElementById("employeeNumber");
-  firstPage.drawText(employeenumber.value, {
+  const employeeNumberElement = document.getElementById("employeeNumber");
+  firstPage.drawText(employeeNumberElement.value, {
     x: 160,
     y: 706,
     size: 8,
     font: helveticaFont,
   });
-  if (employeenumber.value == "") {
+  if (employeeNumberElement.value == "") {
     return false;
   }
 
   //Ticket No.
-  const ticket = document.getElementById("ticketNumber");
-  firstPage.drawText(ticket.value, {
+  const ticketNumberElement = document.getElementById("ticketNumber");
+  firstPage.drawText(ticketNumberElement.value, {
     x: 420,
     y: 731.5,
     size: 6.5,
     font: helveticaFont,
   });
-  if (ticket.value == "") {
-    return false;
-  }
   //Last Name
-  firstPage.drawText(names.value, {
+  firstPage.drawText(lastNameElement.value, {
     x: 160,
     y: 685,
     size: 8,
     font: helveticaFont,
   });
-  if (names.value == "") {
+  if (lastNameElement.value == "") {
     return false;
   }
   //First Name
-  firstPage.drawText(names1.value, {
+  firstPage.drawText(firstNameElement.value, {
     x: 280,
     y: 685,
     size: 8,
     font: helveticaFont,
   });
-  if (names1.value == "") {
+  if (firstNameElement.value == "") {
     return false;
   }
   //FullName Copy
-  let nameCopy = `${names1.value} ${names2.value} ${names.value} `;
-  firstPage.drawText(nameCopy.toUpperCase(), {
+  let fullName = `${firstNameElement.value} ${middleNameElement.value} ${lastNameElement.value} `;
+  firstPage.drawText(fullName.toUpperCase(), {
     x: 130,
     y: 115,
     size: 6,
     font: helveticaFont,
   });
   //Middle Name
-  firstPage.drawText(names2.value, {
+  firstPage.drawText(middleNameElement.value, {
     x: 420,
     y: 685,
     size: 8,
     font: helveticaFont,
   });
-  if (names2.value == "") {
+  if (middleNameElement.value == "") {
     return false;
   }
   //Email
-  const email = document.getElementById("email");
-  firstPage.drawText(email.value, {
+  const emailInputElement = document.getElementById("email");
+  firstPage.drawText(emailInputElement.value, {
     x: 150,
     y: 674.5,
     size: 6,
     font: helveticaFont,
   });
-  if (email.value == "") {
+  if (emailInputElement.value == "") {
     return false;
   }
   //Department
-  const department = document.getElementById("department");
-  firstPage.drawText(department.value, {
+  const departmentInputElement = document.getElementById("departmentInput");
+  firstPage.drawText(departmentInputElement.value, {
     x: 150,
     y: 667,
     size: 6,
     font: helveticaFont,
   });
-  if (department.value == "") {
+  if (departmentInputElement.value == "") {
     return false;
   }
   //Contact Number
-  const contactnumber = document.getElementById("contactNumber");
-  firstPage.drawText(contactnumber.value, {
+  const contactNumberInputElement = document.getElementById("contactNumber");
+  firstPage.drawText(contactNumberInputElement.value, {
     x: 387,
     y: 674,
     size: 6,
     font: helveticaFont,
   });
-  if (contactnumber.value == "") {
+  if (contactNumberInputElement.value == "") {
     return false;
   }
   //JobTitle Number
-  const jobtitle = document.getElementById("jobtitle");
-  firstPage.drawText(jobtitle.value, {
+  const jobTitleInputElement = document.getElementById("jobTitle");
+  firstPage.drawText(jobTitleInputElement.value, {
     x: 387,
     y: 667,
     size: 6,
     font: helveticaFont,
   });
-  if (jobtitle.value == "") {
+  if (jobTitleInputElement.value == "") {
     return false;
   }
   //Workstation:to be filled by BUH
   //Windows Desktop
-  const desktop = document.getElementById("desktop");
-  firstPage.drawText(desktop.value, {
+  const desktopInputValue = document.getElementById("deskTop");
+  firstPage.drawText(desktopInputValue.value, {
     x: 210,
     y: 626.5,
     size: 6,
@@ -203,8 +186,8 @@ async function modifyPdf() {
   });
 
   //Windows Laptop
-  const laptop = document.getElementById("laptop");
-  firstPage.drawText(laptop.value, {
+  const laptopInputElement = document.getElementById("lapTop");
+  firstPage.drawText(laptopInputElement.value, {
     x: 210,
     y: 619,
     size: 6,
@@ -212,8 +195,8 @@ async function modifyPdf() {
   });
 
   //Apple MAC
-  const apple = document.getElementById("applemac");
-  firstPage.drawText(apple.value, {
+  const macInputElement = document.getElementById("mac");
+  firstPage.drawText(macInputElement.value, {
     x: 210,
     y: 612,
     size: 6,
@@ -221,8 +204,8 @@ async function modifyPdf() {
   });
 
   //Justification
-  const justify = document.getElementById("justification");
-  firstPage.drawText(justify.value, {
+  const justificationInputElement = document.getElementById("justiFication");
+  firstPage.drawText(justificationInputElement.value, {
     x: 147,
     y: 601,
     size: 6,
@@ -231,8 +214,8 @@ async function modifyPdf() {
 
   //Enterprise Access Request
   //NT Login
-  const ntlogin = document.getElementById("ntLogin");
-  firstPage.drawText(ntlogin.value, {
+  const ntLoginInputElement = document.getElementById("ntLogin");
+  firstPage.drawText(ntLoginInputElement.value, {
     x: 250,
     y: 582,
     size: 6,
@@ -240,8 +223,8 @@ async function modifyPdf() {
   });
 
   //Email ID
-  const emailid = document.getElementById("emailid");
-  firstPage.drawText(emailid.value, {
+  const emailIdInputElement = document.getElementById("email-id");
+  firstPage.drawText(emailIdInputElement.value, {
     x: 250,
     y: 575,
     size: 6,
@@ -249,8 +232,8 @@ async function modifyPdf() {
   });
 
   //File Server Access
-  const fsa = document.getElementById("fsa");
-  firstPage.drawText(fsa.value, {
+  const fileServerAccessInputElement = document.getElementById("fsa");
+  firstPage.drawText(fileServerAccessInputElement.value, {
     x: 250,
     y: 567,
     size: 6,
@@ -325,85 +308,105 @@ async function modifyPdf() {
   <path style=" stroke:none;fill-rule:nonzero;fill:rgb(0%,0%,0%);fill-opacity:1;" d="M 15.90625 3.535156 L 6.1875 13.253906 L 2.09375 9.15625 L 1.28125 9.96875 L 5.78125 14.46875 L 6.1875 14.851562 L 6.589844 14.46875 L 16.71875 4.34375 Z M 15.90625 3.535156 "/>
   </g>
   </svg>`;
+  var array = ['bss' , 'oss', 'ssp', 'otrs', 'usp', 'ibass', 'docsis', 'u2000', 'avsystem', 'mrtg', '']
+  let bssActionsStartingYCoordinate = 550.5;
+  array.forEach((type)=>{
+     bssActionsStartingYCoordinate = bssActionsStartingYCoordinate - 7;
 
-  var arraybss = [];
-  var checkboxes = document.querySelectorAll("input[name=bss-options]:checked");
+  var arrayYaxis = []
+  var bssActionsArray = ['view', 'add', 'edit', 'delete', 'export', 'import', 'admin'];
+ var checkboxes = document.querySelectorAll(`input[name=${type}-options]:checked`);
+
 
   for (var i = 0; i < checkboxes.length; i++) {
-    arraybss.push(checkboxes[i].value);
+    arrayYaxis.push(checkboxes[i].value);
   }
+ let bssActionsStartingXCoordinate = 162.5;
+  bssActionsArray.forEach((action) => {
+    bssActionsStartingXCoordinate = bssActionsStartingXCoordinate + 26;
+    console.log(arrayYaxis.includes(action))
+    if (arrayYaxis.includes(action)) {
+      firstPage.drawSvgPath(svgPath, {
+        color: rgb(0, 0, 0),
+        x: bssActionsStartingXCoordinate,
+        y:bssActionsStartingYCoordinate,
+        scale: 0.5,
+        
+      });
+    }
+  });
+ })
+   //VIEW BSS
+ //if (arraybss.includes("view")) {
+// firstPage.drawSvgPath(svgPath, {
+// color: rgb(0, 0, 0),
+// x: 188.5,
+// y: 543.5,
+// scale: 0.5,
+// });
+// }
+////ADD BSS
+// if (arraybss.includes("add")) {
+// firstPage.drawSvgPath(svgPath, {
+// color: rgb(0, 0, 0),
+// x: 214.5,
+// y: 543.5,
+// scale: 0.5,
+// });
+// }
 
-  //VIEW BSS
-  if (arraybss.includes("view")) {
-    firstPage.drawSvgPath(svgPath, {
-      color: rgb(0, 0, 0),
-      x: 188,
-      y: 543.5,
-      scale: 0.5,
-    });
-  }
-  //ADD BSS
-  if (arraybss.includes("add")) {
-    firstPage.drawSvgPath(svgPath, {
-      color: rgb(0, 0, 0),
-      x: 214.5,
-      y: 543.5,
-      scale: 0.5,
-    });
-  }
+// //EDIT BSS
+// if (arraybss.includes("edit")) {
+// firstPage.drawSvgPath(svgPath, {
+// color: rgb(0, 0, 0),
+// x: 240.5,
+// y: 543.5,
+// scale: 0.5,
+// });
+// }
 
-  //EDIT BSS
-  if (arraybss.includes("edit")) {
-    firstPage.drawSvgPath(svgPath, {
-      color: rgb(0, 0, 0),
-      x: 240.5,
-      y: 543.5,
-      scale: 0.5,
-    });
-  }
+// //DELETE BSS
+// if (arraybss.includes("delete")) {
+// firstPage.drawSvgPath(svgPath, {
+// color: rgb(0, 0, 0),
+// x: 265.5,
+// y: 543.5,
+// scale: 0.5,
+// });
+// }
 
-  //DELETE BSS
-  if (arraybss.includes("delete")) {
-    firstPage.drawSvgPath(svgPath, {
-      color: rgb(0, 0, 0),
-      x: 265.5,
-      y: 543.5,
-      scale: 0.5,
-    });
-  }
+// //EXPORT BSS
+// if (arraybss.includes("export")) {
+// firstPage.drawSvgPath(svgPath, {
+// color: rgb(0, 0, 0),
+// x: 290.5,
+// y: 543.5,
+// scale: 0.5,
+// });
+// }
 
-  //EXPORT BSS
-  if (arraybss.includes("export")) {
-    firstPage.drawSvgPath(svgPath, {
-      color: rgb(0, 0, 0),
-      x: 290.5,
-      y: 543.5,
-      scale: 0.5,
-    });
-  }
+// //IMPORT BSS
+// if (arraybss.includes("import")) {
+// firstPage.drawSvgPath(svgPath, {
+// color: rgb(0, 0, 0),
+// x: 316.5,
+// y: 543.5,
+// scale: 0.5,
+// });
+// }
 
-  //IMPORT BSS
-  if (arraybss.includes("import")) {
-    firstPage.drawSvgPath(svgPath, {
-      color: rgb(0, 0, 0),
-      x: 316.5,
-      y: 543.5,
-      scale: 0.5,
-    });
-  }
+// //ADMIN BSS
+// if (arraybss.includes("admin")) {
+// firstPage.drawSvgPath(svgPath, {
+// color: rgb(0, 0, 0),
+// x: 342.5,
+// y: 543.5,
+// scale: 0.5,
+// });
+// }
 
-  //ADMIN BSS
-  if (arraybss.includes("admin")) {
-    firstPage.drawSvgPath(svgPath, {
-      color: rgb(0, 0, 0),
-      x: 342.5,
-      y: 543.5,
-      scale: 0.5,
-    });
-  }
-
-  //Radio Button Location
-  var arrayloc = [];
+//Radio Button Location
+var arrayloc = [];
   var radioButton = document.querySelectorAll("input[name=location]:checked");
   for (var i = 0; i < radioButton.length; i++) {
     arrayloc.push(radioButton[i].value);
@@ -453,9 +456,9 @@ async function modifyPdf() {
   }
   //Radio Button New Account
   var arraynewaccount = [];
-  var radioButton = document.querySelectorAll("input[name=account]:checked");
-  for (var i = 0; i < radioButton.length; i++) {
-    arraynewaccount.push(radioButton[i].value);
+  var newAccountRadioButton = document.querySelectorAll("input[name=newAccount]:checked");
+  for (var i = 0; i < newAccountRadioButton.length; i++) {
+    arraynewaccount.push(newAccountRadioButton[i].value);
   }
 
   //Yes
@@ -507,159 +510,7 @@ async function modifyPdf() {
     });
   }
 
-  //OSS Checkbox
-  var arrayoss = [];
-  var checkboxes = document.querySelectorAll("input[name=oss-options]:checked");
-
-  for (var i = 0; i < checkboxes.length; i++) {
-    arrayoss.push(checkboxes[i].value);
-  }
-
-  //VIEW OSS
-  if (arrayoss.includes("view")) {
-    firstPage.drawSvgPath(svgPath, {
-      color: rgb(0, 0, 0),
-      x: 188,
-      y: 536,
-      scale: 0.5,
-    });
-  }
-  //ADD OSS
-  if (arrayoss.includes("add")) {
-    firstPage.drawSvgPath(svgPath, {
-      color: rgb(0, 0, 0),
-      x: 214.5,
-      y: 536,
-      scale: 0.5,
-    });
-  }
-
-  //EDIT OSS
-  if (arrayoss.includes("edit")) {
-    firstPage.drawSvgPath(svgPath, {
-      color: rgb(0, 0, 0),
-      x: 240.5,
-      y: 536,
-      scale: 0.5,
-    });
-  }
-
-  //DELETE OSS
-  if (arrayoss.includes("delete")) {
-    firstPage.drawSvgPath(svgPath, {
-      color: rgb(0, 0, 0),
-      x: 265.5,
-      y: 536,
-      scale: 0.5,
-    });
-  }
-
-  //EXPORT OSS
-  if (arrayoss.includes("export")) {
-    firstPage.drawSvgPath(svgPath, {
-      color: rgb(0, 0, 0),
-      x: 290.5,
-      y: 536,
-      scale: 0.5,
-    });
-  }
-
-  //IMPORT OSS
-  if (arrayoss.includes("import")) {
-    firstPage.drawSvgPath(svgPath, {
-      color: rgb(0, 0, 0),
-      x: 316.5,
-      y: 536,
-      scale: 0.5,
-    });
-  }
-
-  //ADMIN OSS
-  if (arrayoss.includes("admin")) {
-    firstPage.drawSvgPath(svgPath, {
-      color: rgb(0, 0, 0),
-      x: 342.5,
-      y: 536,
-      scale: 0.5,
-    });
-  }
-
-  //SSP Checkbox
-  var arrayssp = [];
-  var checkboxes = document.querySelectorAll("input[name=ssp-options]:checked");
-
-  for (var i = 0; i < checkboxes.length; i++) {
-    arrayssp.push(checkboxes[i].value);
-  }
-
-  //VIEW SSP
-  if (arrayssp.includes("view")) {
-    firstPage.drawSvgPath(svgPath, {
-      color: rgb(0, 0, 0),
-      x: 188,
-      y: 529,
-      scale: 0.5,
-    });
-  }
-  //ADD SSP
-  if (arrayssp.includes("add")) {
-    firstPage.drawSvgPath(svgPath, {
-      color: rgb(0, 0, 0),
-      x: 214.5,
-      y: 529,
-      scale: 0.5,
-    });
-  }
-
-  //EDIT SSP
-  if (arrayssp.includes("edit")) {
-    firstPage.drawSvgPath(svgPath, {
-      color: rgb(0, 0, 0),
-      x: 240.5,
-      y: 529,
-      scale: 0.5,
-    });
-  }
-
-  //DELETE SSP
-  if (arrayssp.includes("delete")) {
-    firstPage.drawSvgPath(svgPath, {
-      color: rgb(0, 0, 0),
-      x: 265.5,
-      y: 529,
-      scale: 0.5,
-    });
-  }
-
-  //EXPORT SSP
-  if (arrayssp.includes("export")) {
-    firstPage.drawSvgPath(svgPath, {
-      color: rgb(0, 0, 0),
-      x: 290.5,
-      y: 529,
-      scale: 0.5,
-    });
-  }
-
-  //IMPORT SSP
-  if (arrayssp.includes("import")) {
-    firstPage.drawSvgPath(svgPath, {
-      color: rgb(0, 0, 0),
-      x: 316.5,
-      y: 529,
-      scale: 0.5,
-    });
-  }
-
-  //ADMIN SSP
-  if (arrayssp.includes("admin")) {
-    firstPage.drawSvgPath(svgPath, {
-      color: rgb(0, 0, 0),
-      x: 342.5,
-      y: 529,
-      scale: 0.5,
-    });
-  }
+  
 
   //OTRS Checkbox
   var arrayotrs = [];

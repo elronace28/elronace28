@@ -39,45 +39,46 @@
                         <input type="text" name="employeeNumber" class="form-control" id="employeeNumber" required>
                     </div>
                 </div>
+                
                 <div class="col-3 mb-3">
                     <label for="ticketNumber" class="form-label">Ticket Number:</label>
-                    <input type="text" name="ticketNumber" class="form-control" id="ticketNumber" required>
+                    <input type="text" name="ticketNumber" class="form-control" id="ticketNumber" >
                 </div>
                 <div>
                     <p class="fw-semibold fs-3">
                         Account?
                     </p>
 
-
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="account" value="yes" id="yes" required>
-                        <label class="form-check-label" for="radio">
-                            Yes
+                        <input class="form-check-input" type="radio" name="newAccount" value="yes" id="yes"required>
+                        <label class="form-check-label" for="yes">
+                          Yes
                         </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="account" value="no" id="no">
-                        <label class="form-check-label" for="radio" required>
+                        <input class="form-check-input" type="radio" name="newAccount" value="no" id="no"required>
+                        <label class="form-check-label" for="no" >
                             No
                         </label><br>
 
                     </div><br>
-                    <p class="text-semibold fs-4">
+                    <p class="text-semibold fs-3">
                         Select(Converge and Subsidiary)
                     </p>
+
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="radio1" value="converge" id="converge">
-                        <label class="form-check-label" for="radio1">
+                        <input class="form-check-input" type="radio" name="radio1" value="converge" id="converge"required>
+                        <label class="form-check-label" for="converge">
                             Converge
                         </label>
                     </div>
                     <div class="form-check">
                         <input class="form-check-input" type="radio" name="radio1" id="subsidiary" value="subsidiary"
                             required>
-                        <label class="form-check-label" for="radio1">
+                        <label class="form-check-label" for="subsidiary">
                             Subsidiary
                         </label>
-                    </div>
+                    </div><br>
 
 
                     <p class="text-semibold fs-3">
@@ -101,13 +102,12 @@
                     </div>
                     <div class="row">
                         <div class="col mb-3">
-                            <label for="email" class="form-label">Email:</label>
-                            <input type="text" name="email" placeholder="@example.com" class="form-control" id="email"
-                                required>
+                            <label for="emailInput" class="form-label">Email:</label>
+                            <input type="email" name="emailInput" placeholder="@example.com" class="form-control" id="email" required>
                         </div>
                         <div class="col mb-3">
-                            <label for="department" class="form-label">Department:</label>
-                            <input type="text" name="department" class="form-control" id="department" required>
+                            <label for="departmentInput" class="form-label">Department:</label>
+                            <input type="text" name="departmentInput" class="form-control" id="departmentInput" required>
                         </div>
                         <div class="row">
                             <div class="col mb-3">
@@ -116,8 +116,8 @@
                                     id="contactNumber" required>
                             </div>
                             <div class="col mb-3">
-                                <label for="jobtitle" class="form-label">Job Title:</label>
-                                <input type="text" name="jobtitle" class="form-control" id="jobtitle" required>
+                                <label for="jobTitle" class="form-label">Job Title:</label>
+                                <input type="text" name="jobTitle" class="form-control" id="jobTitle" required>
                             </div>
 
                         </div>
@@ -126,21 +126,29 @@
 
 
                     </div>
-                    <div id="shalala">
-                        <input type="radio" name="location" value="Metro Manila" id="loc"
-                            onclick="myFunction('Others', 'option-radio')" required>Metro Manila<br>
+                   
+                
+                    </div>
 
-                        <input type="radio" class="radiolocation" name="location" value="others" id="Others"
-                            onclick="myFunction('Others', 'option-radio')" required>Others
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="location" value="Metro Manila" id="loc"
+                            onclick="toggleLocation('others', 'option-radio')"  value="loc" required>Metro Manila<br>
+                            <label class="form-check-label" for="loc"></label>
+                    </div>
+
+                    <div class="form-check">
+                        <input type="radio" class="form-check-input" name="location" value="others" id="others"
+                            onclick="toggleLocation('others', 'option-radio')" required>Others
+                            <label class="form-check-label" for="others"></label>
 
                         <div class="row" id="option-radio" style="display:none">
                             <div class="col-3 mb">
-
                                 <span class="input-group-text" id="basic-addon1" required>Enter Location:</span>
                                 <input type="text" class="form-control" id="otherlocation" name="option-radio" value="">
-                            </div>
-                        </div>
-                    </div>
+                                 </div>
+                                </div>
+                        
+                    
                 </div>
 
                 <div class="container">
@@ -148,15 +156,15 @@
                     <div class="row">
                         <div class="col mb-3">
                             <label for="input" class="form-label">Windows Desktop:</label>
-                            <input type="text" name="desktok" class="form-control" id="desktop" value="">
+                            <input type="text" name="deskTop" class="form-control" id="deskTop" value="">
                         </div>
                         <div class="col mb-3">
                             <label for="input" class="form-label">Windows Laptop:</label>
-                            <input type="text" name="laptop" class="form-control" id="laptop" value="">
+                            <input type="text" name="lapTop" class="form-control" id="lapTop" value="">
                         </div>
                         <div class="col mb-3">
                             <label for="input" class="form-label">Apple MAC:</label>
-                            <input type="input" class="form-control" name="applemac" id="applemac" value="">
+                            <input type="input" class="form-control" name="mac" id="mac" value="">
                         </div>
                     </div>
 
@@ -168,8 +176,8 @@
                 <div class="col-md">
                     <div class="col-6 mb-3">
                         <label for="floatingTextarea2">Justification(if any):</label>
-                        <textarea class="form-control" placeholder="Leave a comment here" id="justification"
-                            name="justify" style="height: 70px" maxlength="90" value="" rows="5"></textarea>
+                        <textarea class="form-control" placeholder="Leave a comment here" id="justiFication"
+                            name="justiFication" style="height: 70px" maxlength="90" value="" rows="5"></textarea>
                     </div>
 
                     <p class="text-semibold fs-3">
@@ -184,7 +192,7 @@
                     <div class="row">
                         <div class="col-3 mb-3">
                             <label for="input" class="form-label"> Email ID::</label>
-                            <input type="input" class="form-control" name="emailid" id="emailid" value="">
+                            <input type="input" class="form-control" name="email-id" id="email-id" value="">
                         </div>
                     </div>
                     <div class="row">
@@ -234,8 +242,8 @@
                         </thead>
                         <div class="form-check">
                             <tbody>
-                                <tr>
-                                    <th scope="row">BSS</th>
+                                <tr id="bss">
+                                    <th scope="row" >BSS</th>
                                     <td><input type="checkbox" class="form-check-input" name="bss-options"
                                             value="view" />
                                     </td>
@@ -255,11 +263,11 @@
                                             value="import" />
                                     </td>
                                     <td><input type="checkbox" class="form-check-input" name="bss-options"
-                                            value="admin" />
+                                            value="admin"  />
                                     </td>
                                 </tr>
-                            <tbody>
-                                <tr>
+                            <tbody >
+                                <tr id="oss">
                                     <th scope="row">OSS</th>
                                     <td><input type="checkbox" class="form-check-input" name="oss-options"
                                             value="view" />
@@ -283,7 +291,7 @@
                                             value="admin" />
                                     </td>
                                 </tr>
-                            <tbody>
+                            <tbody id="ssp">
                                 <tr>
                                     <th scope="row">SSP</th>
                                     <td><input type="checkbox" class="form-check-input" name="ssp-options"
@@ -308,7 +316,7 @@
                                             value="admin" />
                                     </td>
                                 </tr>
-                            <tbody>
+                            <tbody id="otrs">
                                 <tr>
                                     <th scope="row">OTRS</th>
                                     <td><input type="checkbox" class="form-check-input" name="otrs-options"
@@ -330,7 +338,7 @@
                                             value="admin" />
                                     </td>
                                 </tr>
-                            <tbody>
+                            <tbody id="usp">
                                 <tr>
                                     <th scope="row">USP</th>
                                     <td><input type="checkbox" class="form-check-input" name="usp-options"
@@ -355,28 +363,28 @@
                                             value="admin" />
                                     </td>
                                 </tr>
-                            <tbody>
+                            <tbody id="ibass">
                                 <tr>
                                     <th scope="row">iBASS</th>
                                     <td><input type="checkbox" class="form-check-input" name="ibass-options"
-                                            value="view" />
+                                            value="view" id="view"/>
                                     </td>
                                     <td><input type="checkbox" class="form-check-input" name="ibass-options"
-                                            value="add" />
+                                            value="add" id="add"/>
                                     </td>
                                     <td><input type="checkbox" class="form-check-input" name="ibass-options"
-                                            value="edit" />
+                                            value="edit" id="edit"/>
                                     </td>
                                     <td><input type="checkbox" class="form-check-input" name="ibass-options"
-                                            value="delete" /></td>
+                                            value="delete" id="delete" /></td>
                                     <td><input type="checkbox" class="form-check-input" name="ibass-options"
-                                            value="export" /></td>
+                                            value="export" id="export"/></td>
                                     <td><input type="checkbox" class="form-check-input" name="ibass-options"
-                                            value="import" /></td>
+                                            value="import" id="import"/></td>
                                     <td><input type="checkbox" class="form-check-input" name="ibass-options"
-                                            value="admin" /></td>
+                                            value="admin" id="admin"/></td>
                                 </tr>
-                            <tbody>
+                            <tbody id="docsis">
                                 <tr>
                                     <th scope="row">DOCSIS</th>
                                     <td><input type="checkbox" class="form-check-input" name="docsis-options"
@@ -396,7 +404,7 @@
                                             value="admin" /></td>
                                 </tr>
                             <tbody>
-                                <tr>
+                                <tr id="u2000">
                                     <th scope="row">U2000</th>
                                     <td><input type="checkbox" class="form-check-input" name="u2000-options"
                                             value="view" />
@@ -416,7 +424,7 @@
                                     <td><input type="checkbox" class="form-check-input" name="u2000-options"
                                             value="admin" /></td>
                                 </tr>
-                            <tbody>
+                            <tbody id="avsystem">
                                 <tr>
                                     <th scope="row">AVSystem</th>
                                     <td><input type="checkbox" class="form-check-input" name="avsystem-options"
@@ -434,7 +442,7 @@
                                     <td><input type="checkbox" class="form-check-input" name="avsystem-options"
                                             value="admin" /></td>
                                 </tr>
-                            <tbody>
+                            <tbody id="mrtg">
                                 <tr>
                                     <th scope="row">MRTG</th>
                                     <td><input type="checkbox" class="form-check-input" name="mrtg-options"
@@ -456,7 +464,7 @@
                                             value="admin" />
                                     </td>
                                 </tr>
-                            <tbody>
+                            <tbody id="coriant">
                                 <tr>
                                     <th scope="row">CORIANT</th>
                                     <td><input type="checkbox" class="form-check-input" name="coriant-options"
@@ -474,7 +482,7 @@
                                     <td><input type="checkbox" class="form-check-input" name="coriant-options"
                                             value="admin" /></td>
                                 </tr>
-                            <tbody>
+                            <tbody id="facebook">
                                 <tr>
                                     <th scope="row">Facebook</th>
                                     <td><input type="checkbox" class="form-check-input" name="facebook-options"
@@ -492,7 +500,7 @@
                                     <td><input type="checkbox" class="form-check-input" name="facebook-options"
                                             value="admin" /></td>
                                 </tr>
-                            <tbody>
+                            <tbody id="youtube">
                                 <tr>
                                     <th scope="row">Youtube</th>
                                     <td><input type="checkbox" class="form-check-input" name="youtube-options"
@@ -510,7 +518,7 @@
                                     <td><input type="checkbox" class="form-check-input" name="youtube-options"
                                             value="admin" /></td>
                                 </tr>
-                            <tbody>
+                            <tbody id="it-ticketing-tool">
                                 <tr>
                                     <th scope="row">IT Ticketing Tool</th>
                                     <td><input type="checkbox" class="form-check-input" name="it-ticketing-tool-options"
@@ -528,7 +536,7 @@
                                     <td><input type="checkbox" class="form-check-input" name="it-ticketing-tool-options"
                                             value="admin" /></td>
                                 </tr>
-                            <tbody>
+                            <tbody id="tpd-ticketing-tool">
                                 <tr>
                                     <th scope="row">TPD Ticketing Tool</th>
                                     <td><input type="checkbox" class="form-check-input"
@@ -546,7 +554,7 @@
                                     <td><input type="checkbox" class="form-check-input"
                                             name="tpd-ticketing-tool-options" value="admin" /></td>
                                 </tr>
-                            <tbody>
+                            <tbody id="hcm">
                                 <tr>
                                     <th scope="row">HCM</th>
                                     <td><input type="checkbox" class="form-check-input" name="hcm-options"
@@ -571,7 +579,7 @@
                                             value="admin" />
                                     </td>
                                 </tr>
-                            <tbody>
+                            <tbody id="erp">
                                 <tr>
                                     <th scope="row">ERP</thscope="row">
                                     <td><input type="checkbox" class="form-check-input" name="erp-options"
@@ -596,7 +604,7 @@
                                             value="admin" />
                                     </td>
                                 </tr>
-                            <tbody>
+                            <tbody id="nap-locator">
                                 <tr>
                                     <th scope="row">NAP Locator</th>
                                     <td><input type="checkbox" class="form-check-input" name="naplocator-options"
@@ -614,7 +622,7 @@
                                     <td><input type="checkbox" class="form-check-input" name="naplocator-options"
                                             value="admin" /></td>
                                 </tr>
-                            <tbody>
+                            <tbody id="gsuite">
                                 <tr>
                                     <th scope="row">Gsuite</th>
                                     <td><input type="checkbox" class="form-check-input" name="gsuite-options"
@@ -633,7 +641,7 @@
                                     <td><input type="checkbox" class="form-check-input" name="gsuite-options"
                                             value="admin" /></td>
                                 </tr>
-                            <tbody>
+                            <tbody id="domain-controller">
                                 <tr>
                                     <th scope="row">Domain Controller</th>
                                     <td><input type="checkbox" class="form-check-input" name="domain-controller-options"
@@ -651,7 +659,7 @@
                                     <td><input type="checkbox" class="form-check-input" name="domain-controller-options"
                                             value="admin" /></td>
                                 </tr>
-                            <tbody>
+                            <tbody id="oss-user-management">
                                 <tr>
                                     <th scope="row">OSS User management</td>
                                     <td><input type="checkbox" class="form-check-input"
@@ -669,7 +677,7 @@
                                     <td><input type="checkbox" class="form-check-input"
                                             name="oss-user-mangement-options" value="admin" /></td>
                                 </tr>
-                            <tbody>
+                            <tbody id="vcenter">
                                 <tr>
                                     <th scope="row">Vcenter</th>
                                     <td><input type="checkbox" class="form-check-input" name="vcenter-options"
@@ -687,7 +695,7 @@
                                     <td><input type="checkbox" class="form-check-input" name="vcenter-options"
                                             value="admin" /></td>
                                 </tr>
-                            <tbody>
+                            <tbody id="smart-sheet">
                                 <tr>
                                     <th scope="row">Smart Sheet</th>
                                     <td><input type="checkbox" class="form-check-input" name="smartsheet-options"
@@ -705,7 +713,7 @@
                                     <td><input type="checkbox" class="form-check-input" name="smartsheet-options"
                                             value="admin" /></td>
                                 </tr>
-                            <tbody>
+                            <tbody id="tableau">
                                 <tr>
                                     <th scope="row">Tableau</th>
                                     <td><input type="checkbox" class="form-check-input" name="tableau-options"
@@ -729,7 +737,7 @@
         </div>
         <table>
             <tbody>
-                <tr>
+               
 
 
 
@@ -738,9 +746,10 @@
                     <p class="text-semibold fs-3">
                         Productivity Tools
                     </p>
-                    <div class="table form-check">
-                        <th scope="row">MS Office</th>
-                        <td><input type="checkbox" class="form-check-input" name="msoffice" value="msOffice" /></td>
+                     <tr id="productivity-tools">
+                    <div class="table form-check" >
+                        <th scope="row" >MS Office</th>
+                        <td><input type="checkbox" class="form-check-input" name="msoffice" value="msOffice"/></td>
 
                         <th scope="row">Instant Message</th>
                         <td><input type="checkbox" class="form-check-input" name="instantmessage"
@@ -770,21 +779,13 @@
         </table>
     </div><br>
 
-
-
-    <div class="d-grid gap-2 d-md-block">
-        <button type="button" class="addinput btn btn-primary btn-lg btn btn-dark" id="add"
-            onclick="addinput('add', 'add-input')" value="Add Tools">Add
-            Tools+</button>
-    </div>
-
-
-    <!---->
-
-    <!---->
-
-
-    <div input-group id="add-input" style="display:none">
+    
+<button type="button" class="btn btn-dark position-relative position-absolute bottom-70 end-45 " id="add"
+onclick="addinput('add', 'add-input')" value="Add Tools">
+  Add Tools+ <svg width="1em" height="1em" viewBox="0 0 16 16" class="position-absolute top-100 start-50 translate-middle mt-1" fill="#212529" xmlns="http://www.w3.org/2000/svg"><path d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/></svg>
+</button>
+    
+    <br><br><div input-group id="add-input" style="display:none">
         <h3><label for="input" name="checklist">(Specify Here):</label><br></h3>
         Enter Here:<input type="text" name="add-input" id="tools" value=""><br><br>
         Enter Here:<input type="text" name="add-input" id="tools1" value=""><br><br>
@@ -795,7 +796,7 @@
 
 
     <div class="d-grid gap-2 col-6 mx-auto">
-        <br><br><button class="btn btn-primary btn-lg" onclick="modifyPdf()" id="copyBtn">Generate PDF</button>
+        <br><br><button class="btn btn-primary btn-lg" onclick="generatePdf()" id="copyBtn">Generate PDF</button>
 
 
 
