@@ -18,10 +18,8 @@
 </head>
 
 <body>
-
-
     </div>
-    <div class="container-sm">
+    <div class="container-sm needs-validation" novalidate>
         <div class="header">
             <center class="fw-bold fs-1">Employee Account Request Form</center>
         </div>
@@ -31,13 +29,17 @@
 
         <!--HTML Validation for empty input field-->
         <div class="container">
-
-            <form onsubmit="return false">
+               
+            <form id="overallForm">
+               
                 <div class="row">
-                    <div class="col-3 mb-3">
+                    <div class="col-3 mb-3 form-field success">
                         <label for="employeeNumber" class="form-label">Employee Number:</label>
-                        <input type="text" name="employeeNumber" class="form-control" id="employeeNumber" required>
-                    </div>
+                        <input type="text" name="employeeNumber" class="form-control" id="employeeNumber" autocomplete="off" required>
+                        <div class="invalid-feedback">
+                                Please choose a username.
+                              </div>
+                    </div>      
                 </div>
                 
                 <div class="col-3 mb-3">
@@ -100,10 +102,13 @@
                         </div>
 
                     </div>
+
+
                     <div class="row">
-                        <div class="col mb-3">
-                            <label for="emailInput" class="form-label">Email:</label>
-                            <input type="email" name="emailInput" placeholder="@example.com" class="form-control" id="email" required>
+                        <div class="form-field col mb-3">
+                            <label for="emailInput" class="form-label" >Email:</label>
+                            <input type="email" name="emailInput" placeholder="@example.com" class="form-control"id="emailInput" autocomplete="off" required>
+                            <small></small>
                         </div>
                         <div class="col mb-3">
                             <label for="departmentInput" class="form-label">Department:</label>
@@ -111,20 +116,18 @@
                         </div>
                         <div class="row">
                             <div class="col mb-3">
-                                <label for="contactNumber" class="form-label">Contact Number:</label>
-                                <input type="number" name="contactNumber" placeholder="09*********" class="form-control"
-                                    id="contactNumber" required>
+                                <label for="contactNumberInput" class="form-label">Contact Number:</label>
+                                <input type="number" name="contactNumberInput" placeholder="09*********" class="form-control"
+                                    id="contactNumberInput" required>
                             </div>
                             <div class="col mb-3">
                                 <label for="jobTitle" class="form-label">Job Title:</label>
-                                <input type="text" name="jobTitle" class="form-control" id="jobTitle" required>
+                                <input type="text" name="jobtitleInput" class="form-control" id="jobtitleInput" required>
                             </div>
 
                         </div>
                         <p class="text-semibold fs-2">
                             Location</p>
-
-
                     </div>
                    
                 
@@ -143,12 +146,10 @@
 
                         <div class="row" id="option-radio" style="display:none">
                             <div class="col-3 mb">
-                                <span class="input-group-text" id="basic-addon1" required>Enter Location:</span>
-                                <input type="text" class="form-control" id="otherlocation" name="option-radio" value="">
+                                <span class="input-group-text" id="basic-addon1">Enter Location:</span>
+                                <input type="text" class="form-control" id="otherlocation" name="option-radio" value="" >
                                  </div>
-                                </div>
-                        
-                    
+                                </div>     
                 </div>
 
                 <div class="container">
@@ -156,15 +157,15 @@
                     <div class="row">
                         <div class="col mb-3">
                             <label for="input" class="form-label">Windows Desktop:</label>
-                            <input type="text" name="deskTop" class="form-control" id="deskTop" value="">
+                            <input type="text" name="desktopInput" class="form-control" id="desktopInput" value="">
                         </div>
                         <div class="col mb-3">
                             <label for="input" class="form-label">Windows Laptop:</label>
-                            <input type="text" name="lapTop" class="form-control" id="lapTop" value="">
+                            <input type="text" name="laptopInput" class="form-control" id="laptopInput" value="">
                         </div>
                         <div class="col mb-3">
                             <label for="input" class="form-label">Apple MAC:</label>
-                            <input type="input" class="form-control" name="mac" id="mac" value="">
+                            <input type="input" class="form-control" name="appleInput" id="appleInput" value="">
                         </div>
                     </div>
 
@@ -176,8 +177,8 @@
                 <div class="col-md">
                     <div class="col-6 mb-3">
                         <label for="floatingTextarea2">Justification(if any):</label>
-                        <textarea class="form-control" placeholder="Leave a comment here" id="justiFication"
-                            name="justiFication" style="height: 70px" maxlength="90" value="" rows="5"></textarea>
+                        <textarea class="form-control" placeholder="Leave a comment here" id="justificationTextArea"
+                            name="justificationTextArea" style="height: 70px" maxlength="90" value="" rows="5"></textarea>
                     </div>
 
                     <p class="text-semibold fs-3">
@@ -186,31 +187,31 @@
                     <div class="row">
                         <div class="col-3 mb-3">
                             <label for="input" class="form-label">NT Login:</label>
-                            <input type="input" class="form-control" name="ntLogin" id="ntLogin" value="">
+                            <input type="input" class="form-control" name="ntLoginInput" id="ntLoginInput" value="">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-3 mb-3">
                             <label for="input" class="form-label"> Email ID::</label>
-                            <input type="input" class="form-control" name="email-id" id="email-id" value="">
+                            <input type="input" class="form-control" name="emailID" id="emailID" value="">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-3 mb-3">
                             <label for="input" class="form-label">File Server Access</label>
-                            <input type="input" class="form-control" name="fsa" id="fsa" value="">
+                            <input type="input" class="form-control" name="fsaInput" id="fsaInput" value="">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-3 mb-3">
                             <label for="input" class="form-label">VPN</label>
-                            <input type="input" class="form-control" name="vpn" id="vpn" value="">
+                            <input type="input" class="form-control" name="vpnInput" id="vpnInput" value="">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-6 mb-3">
-                            <label for="remarks" class="form-label">Remarks</label>
-                            <textarea class="form-control" name="remarks" id="remarks" rows="3"
+                            <label for="remarksInput" class="form-label">Remarks</label>
+                            <textarea class="form-control" name="remarksInput" id="remarksInput" rows="3"
                                 placeholder="Leave a comment here"></textarea>
                         </div>
                     </div>
@@ -222,9 +223,6 @@
                 <p class="text-semibold fs-3">
                     Applications
                 </p>
-
-
-
                 <thead>
                     <table>
                         <thead>
@@ -663,19 +661,19 @@
                                 <tr>
                                     <th scope="row">OSS User management</td>
                                     <td><input type="checkbox" class="form-check-input"
-                                            name="oss-user-mangement-options" value="view" /></td>
+                                            name="oss-user-management-options" value="view" /></td>
                                     <td><input type="checkbox" class="form-check-input"
-                                            name="oss-user-mangement-options" value="add" /></td>
+                                            name="oss-user-management-options" value="add" /></td>
                                     <td><input type="checkbox" class="form-check-input"
-                                            name="oss-user-mangement-options" value="edit" /></td>
+                                            name="oss-user-management-options" value="edit" /></td>
                                     <td><input type="checkbox" class="form-check-input"
-                                            name="oss-user-mangement-options" value="delete" /></td>
+                                            name="oss-user-management-options" value="delete" /></td>
                                     <td><input type="checkbox" class="form-check-input"
-                                            name="oss-user-mangement-options" value="export" /></td>
+                                            name="oss-user-management-options" value="export" /></td>
                                     <td><input type="checkbox" class="form-check-input"
-                                            name="oss-user-mangement-options" value="import" /></td>
+                                            name="oss-user-management-options" value="import" /></td>
                                     <td><input type="checkbox" class="form-check-input"
-                                            name="oss-user-mangement-options" value="admin" /></td>
+                                            name="oss-user-management-options" value="admin" /></td>
                                 </tr>
                             <tbody id="vcenter">
                                 <tr>
@@ -737,10 +735,6 @@
         </div>
         <table>
             <tbody>
-               
-
-
-
                     </label>
 
                     <p class="text-semibold fs-3">
@@ -755,20 +749,15 @@
                         <td><input type="checkbox" class="form-check-input" name="instantmessage"
                                 value="instantMessage" /></td>
 
-
                         <th scope="row">Auto CAD</th>
                         <td><input type="checkbox" class="form-check-input" name="autocad" value="autoCad" /></td>
-
 
                         <th scope="row">WinSCP</th>
                         <td><input type="checkbox" class="form-check-input" name="winscp" value="winScp" /></td>
 
-
                         <th scope="row">Foxit Reader</th>
                         <td><input type="checkbox" class="form-check-input" name="foxitreader" value="foxitReader" />
                         </td>
-
-
 
                         <th scope="row">BI Application</th>
                         <td><input type="checkbox" class="form-check-input" name="biapplication"
@@ -779,42 +768,34 @@
         </table>
     </div><br>
 
-    
-<button type="button" class="btn btn-dark position-relative position-absolute bottom-70 end-45 " id="add"
-onclick="addinput('add', 'add-input')" value="Add Tools">
-  Add Tools+ <svg width="1em" height="1em" viewBox="0 0 16 16" class="position-absolute top-100 start-50 translate-middle mt-1" fill="#212529" xmlns="http://www.w3.org/2000/svg"><path d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/></svg>
-</button>
-    
-    <br><br><div input-group id="add-input" style="display:none">
-        <h3><label for="input" name="checklist">(Specify Here):</label><br></h3>
-        Enter Here:<input type="text" name="add-input" id="tools" value=""><br><br>
-        Enter Here:<input type="text" name="add-input" id="tools1" value=""><br><br>
-        Enter Here:<input type="text" name="add-input" id="tools2" value=""><br><br>
-        Enter Here:<input type="text" name="add-input" id="tools3" value=""><br><br>
-        Enter Here:<input type="text" name="add-input" id="tools4" value="">
+    <button class="btn btn-dark position-relative position-absolute bottom-70 end-45" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling" id="addTools">Add Tools+</button>
+
+    <div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasScrollingLabel">Specify Here:</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        Enter Here:<input type="text" name="add-input" id="toolsInputElement" value=""><br><br>
+        Enter Here:<input type="text" name="add-input" id="toolsInputElement1" value=""><br><br>
+        Enter Here:<input type="text" name="add-input" id="toolsInputElement2" value=""><br><br>
+        Enter Here:<input type="text" name="add-input" id="toolsInputElement3" value=""><br><br>
+        Enter Here:<input type="text" name="add-input" id="toolsInputElement4" value="">
+      </div>
     </div>
 
-
-    <div class="d-grid gap-2 col-6 mx-auto">
-        <br><br><button class="btn btn-primary btn-lg" onclick="generatePdf()" id="copyBtn">Generate PDF</button>
-
-
-
+<div class="d-grid gap-2 col-6 mx-auto">
+    
+        <br><br><button type="submit" class="btn btn-primary btn-lg"  id="copyBtn">Generate PDF</button>
 
     </div>
-    </form>
-
-    <form class="row g-3 needs-validation" novalidate>
-
-    </form>
-
-
-
+   
+    
     <script src="index.js"></script>
 
     </div>
 
-
+</form>
 </body>
 
 </html>
