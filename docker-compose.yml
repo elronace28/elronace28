@@ -1,8 +1,0 @@
-version: '3.4'
-
-services:
-  earfgenerator:
-    image: earfgenerator
-    build:
-      context: .
-      dockerfile: ./Dockerfile

@@ -1,9 +1,4 @@
-
-  //var loadFile = function(event) {
-    //var image = document.getElementById('output');
-    //image.src = URL.createObjectURL(event.target.files[0]);
- // };
-  //Radio Button parent child Location
+//Radio Button parent child Location
 function toggleLocation(type, option) {
   let radio = document.getElementById(type);
   let text = document.getElementById(option);
@@ -11,8 +6,7 @@ function toggleLocation(type, option) {
     text.style.display = "block";
   } else {
     text.style.display = "none";
-
-    return false;
+    return;
   }
 }
 function validateFields() {
@@ -33,7 +27,7 @@ return arrayValidation.map((input) => {
   const elementInput = document.querySelector(`input[name=${input}]`);
   if (elementInput) {
     if (elementInput.value == "" || elementInput.value == null) {
-      form.classList.add('.needs-validation') 
+      //form.classList.add('.needs-validation') 
       return false;
     }
     return true;
@@ -52,18 +46,13 @@ async function generatePdf() {
   const pdfDoc = await PDFDocument.load(existingPdfBytes);
 
   // Embed the Helvetica font
-  const helveticaFont = await pdfDoc.embedFont(StandardFonts.Helvetica);
+  //const helveticaFont = await pdfDoc.embedFont(StandardFonts.Courier);
 
   // Get the first page of the document
   const pages = pdfDoc.getPages();
   const firstPage = pages[0];
 
-  // Get the width and height of the first page
-  const middleNameElement = document.getElementById("middleName");
-  const lastNameElement = document.getElementById("lastName");
-  const firstNameElement = document.getElementById("firstName");
-  let fileName = `EARF_${lastNameElement.value},${firstNameElement.value} ${middleNameElement.value}.pdf`;
-
+//Time and Date function
   let dateNow = new Date();
 
   // Get full date.
@@ -90,8 +79,13 @@ async function generatePdf() {
     y: 641,
     size: 7,
   });
+
+  // Get the width and height of the first page
+  const middleNameElement = document.getElementById("middleName");
+  const lastNameElement = document.getElementById("lastName");
+  const firstNameElement = document.getElementById("firstName");
+  let fileName = `EARF_${lastNameElement.value},${firstNameElement.value} ${middleNameElement.value}.pdf`;
   //Array Functions
-  
   //Employee Account Request Form
   const inputArray = [
     firstPage.drawText(employeeNumber.value, {
@@ -377,9 +371,6 @@ async function generatePdf() {
       scale: 0.5,
     });
   }
-  if (arrayloc == "") {
-    return false;
-  }
   //Enter Location
   const location = document.getElementById("otherlocation");
   if (arrayloc.includes("others")) {
@@ -387,7 +378,6 @@ async function generatePdf() {
       x: 387,
       y: 643,
       size: 7,
-      font: helveticaFont,
     });
   }
 
@@ -398,7 +388,6 @@ async function generatePdf() {
       x: 434.5,
       y: 660,
       size: 6,
-      font: helveticaFont,
     });
   }
   //Radio Button New Account
@@ -574,7 +563,7 @@ form.addEventListener('submit', function (e) {
     //Option for user to proceed and cancel
   var result = confirm("Are You Sure?");
   if (result == false) {
-    form.classList.add('was-validated')
+    //form.classList.add('was-validated')
     return;
   }
     
