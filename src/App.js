@@ -10,9 +10,15 @@ import { useTheme, ThemeProvider, createTheme } from "@mui/material/styles";
 import {
   Autocomplete,
   Button,
-  FormGroup,
+  Paper,
   Stack,
   styled,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
   TextareaAutosize,
 } from "@mui/material";
 import {
@@ -28,7 +34,6 @@ import IconButton from "@mui/material/IconButton";
 import { purple } from "@mui/material/colors";
 import FilePresentIcon from "@mui/icons-material/FilePresent";
 import WarningAmberIcon from "@mui/icons-material/WarningAmber";
-import { Container } from "@mui/system";
 // import { DataGridPro } from '@mui/x-data-grid-pro';
 // import { useDemoData } from '@mui/x-data-grid-generator';
 const ColorModeContext = React.createContext({ toggleColorMode: () => {} });
@@ -408,24 +413,28 @@ firstPage.drawText(data.locationRadioButton, {
       }
     });
   });
-  // // Productivity Tools
-  // //Application MS Office Checkbox
-  // var arraymsapplication = [];
-  // var checkboxes = document.querySelectorAll(`input[name=${input}]:checked`);
+  // Productivity Tools 
+  //Application MS Office Checkbox
+  var arrayProductivityTools = [
+    "msoffice",
+  ];
+  arrayProductivityTools.forEach((data) => {
+  var checkboxes = document.querySelectorAll(`input[name=${data}]:checked`);
 
-  // for (var i = 0; i < checkboxes.length; i++) {
-  //   arraymsapplication.push(checkboxes[i].value);
-  // }
-  // if (arraymsapplication.includes("msoffice")) {
-  //   firstPage.drawSvgPath(svgPath, {
-  //     color: rgb(0, 0, 0),
-  //     x: 265.5,
-  //     y: 342.5,
-  //     scale: 0.5,
-  //   });
-  // }
+  for (var i = 0; i < checkboxes.length; i++) {
+    arrayProductivityTools.push(checkboxes[i].value);
+  }
+
+  if (data.includes(arrayProductivityTools)) {
+    firstPage.drawSvgPath(svgPath, {
+      color: rgb(0, 0, 0),
+      x: 265.5,
+      y: 342.5,
+      scale: 0.5,
+    });
+  }
   // //Application Instant Message check Box
-  // if (arraymsapplication.includes("instantMessage")) {
+  // if (arrayProductivityTools.includes("instantmessage")) {
   //   firstPage.drawSvgPath(svgPath, {
   //     color: rgb(0, 0, 0),
   //     x: 265.5,
@@ -433,9 +442,9 @@ firstPage.drawText(data.locationRadioButton, {
   //     scale: 0.5,
   //   });
   // }
-
+});
   // //Application Auto CAD check Box
-  // if (arraymsapplication.includes("autoCad")) {
+  // if (arrayProductivityTools.includes("autocad")) {
   //   firstPage.drawSvgPath(svgPath, {
   //     color: rgb(0, 0, 0),
   //     x: 265.5,
@@ -445,7 +454,7 @@ firstPage.drawText(data.locationRadioButton, {
   // }
 
   // //Application WinSCP check Box
-  // if (arraymsapplication.includes("winScp")) {
+  // if (arrayProductivityTools.includes("winscp")) {
   //   firstPage.drawSvgPath(svgPath, {
   //     color: rgb(0, 0, 0),
   //     x: 265.5,
@@ -455,7 +464,7 @@ firstPage.drawText(data.locationRadioButton, {
   // }
 
   // //Application Foxit Reader check Box
-  // if (arraymsapplication.includes("foxitReader")) {
+  // if (arrayProductivityTools.includes("foxitreader")) {
   //   firstPage.drawSvgPath(svgPath, {
   //     color: rgb(0, 0, 0),
   //     x: 265.5,
@@ -464,7 +473,7 @@ firstPage.drawText(data.locationRadioButton, {
   //   });
   // }
   // //Application BI Application check Box
-  // if (arraymsapplication.includes("biApplication")) {
+  // if (arrayProductivityTools.includes("biapplication")) {
   //   firstPage.drawSvgPath(svgPath, {
   //     color: rgb(0, 0, 0),
   //     x: 265.5,
@@ -530,14 +539,16 @@ function App() {
   return (
     <form onSubmit={handleSubmit(onClick)}>
       <div className="header">
+        
         <Box
           sx={{
             display: "block",
             width: "100%",
             alignItems: "center",
-            justifyContent: "flex",
+            padding: "20px",
             bgcolor: "background.default",
             color: "text.primary",
+            
           }}
         >
           {theme.palette.mode} mode
@@ -1041,1214 +1052,1553 @@ function App() {
     />
     </Box>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    {/* Application */}
-    {/* BSS */}
-    {/* <div style={{ height: 400, width: '100%' }}>
-    <DataGridPro  pagination {...data} pageSize={10} /> */}
-    <Container maxWidth="sm" >
-    <FormLabel><h1>Applications</h1></FormLabel>
-    <FormControl sx={{ m: 1, }} component="fieldset" variant="standard">
-    <FormLabel component="legend">BSS</FormLabel>
-    <FormGroup aria-label="position" row>
-    <FormControlLabel
-          value="view"
-          control={<Checkbox size="small"/>}
-          label="View"
-          labelPlacement="top"
-          {...register("bss-options", {})}
-        />
-        <FormControlLabel
-          value="add"
-          control={<Checkbox size="small"/>}
-          label="Add"
-          labelPlacement="top"
-          {...register("bss-options", {})}
-        />
-        <FormControlLabel
-          value="edit"
-          control={<Checkbox size="small"/>}
-          label="Edit"
-          labelPlacement="top"
-          {...register("bss-options", {})}
-        />
-        <FormControlLabel
-          value="delete"
-          control={<Checkbox size="small"/>}
-          label="Delete"
-          labelPlacement="top"
-          {...register("bss-options", {})}
-        />
-        <FormControlLabel
-          value="export"
-          control={<Checkbox size="small"/>}
-          label="Export"
-          labelPlacement="top"
-          {...register("bss-options", {})}
-        />
-        <FormControlLabel
-          value="import"
-          control={<Checkbox size="small"/>}
-          label="Import"
-          labelPlacement="top"
-          {...register("bss-options", {})}
-        />
-        <FormControlLabel
-          value="admin"
-          control={<Checkbox size="small"/>}
-          label="Admin"
-          labelPlacement="top"
-          {...register("bss-options", {})}
-        />
-        </FormGroup>
-        </FormControl>
-        {/* OSS */}
-    <FormControl sx={{ m: 3 }} component="fieldset" variant="standard">
-    <FormLabel component="legend">OSS</FormLabel>
-    <FormGroup aria-label="position" row>
-    <FormControlLabel
-          value="view"
-          control={<Checkbox  size="small" />}
-          labelPlacement="top"
-          {...register("oss-options", {})}
-        />
-        <FormControlLabel
-          value="add"
-          control={<Checkbox  size="small" />}
-          labelPlacement="top"
-          {...register("oss-options", {})}
-        />
-        <FormControlLabel
-          value="edit"
-          control={<Checkbox  size="small" />} 
-          labelPlacement="top"
-          {...register("oss-options", {})}
-        />
-        <FormControlLabel
-          value="delete"
-          control={<Checkbox  size="small" />}
-          labelPlacement="top"
-        />
-        <FormControlLabel
-          value="export"
-          control={<Checkbox  size="small" />}
-          labelPlacement="top"
-          {...register("oss-options", {})}
-        />
-        <FormControlLabel
-          value="import"
-          control={<Checkbox  size="small" />}
-          labelPlacement="top"
-          {...register("oss-options", {})}
-        />
-        <FormControlLabel
-          value="admin"
-          control={<Checkbox  size="small" />}
-          labelPlacement="top"
-          {...register("oss-options", {})}
-        />
-        </FormGroup>
-        </FormControl> 
-{/* SSP */}      
-        <FormControl sx={{ m: 3 }} component="fieldset" variant="standard">
-    <FormLabel component="legend">SSP</FormLabel>
-    <FormGroup aria-label="position" row>
-    <FormControlLabel
-          value="view"
-          control={<Checkbox  size="small" />}
-          labelPlacement="top"
-          {...register("ssp-options", {})}
-        />
-        <FormControlLabel
-          value="add"
-          control={<Checkbox  size="small" />}
-          labelPlacement="top"
-          {...register("ssp-options", {})}
-        />
-        <FormControlLabel
-          value="edit"
-          control={<Checkbox  size="small" />} 
-          labelPlacement="top"
-          {...register("ssp-options", {})}
-        />
-        <FormControlLabel
-          value="delete"
-          control={<Checkbox  size="small" />}
-          labelPlacement="top"
-        />
-        <FormControlLabel
-          value="export"
-          control={<Checkbox  size="small" />}
-          labelPlacement="top"
-          {...register("ssp-options", {})}
-        />
-        <FormControlLabel
-          value="import"
-          control={<Checkbox  size="small" />}
-          labelPlacement="top"
-          {...register("ssp-options", {})}
-        />
-        <FormControlLabel
-          value="admin"
-          control={<Checkbox  size="small" />}
-          labelPlacement="top"
-          {...register("ssp-options", {})}
-        />
-        </FormGroup>
-        </FormControl>
-{/* OTRS */}
-        <FormControl sx={{ m: 3 }} component="fieldset" variant="standard">
-    <FormLabel component="legend">OTRS</FormLabel>
-    <FormGroup aria-label="position" row>
-    <FormControlLabel
-          value="view"
-          control={<Checkbox  size="small" />}
-          labelPlacement="top"
-          {...register("otrs-options", {})}
-        />
-        <FormControlLabel
-          value="add"
-          control={<Checkbox  size="small" />}
-          labelPlacement="top"
-          {...register("otrs-options", {})}
-        />
-        <FormControlLabel
-          value="edit"
-          control={<Checkbox  size="small" />} 
-          labelPlacement="top"
-          {...register("otrs-options", {})}
-        />
-        <FormControlLabel
-          value="delete"
-          control={<Checkbox  size="small" />}
-          labelPlacement="top"
-        />
-        <FormControlLabel
-          value="export"
-          control={<Checkbox  size="small" />}
-          labelPlacement="top"
-          {...register("otrs-options", {})}
-        />
-        <FormControlLabel
-          value="import"
-          control={<Checkbox  size="small" />}
-          labelPlacement="top"
-          {...register("otrs-options", {})}
-        />
-        <FormControlLabel
-          value="admin"
-          control={<Checkbox  size="small" />}
-          labelPlacement="top"
-          {...register("otrs-options", {})}
-        />
-        </FormGroup>
-        </FormControl>
-{/* USP */}
-        <FormControl sx={{ m: 3 }} component="fieldset" variant="standard">
-    <FormLabel component="legend">USP</FormLabel>
-    <FormGroup aria-label="position" row>
-    <FormControlLabel
-          value="view"
-          control={<Checkbox  size="small" />}
-          labelPlacement="top"
-          {...register("usp-options", {})}
-        />
-        <FormControlLabel
-          value="add"
-          control={<Checkbox  size="small" />}
-          labelPlacement="top"
-          {...register("usp-options", {})}
-        />
-        <FormControlLabel
-          value="edit"
-          control={<Checkbox  size="small" />} 
-          labelPlacement="top"
-          {...register("usp-options", {})}
-        />
-        <FormControlLabel
-          value="delete"
-          control={<Checkbox  size="small" />}
-          labelPlacement="top"
-        />
-        <FormControlLabel
-          value="export"
-          control={<Checkbox  size="small" />}
-          labelPlacement="top"
-          {...register("usp-options", {})}
-        />
-        <FormControlLabel
-          value="import"
-          control={<Checkbox  size="small" />}
-          labelPlacement="top"
-          {...register("usp-options", {})}
-        />
-        <FormControlLabel
-          value="admin"
-          control={<Checkbox  size="small" />}
-          labelPlacement="top"
-          {...register("usp-options", {})}
-        />
-        </FormGroup>
-        </FormControl>
-{/* IBAS */}
-        <FormControl sx={{ m: 3 }} component="fieldset" variant="standard">
-    <FormLabel component="legend">iBAS</FormLabel>
-    <FormGroup aria-label="position" row>
-    <FormControlLabel
-          value="view"
-          control={<Checkbox  size="small" />}
-          labelPlacement="top"
-          {...register("ibas-options", {})}
-        />
-        <FormControlLabel
-          value="add"
-          control={<Checkbox  size="small" />}
-          labelPlacement="top"
-          {...register("ibas-options", {})}
-        />
-        <FormControlLabel
-          value="edit"
-          control={<Checkbox  size="small" />} 
-          labelPlacement="top"
-          {...register("ibas-options", {})}
-        />
-        <FormControlLabel
-          value="delete"
-          control={<Checkbox  size="small" />}
-          labelPlacement="top"
-        />
-        <FormControlLabel
-          value="export"
-          control={<Checkbox  size="small" />}
-          labelPlacement="top"
-          {...register("ibas-options", {})}
-        />
-        <FormControlLabel
-          value="import"
-          control={<Checkbox  size="small" />}
-          labelPlacement="top"
-          {...register("ibas-options", {})}
-        />
-        <FormControlLabel
-          value="admin"
-          control={<Checkbox  size="small" />}
-          labelPlacement="top"
-          {...register("ibas-options", {})}
-        />
-        </FormGroup>
-        </FormControl>
-{/* DOCSIS */}
-        <FormControl sx={{ m: 3 }} component="fieldset" variant="standard">
-    <FormLabel component="legend">DOCSIS</FormLabel>
-    <FormGroup aria-label="position" row>
-    <FormControlLabel
-          value="view"
-          control={<Checkbox  size="small" />}
-          labelPlacement="top"
-          {...register("docsis-options", {})}
-        />
-        <FormControlLabel
-          value="add"
-          control={<Checkbox  size="small" />}
-          labelPlacement="top"
-          {...register("docsis-options", {})}
-        />
-        <FormControlLabel
-          value="edit"
-          control={<Checkbox  size="small" />} 
-          labelPlacement="top"
-          {...register("docsis-options", {})}
-        />
-        <FormControlLabel
-          value="delete"
-          control={<Checkbox  size="small" />}
-          labelPlacement="top"
-        />
-        <FormControlLabel
-          value="export"
-          control={<Checkbox  size="small" />}
-          labelPlacement="top"
-          {...register("docsis-options", {})}
-        />
-        <FormControlLabel
-          value="import"
-          control={<Checkbox  size="small" />}
-          labelPlacement="top"
-          {...register("docsis-options", {})}
-        />
-        <FormControlLabel
-          value="admin"
-          control={<Checkbox  size="small" />}
-          labelPlacement="top"
-          {...register("docsis-options", {})}
-        />
-        </FormGroup>
-        </FormControl>
+<div className="tableapplication">
+    <TableContainer component={Paper}>
+      <Table sx={{ minWidth: 650 }}  aria-label="simple table">
+        <TableHead>
+          <TableRow>
+          
+            <TableCell align="center"><h2>Applications</h2></TableCell>
+            <TableCell align="center"><h3>View</h3></TableCell>
+            <TableCell align="center"><h3>Add</h3></TableCell>
+            <TableCell align="center"><h3>Edit</h3></TableCell>
+            <TableCell align="center"><h3>Delete</h3></TableCell>
+            <TableCell align="center"><h3>Export</h3></TableCell>
+            <TableCell align="center"><h3>Import</h3></TableCell>
+            <TableCell align="center"><h3>Admin</h3></TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
         
-{/* U2000 */}
-        <FormControl sx={{ m: 3 }} component="fieldset" variant="standard">
-    <FormLabel component="legend">U2000</FormLabel>
-    <FormGroup aria-label="position" row>
+          <TableRow
+              sx={{ '&:last-child td, &:last-child th': { border: 1 } }}
+            >
+          <TableCell component="th" scope="row" align="center"><h3>BSS</h3></TableCell>
+          <TableCell align="center">
+          <FormControlLabel
+          value="view"
+          control={<Checkbox size="small"/>}
+          labelPlacement="top"
+          {...register("bss-options", {})}
+          />
+          </TableCell>
+          
+          <TableCell align="center">
+        <FormControlLabel
+          value="add"
+          control={<Checkbox size="small"/>}
+          labelPlacement="top"
+          {...register("bss-options", {})}
+        />
+        </TableCell>
+        <TableCell align="center">
+        <FormControlLabel
+          value="edit"
+          control={<Checkbox size="small"/>}
+          labelPlacement="top"
+          {...register("bss-options", {})}
+        />
+        </TableCell>
+        <TableCell align="center">
+        <FormControlLabel
+          value="delete"
+          control={<Checkbox size="small"/>}
+          labelPlacement="top"
+          {...register("bss-options", {})}
+        />
+        </TableCell>
+        <TableCell align="center">
+        <FormControlLabel
+          value="export"
+          control={<Checkbox size="small"/>}
+          labelPlacement="top"
+          {...register("bss-options", {})}
+        />
+        </TableCell>
+        <TableCell align="center">
+        <FormControlLabel
+          value="import"
+          control={<Checkbox size="small"/>}
+          labelPlacement="top"
+          {...register("bss-options", {})}
+        />
+        </TableCell>
+        <TableCell align="center">
+        <FormControlLabel
+          value="admin"
+          control={<Checkbox size="small"/>}
+          labelPlacement="top"
+          {...register("bss-options", {})}
+        />
+        </TableCell>
+        </TableRow>
+
+         <TableRow
+              sx={{ '&:last-child td, &:last-child th': { border: 1 } }}
+            >
+        <TableCell component="th" scope="row" align="center"><h3>OSS</h3></TableCell>
+        <TableCell align="center">
+    <FormControlLabel
+          value="view"
+          control={<Checkbox  size="small" />}
+          labelPlacement="top"
+          {...register("oss-options", {})}
+        />
+        </TableCell>
+        <TableCell align="center">
+        <FormControlLabel
+          value="add"
+          control={<Checkbox  size="small" />}
+          labelPlacement="top"
+          {...register("oss-options", {})}
+        />
+        </TableCell>
+        <TableCell align="center">
+        <FormControlLabel
+          value="edit"
+          control={<Checkbox  size="small" />} 
+          labelPlacement="top"
+          {...register("oss-options", {})}
+        />
+        </TableCell>
+        <TableCell align="center">
+        <FormControlLabel
+          value="delete"
+          control={<Checkbox  size="small" />}
+          labelPlacement="top"
+        />
+        </TableCell>
+        <TableCell align="center">
+        <FormControlLabel
+          value="export"
+          control={<Checkbox  size="small" />}
+          labelPlacement="top"
+          {...register("oss-options", {})}
+        />
+        </TableCell>
+        <TableCell align="center">
+        <FormControlLabel
+          value="import"
+          control={<Checkbox  size="small" />}
+          labelPlacement="top"
+          {...register("oss-options", {})}
+        />
+        </TableCell>
+        <TableCell align="center">
+        <FormControlLabel
+          value="admin"
+          control={<Checkbox  size="small" />}
+          labelPlacement="top"
+          {...register("oss-options", {})}
+        />
+        </TableCell>
+            </TableRow>
+
+            <TableRow
+              sx={{ '&:last-child td, &:last-child th': { border: 1 } }}
+            >
+        <TableCell component="th" scope="row" align="center"><h3>SSP</h3></TableCell>
+        <TableCell align="center">
+    <FormControlLabel
+          value="view"
+          control={<Checkbox  size="small" />}
+          labelPlacement="top"
+          {...register("ssp-options", {})}
+        />
+        </TableCell>
+        <TableCell align="center">
+        <FormControlLabel
+          value="add"
+          control={<Checkbox  size="small" />}
+          labelPlacement="top"
+          {...register("ssp-options", {})}
+        />
+        </TableCell>
+        <TableCell align="center">
+        <FormControlLabel
+          value="edit"
+          control={<Checkbox  size="small" />} 
+          labelPlacement="top"
+          {...register("ssp-options", {})}
+        />
+        </TableCell>
+        <TableCell align="center">
+        <FormControlLabel
+          value="delete"
+          control={<Checkbox  size="small" />}
+          labelPlacement="top"
+        />
+        </TableCell>
+        <TableCell align="center">
+        <FormControlLabel
+          value="export"
+          control={<Checkbox  size="small" />}
+          labelPlacement="top"
+          {...register("ssp-options", {})}
+        />
+        </TableCell>
+        <TableCell align="center">
+        <FormControlLabel
+          value="import"
+          control={<Checkbox  size="small" />}
+          labelPlacement="top"
+          {...register("ssp-options", {})}
+        />
+        </TableCell>
+        <TableCell align="center">
+        <FormControlLabel
+          value="admin"
+          control={<Checkbox  size="small" />}
+          labelPlacement="top"
+          {...register("ssp-options", {})}
+        />
+        </TableCell>
+            </TableRow>
+
+            <TableRow
+              sx={{ '&:last-child td, &:last-child th': { border: 2 } }}
+            >
+        <TableCell component="th" scope="row" align="center"><h3>OTRS</h3></TableCell>
+        <TableCell align="center">
+    <FormControlLabel
+          value="view"
+          control={<Checkbox  size="small" />}
+          labelPlacement="top"
+          {...register("otrs-options", {})}
+        />
+        </TableCell>
+        <TableCell align="center">
+        <FormControlLabel
+          value="add"
+          control={<Checkbox  size="small" />}
+          labelPlacement="top"
+          {...register("otrs-options", {})}
+        />
+        </TableCell>
+        <TableCell align="center">
+        <FormControlLabel
+          value="edit"
+          control={<Checkbox  size="small" />} 
+          labelPlacement="top"
+          {...register("otrs-options", {})}
+        />
+        </TableCell>
+        <TableCell align="center">
+        <FormControlLabel
+          value="delete"
+          control={<Checkbox  size="small" />}
+          labelPlacement="top"
+        />
+        </TableCell>
+        <TableCell align="center">
+        <FormControlLabel
+          value="export"
+          control={<Checkbox  size="small" />}
+          labelPlacement="top"
+          {...register("otrs-options", {})}
+        />
+        </TableCell>
+        <TableCell align="center">
+        <FormControlLabel
+          value="import"
+          control={<Checkbox  size="small" />}
+          labelPlacement="top"
+          {...register("otrs-options", {})}
+        />
+        </TableCell>
+        <TableCell align="center">
+        <FormControlLabel
+          value="admin"
+          control={<Checkbox  size="small" />}
+          labelPlacement="top"
+          {...register("otrs-options", {})}
+        />
+        </TableCell>
+            </TableRow>
+
+            <TableRow
+              sx={{ '&:last-child td, &:last-child th': { border: 2 } }}
+            >
+        <TableCell component="th" scope="row" align="center"><h3>USP</h3></TableCell>
+        <TableCell align="center">
+    <FormControlLabel
+          value="view"
+          control={<Checkbox  size="small" />}
+          labelPlacement="top"
+          {...register("usp-options", {})}
+        />
+        </TableCell>
+        <TableCell align="center">
+        <FormControlLabel
+          value="add"
+          control={<Checkbox  size="small" />}
+          labelPlacement="top"
+          {...register("usp-options", {})}
+        />
+        </TableCell>
+        <TableCell align="center">
+        <FormControlLabel
+          value="edit"
+          control={<Checkbox  size="small" />} 
+          labelPlacement="top"
+          {...register("usp-options", {})}
+        />
+        </TableCell>
+        <TableCell align="center">
+        <FormControlLabel
+          value="delete"
+          control={<Checkbox  size="small" />}
+          labelPlacement="top"
+        />
+        </TableCell>
+        <TableCell align="center">
+        <FormControlLabel
+          value="export"
+          control={<Checkbox  size="small" />}
+          labelPlacement="top"
+          {...register("usp-options", {})}
+        />
+        </TableCell>
+        <TableCell align="center">
+        <FormControlLabel
+          value="import"
+          control={<Checkbox  size="small" />}
+          labelPlacement="top"
+          {...register("usp-options", {})}
+        />
+        </TableCell>
+        <TableCell align="center">
+        <FormControlLabel
+          value="admin"
+          control={<Checkbox  size="small" />}
+          labelPlacement="top"
+          {...register("usp-options", {})}
+        />
+        </TableCell>
+            </TableRow>
+
+            <TableRow
+              sx={{ '&:last-child td, &:last-child th': { border: 2 } }}
+            >
+        <TableCell component="th" scope="row" align="center"><h3>iBAS</h3></TableCell>
+        <TableCell align="center">
+    <FormControlLabel
+          value="view"
+          control={<Checkbox  size="small" />}
+          labelPlacement="top"
+          {...register("ibas-options", {})}
+        />
+        </TableCell>
+        <TableCell align="center">
+        <FormControlLabel
+          value="add"
+          control={<Checkbox  size="small" />}
+          labelPlacement="top"
+          {...register("ibas-options", {})}
+        />
+        </TableCell>
+        <TableCell align="center">
+        <FormControlLabel
+          value="edit"
+          control={<Checkbox  size="small" />} 
+          labelPlacement="top"
+          {...register("ibas-options", {})}
+        />
+        </TableCell>
+        <TableCell align="center">
+        <FormControlLabel
+          value="delete"
+          control={<Checkbox  size="small" />}
+          labelPlacement="top"
+        />
+        </TableCell>
+        <TableCell align="center">
+        <FormControlLabel
+          value="export"
+          control={<Checkbox  size="small" />}
+          labelPlacement="top"
+          {...register("ibas-options", {})}
+        />
+        </TableCell>
+        <TableCell align="center">
+        <FormControlLabel
+          value="import"
+          control={<Checkbox  size="small" />}
+          labelPlacement="top"
+          {...register("ibas-options", {})}
+        />
+        </TableCell>
+        <TableCell align="center">
+        <FormControlLabel
+          value="admin"
+          control={<Checkbox  size="small" />}
+          labelPlacement="top"
+          {...register("ibas-options", {})}
+        />
+        </TableCell>
+            </TableRow>
+
+            <TableRow
+              sx={{ '&:last-child td, &:last-child th': { border: 2 } }}
+            >
+        <TableCell component="th" scope="row" align="center"><h3>DOCSIS</h3></TableCell>
+        <TableCell align="center">
+    <FormControlLabel
+          value="view"
+          control={<Checkbox  size="small" />}
+          labelPlacement="top"
+          {...register("docsis-options", {})}
+        />
+        </TableCell>
+        <TableCell align="center">
+        <FormControlLabel
+          value="add"
+          control={<Checkbox  size="small" />}
+          labelPlacement="top"
+          {...register("docsis-options", {})}
+        />
+        </TableCell>
+        <TableCell align="center">
+        <FormControlLabel
+          value="edit"
+          control={<Checkbox  size="small" />} 
+          labelPlacement="top"
+          {...register("docsis-options", {})}
+        />
+        </TableCell>
+        <TableCell align="center">
+        <FormControlLabel
+          value="delete"
+          control={<Checkbox  size="small" />}
+          labelPlacement="top"
+        />
+        </TableCell>
+        <TableCell align="center">
+        <FormControlLabel
+          value="export"
+          control={<Checkbox  size="small" />}
+          labelPlacement="top"
+          {...register("docsis-options", {})}
+        />
+        </TableCell>
+        <TableCell align="center">
+        <FormControlLabel
+          value="import"
+          control={<Checkbox  size="small" />}
+          labelPlacement="top"
+          {...register("docsis-options", {})}
+        />
+        </TableCell>
+        <TableCell align="center">
+        <FormControlLabel
+          value="admin"
+          control={<Checkbox  size="small" />}
+          labelPlacement="top"
+          {...register("docsis-options", {})}
+        />
+        </TableCell>
+            </TableRow>
+
+            <TableRow
+              sx={{ '&:last-child td, &:last-child th': { border: 2 } }}
+            >
+        <TableCell component="th" scope="row" align="center"><h3>U2000</h3></TableCell>
+        <TableCell align="center">
     <FormControlLabel
           value="view"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
           {...register("u2000-options", {})}
         />
+        </TableCell>
+        <TableCell align="center">
         <FormControlLabel
           value="add"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
           {...register("u2000-options", {})}
         />
+        </TableCell>
+        <TableCell align="center">
         <FormControlLabel
           value="edit"
           control={<Checkbox  size="small" />} 
           labelPlacement="top"
           {...register("u2000-options", {})}
         />
+        </TableCell>
+        <TableCell align="center">
         <FormControlLabel
           value="delete"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
         />
+        </TableCell>
+        <TableCell align="center">
         <FormControlLabel
           value="export"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
           {...register("u2000-options", {})}
         />
+        </TableCell>
+        <TableCell align="center">
         <FormControlLabel
           value="import"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
           {...register("u2000-options", {})}
         />
+        </TableCell>
+        <TableCell align="center">
         <FormControlLabel
           value="admin"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
           {...register("u2000-options", {})}
         />
-        </FormGroup>
-        </FormControl>
-{/* AVSystem */}
-        <FormControl sx={{ m: 3 }} component="fieldset" variant="standard">
-    <FormLabel component="legend">AVSystem</FormLabel>
-    <FormGroup aria-label="position" row>
+        </TableCell>
+            </TableRow>
+
+            <TableRow
+              sx={{ '&:last-child td, &:last-child th': { border: 2 } }}
+            >
+        <TableCell component="th" scope="row" align="center"><h3>AVSystem</h3></TableCell>
+        <TableCell align="center">
     <FormControlLabel
           value="view"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
           {...register("avsystem-options", {})}
         />
+        </TableCell>
+        <TableCell align="center">
         <FormControlLabel
           value="add"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
           {...register("avsystem-options", {})}
         />
+        </TableCell>
+        <TableCell align="center">
         <FormControlLabel
           value="edit"
           control={<Checkbox  size="small" />} 
           labelPlacement="top"
           {...register("avsystem-options", {})}
         />
+        </TableCell>
+        <TableCell align="center">
         <FormControlLabel
           value="delete"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
         />
+        </TableCell>
+        <TableCell align="center">
         <FormControlLabel
           value="export"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
           {...register("avsystem-options", {})}
         />
+        </TableCell>
+        <TableCell align="center">
         <FormControlLabel
           value="import"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
           {...register("avsystem-options", {})}
         />
+        </TableCell>
+        <TableCell align="center">
         <FormControlLabel
           value="admin"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
           {...register("avsystem-options", {})}
         />
-        </FormGroup>
-        </FormControl>
-        {/* MRTG */}
-        <FormControl sx={{ m: 3 }} component="fieldset" variant="standard">
-    <FormLabel component="legend">MRTG</FormLabel>
-    <FormGroup aria-label="position" row>
+        </TableCell>
+            </TableRow>
+
+            <TableRow
+              sx={{ '&:last-child td, &:last-child th': { border: 2 } }}
+            >
+        <TableCell component="th" scope="row" align="center"><h3>MRTG</h3></TableCell>
+        <TableCell align="center">
     <FormControlLabel
           value="view"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
           {...register("mrtg-options", {})}
         />
+        </TableCell>
+        <TableCell align="center">
         <FormControlLabel
           value="add"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
           {...register("mrtg-options", {})}
         />
+        </TableCell>
+        <TableCell align="center">
         <FormControlLabel
           value="edit"
           control={<Checkbox  size="small" />} 
           labelPlacement="top"
           {...register("mrtg-options", {})}
         />
+        </TableCell>
+        <TableCell align="center">
         <FormControlLabel
           value="delete"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
         />
+        </TableCell>
+        <TableCell align="center">
         <FormControlLabel
           value="export"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
           {...register("mrtg-options", {})}
         />
+        </TableCell>
+        <TableCell align="center">
         <FormControlLabel
           value="import"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
           {...register("mrtg-options", {})}
         />
+        </TableCell>
+        <TableCell align="center">
         <FormControlLabel
           value="admin"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
           {...register("mrtg-options", {})}
         />
-        </FormGroup>
-        </FormControl>
-{/* CORIANT */}
-<FormControl sx={{ m: 3 }} component="fieldset" variant="standard">
-    <FormLabel component="legend">CORIANT</FormLabel>
-    <FormGroup aria-label="position" row>
+        </TableCell>
+            </TableRow>
+
+            <TableRow
+              sx={{ '&:last-child td, &:last-child th': { border: 2 } }}
+            >
+        <TableCell component="th" scope="row" align="center"><h3>CORIANT</h3></TableCell>
+        <TableCell align="center">
     <FormControlLabel
           value="view"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
           {...register("coriant-options", {})}
         />
+        </TableCell>
+        <TableCell align="center">
         <FormControlLabel
           value="add"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
           {...register("coriant-options", {})}
         />
+        </TableCell>
+        <TableCell align="center">
         <FormControlLabel
           value="edit"
           control={<Checkbox  size="small" />} 
           labelPlacement="top"
           {...register("coriant-options", {})}
         />
+        </TableCell>
+        <TableCell align="center">
         <FormControlLabel
           value="delete"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
         />
+        </TableCell>
+        <TableCell align="center">
         <FormControlLabel
           value="export"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
           {...register("coriant-options", {})}
         />
+        </TableCell>
+        <TableCell align="center">
         <FormControlLabel
           value="import"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
           {...register("coriant-options", {})}
         />
+        </TableCell>
+        <TableCell align="center">
         <FormControlLabel
           value="admin"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
           {...register("coriant-options", {})}
         />
-        </FormGroup>
-        </FormControl>
-{/* Facebook */}
-<FormControl sx={{ m: 3 }} component="fieldset" variant="standard">
-    <FormLabel component="legend">Facebook</FormLabel>
-    <FormGroup aria-label="position" row>
+        </TableCell>
+            </TableRow>
+
+            <TableRow
+              sx={{ '&:last-child td, &:last-child th': { border: 2 } }}
+            >
+        <TableCell component="th" scope="row" align="center"><h3>Facebook</h3></TableCell>
+        <TableCell align="center">
     <FormControlLabel
           value="view"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
           {...register("facebook-options", {})}
         />
+        </TableCell>
+        <TableCell align="center">
         <FormControlLabel
           value="add"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
           {...register("facebook-options", {})}
         />
+        </TableCell>
+        <TableCell align="center">
         <FormControlLabel
           value="edit"
           control={<Checkbox  size="small" />} 
           labelPlacement="top"
           {...register("facebook-options", {})}
         />
+        </TableCell>
+        <TableCell align="center">
         <FormControlLabel
           value="delete"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
         />
+        </TableCell>
+        <TableCell align="center">
         <FormControlLabel
           value="export"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
           {...register("facebook-options", {})}
         />
+        </TableCell>
+        <TableCell align="center">
         <FormControlLabel
           value="import"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
           {...register("facebook-options", {})}
         />
+        </TableCell>
+        <TableCell align="center">
         <FormControlLabel
           value="admin"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
           {...register("facebook-options", {})}
         />
-        </FormGroup>
-        </FormControl>
-{/* Youtube */}
-<FormControl sx={{ m: 3 }} component="fieldset" variant="standard">
-    <FormLabel component="legend">Youtube</FormLabel>
-    <FormGroup aria-label="position" row>
+        </TableCell>
+            </TableRow>
+
+            <TableRow
+              sx={{ '&:last-child td, &:last-child th': { border: 2 } }}
+            >
+        <TableCell component="th" scope="row" align="center"><h3>Youtube</h3></TableCell>
+        <TableCell align="center">
     <FormControlLabel
           value="view"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
           {...register("youtube-options", {})}
         />
+        </TableCell>
+        <TableCell align="center">
         <FormControlLabel
           value="add"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
           {...register("youtube-options", {})}
         />
+        </TableCell>
+        <TableCell align="center">
         <FormControlLabel
           value="edit"
           control={<Checkbox  size="small" />} 
           labelPlacement="top"
           {...register("youtube-options", {})}
         />
+        </TableCell>
+        <TableCell align="center">
         <FormControlLabel
           value="delete"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
         />
+        </TableCell>
+        <TableCell align="center">
         <FormControlLabel
           value="export"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
           {...register("youtube-options", {})}
         />
+        </TableCell>
+        <TableCell align="center">
         <FormControlLabel
           value="import"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
           {...register("youtube-options", {})}
         />
+        </TableCell>
+        <TableCell align="center">
         <FormControlLabel
           value="admin"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
           {...register("youtube-options", {})}
         />
-        </FormGroup>
-        </FormControl>
-        {/* IT Ticketing Tool */}
-<FormControl sx={{ m: 3 }} component="fieldset" variant="standard">
-    <FormLabel component="legend">IT Ticketing Tool</FormLabel>
-    <FormGroup aria-label="position" row>
+        </TableCell>
+            </TableRow>
+
+            <TableRow
+              sx={{ '&:last-child td, &:last-child th': { border: 2 } }}
+            >
+        <TableCell component="th" scope="row" align="center"><h3>IT Ticketing Tool</h3></TableCell>
+        <TableCell align="center">
     <FormControlLabel
           value="view"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
           {...register("it-ticketing-tool-options", {})}
         />
+        </TableCell>
+        <TableCell align="center">
         <FormControlLabel
           value="add"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
           {...register("it-ticketing-tool-options", {})}
         />
+        </TableCell>
+        <TableCell align="center">
         <FormControlLabel
           value="edit"
           control={<Checkbox  size="small" />} 
           labelPlacement="top"
           {...register("it-ticketing-tool-options", {})}
         />
+        </TableCell>
+        <TableCell align="center">
         <FormControlLabel
           value="delete"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
         />
+        </TableCell>
+        <TableCell align="center">
         <FormControlLabel
           value="export"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
           {...register("it-ticketing-tool-options", {})}
         />
+        </TableCell>
+        <TableCell align="center">
         <FormControlLabel
           value="import"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
           {...register("it-ticketing-tool-options", {})}
         />
+        </TableCell>
+        <TableCell align="center">
         <FormControlLabel
           value="admin"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
           {...register("it-ticketing-tool-options", {})}
         />
-        </FormGroup>
-        </FormControl>
-{/* TPD Ticketing Tool */}
-<FormControl sx={{ m: 3 }} component="fieldset" variant="standard">
-    <FormLabel component="legend">TPD Ticketing Tool</FormLabel>
-    <FormGroup aria-label="position" row>
+        </TableCell>
+            </TableRow>
+
+            <TableRow
+              sx={{ '&:last-child td, &:last-child th': { border: 2 } }}
+            >
+        <TableCell component="th" scope="row" align="center"><h3>TPD Ticketing Tool</h3></TableCell>
+        <TableCell align="center">
     <FormControlLabel
           value="view"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
           {...register("tpd-ticketing-tool-options", {})}
         />
+        </TableCell>
+        <TableCell align="center">
         <FormControlLabel
           value="add"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
           {...register("tpd-ticketing-tool-options", {})}
         />
+        </TableCell>
+        <TableCell align="center">
         <FormControlLabel
           value="edit"
           control={<Checkbox  size="small" />} 
           labelPlacement="top"
           {...register("tpd-ticketing-tool-options", {})}
         />
+        </TableCell>
+        <TableCell align="center">
         <FormControlLabel
           value="delete"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
         />
+        </TableCell>
+        <TableCell align="center">
         <FormControlLabel
           value="export"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
           {...register("tpd-ticketing-tool-options", {})}
         />
+        </TableCell>
+        <TableCell align="center">
         <FormControlLabel
           value="import"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
           {...register("tpd-ticketing-tool-options", {})}
         />
+        </TableCell>
+        <TableCell align="center">
         <FormControlLabel
           value="admin"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
           {...register("tpd-ticketing-tool-options", {})}
         />
-        </FormGroup>
-        </FormControl>
-{/* HCM */}
-<FormControl sx={{ m: 3 }} component="fieldset" variant="standard">
-    <FormLabel component="legend">HCM</FormLabel>
-    <FormGroup aria-label="position" row>
+        </TableCell>
+            </TableRow>
+
+            <TableRow
+              sx={{ '&:last-child td, &:last-child th': { border: 2 } }}
+            >
+        <TableCell component="th" scope="row" align="center"><h3>HCM</h3></TableCell>
+        <TableCell align="center">
     <FormControlLabel
           value="view"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
           {...register("hcm-options", {})}
         />
+        </TableCell>
+        <TableCell align="center">
         <FormControlLabel
           value="add"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
           {...register("hcm-options", {})}
         />
+        </TableCell>
+        <TableCell align="center">
         <FormControlLabel
           value="edit"
           control={<Checkbox  size="small" />} 
           labelPlacement="top"
           {...register("hcm-options", {})}
         />
+        </TableCell>
+        <TableCell align="center">
         <FormControlLabel
           value="delete"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
         />
+        </TableCell>
+        <TableCell align="center">
         <FormControlLabel
           value="export"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
           {...register("hcm-options", {})}
         />
+        </TableCell>
+        <TableCell align="center">
         <FormControlLabel
           value="import"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
           {...register("hcm-options", {})}
         />
+        </TableCell>
+        <TableCell align="center">
         <FormControlLabel
           value="admin"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
           {...register("hcm-options", {})}
         />
-        </FormGroup>
-        </FormControl>
-{/* ERP */}
-<FormControl sx={{ m: 3 }} component="fieldset" variant="standard">
-    <FormLabel component="legend">ERP</FormLabel>
-    <FormGroup aria-label="position" row>
+        </TableCell>
+            </TableRow>
+
+            <TableRow
+              sx={{ '&:last-child td, &:last-child th': { border: 2 } }}
+            >
+        <TableCell component="th" scope="row" align="center"><h3>ERP</h3></TableCell>
+        <TableCell align="center">
     <FormControlLabel
           value="view"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
           {...register("erp-options", {})}
         />
+        </TableCell>
+        <TableCell align="center">
         <FormControlLabel
           value="add"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
           {...register("erp-options", {})}
         />
+        </TableCell>
+        <TableCell align="center">
         <FormControlLabel
           value="edit"
           control={<Checkbox  size="small" />} 
           labelPlacement="top"
           {...register("erp-options", {})}
         />
+        </TableCell>
+        <TableCell align="center">
         <FormControlLabel
           value="delete"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
         />
+        </TableCell>
+        <TableCell align="center">
         <FormControlLabel
           value="export"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
           {...register("erp-options", {})}
         />
+        </TableCell>
+        <TableCell align="center">
         <FormControlLabel
           value="import"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
           {...register("erp-options", {})}
         />
+        </TableCell>
+        <TableCell align="center">
         <FormControlLabel
           value="admin"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
           {...register("erp-options", {})}
         />
-        </FormGroup>
-        </FormControl>
-{/* NAP Locator */}
-<FormControl sx={{ m: 3 }} component="fieldset" variant="standard">
-    <FormLabel component="legend">NAP Locator</FormLabel>
-    <FormGroup aria-label="position" row>
+        </TableCell>
+            </TableRow>
+
+            <TableRow
+              sx={{ '&:last-child td, &:last-child th': { border: 2 } }}
+            >
+        <TableCell component="th" scope="row" align="center"><h3>NAP Locator</h3></TableCell>
+        <TableCell align="center">
     <FormControlLabel
           value="view"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
           {...register("naplocator-options", {})}
         />
+        </TableCell>
+        <TableCell align="center">
         <FormControlLabel
           value="add"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
           {...register("naplocator-options", {})}
         />
+        </TableCell>
+        <TableCell align="center">
         <FormControlLabel
           value="edit"
           control={<Checkbox  size="small" />} 
           labelPlacement="top"
           {...register("naplocator-options", {})}
         />
+        </TableCell>
+        <TableCell align="center">
         <FormControlLabel
           value="delete"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
         />
+        </TableCell>
+        <TableCell align="center">
         <FormControlLabel
           value="export"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
           {...register("naplocator-options", {})}
         />
+        </TableCell>
+        <TableCell align="center">
         <FormControlLabel
           value="import"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
           {...register("naplocator-options", {})}
         />
+        </TableCell>
+        <TableCell align="center">
         <FormControlLabel
           value="admin"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
           {...register("naplocator-options", {})}
         />
-        </FormGroup>
-        </FormControl>
-{/* Gsuite */}
-<FormControl sx={{ m: 3 }} component="fieldset" variant="standard">
-    <FormLabel component="legend">Gsuite</FormLabel>
-    <FormGroup aria-label="position" row>
+        </TableCell>
+            </TableRow>
+
+            <TableRow
+              sx={{ '&:last-child td, &:last-child th': { border: 2 } }}
+            >
+        <TableCell component="th" scope="row" align="center"><h3>Gsuite</h3></TableCell>
+        <TableCell align="center">
     <FormControlLabel
           value="view"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
           {...register("gsuite-options", {})}
         />
+        </TableCell>
+        <TableCell align="center">
         <FormControlLabel
           value="add"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
           {...register("gsuite-options", {})}
         />
+        </TableCell>
+        <TableCell align="center">
         <FormControlLabel
           value="edit"
           control={<Checkbox  size="small" />} 
           labelPlacement="top"
           {...register("gsuite-options", {})}
         />
+        </TableCell>
+        <TableCell align="center">
         <FormControlLabel
           value="delete"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
         />
+        </TableCell>
+        <TableCell align="center">
         <FormControlLabel
           value="export"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
           {...register("gsuite-options", {})}
         />
+        </TableCell>
+        <TableCell align="center">
         <FormControlLabel
           value="import"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
           {...register("gsuite-options", {})}
         />
+        </TableCell>
+        <TableCell align="center">
         <FormControlLabel
           value="admin"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
           {...register("gsuite-options", {})}
         />
-        </FormGroup>
-        </FormControl>
-{/* Domain Controller */}
-<FormControl sx={{ m: 3 }} component="fieldset" variant="standard">
-    <FormLabel component="legend">Domain Controller</FormLabel>
-    <FormGroup aria-label="position" row>
+        </TableCell>
+            </TableRow>
+
+            <TableRow
+              sx={{ '&:last-child td, &:last-child th': { border: 2 } }}
+            >
+        <TableCell component="th" scope="row" align="center"><h3>Domain Controller</h3></TableCell>
+        <TableCell align="center">
     <FormControlLabel
           value="view"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
-          {...register("domaincontroller-options", {})}
+          {...register("domain-controller-options", {})}
         />
+        </TableCell>
+        <TableCell align="center">
         <FormControlLabel
           value="add"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
-          {...register("domaincontroller-options", {})}
+          {...register("domain-controller-options", {})}
         />
+        </TableCell>
+        <TableCell align="center">
         <FormControlLabel
           value="edit"
           control={<Checkbox  size="small" />} 
           labelPlacement="top"
-          {...register("domaincontroller-options", {})}
+          {...register("domain-controller-options", {})}
         />
+        </TableCell>
+        <TableCell align="center">
         <FormControlLabel
           value="delete"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
         />
+        </TableCell>
+        <TableCell align="center">
         <FormControlLabel
           value="export"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
-          {...register("domaincontroller-options", {})}
+          {...register("domain-controller-options", {})}
         />
+        </TableCell>
+        <TableCell align="center">
         <FormControlLabel
           value="import"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
-          {...register("domaincontroller-options", {})}
+          {...register("domain-controller-options", {})}
         />
+        </TableCell>
+        <TableCell align="center">
         <FormControlLabel
           value="admin"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
-          {...register("domaincontroller-options", {})}
+          {...register("domain-controller-options", {})}
         />
-        </FormGroup>
-        </FormControl>
-{/* OSS User management */}
-<FormControl sx={{ m: 3 }} component="fieldset" variant="standard">
-    <FormLabel component="legend">OSS User management</FormLabel>
-    <FormGroup aria-label="position" row>
+        </TableCell>
+            </TableRow>
+
+            <TableRow
+              sx={{ '&:last-child td, &:last-child th': { border: 2 } }}
+            >
+        <TableCell component="th" scope="row" align="center"><h3>OSS User management</h3></TableCell>
+        <TableCell align="center">
     <FormControlLabel
           value="view"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
           {...register("oss-user-management-options", {})}
         />
+        </TableCell>
+        <TableCell align="center">
         <FormControlLabel
           value="add"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
           {...register("oss-user-management-options", {})}
         />
+        </TableCell>
+        <TableCell align="center">
         <FormControlLabel
           value="edit"
           control={<Checkbox  size="small" />} 
           labelPlacement="top"
           {...register("oss-user-management-options", {})}
         />
+        </TableCell>
+        <TableCell align="center">
         <FormControlLabel
           value="delete"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
         />
+        </TableCell>
+        <TableCell align="center">
         <FormControlLabel
           value="export"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
           {...register("oss-user-management-options", {})}
         />
+        </TableCell>
+        <TableCell align="center">
         <FormControlLabel
           value="import"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
           {...register("oss-user-management-options", {})}
         />
+        </TableCell>
+        <TableCell align="center">
         <FormControlLabel
           value="admin"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
           {...register("oss-user-management-options", {})}
         />
-        </FormGroup>
-        </FormControl>
-{/* Vcenter */}
-<FormControl sx={{ m: 3 }} component="fieldset" variant="standard">
-    <FormLabel component="legend">Vcenter</FormLabel>
-    <FormGroup aria-label="position" row>
+        </TableCell>
+            </TableRow>
+
+            <TableRow
+              sx={{ '&:last-child td, &:last-child th': { border: 2 } }}
+            >
+        <TableCell component="th" scope="row" align="center"><h3>Vcenter</h3></TableCell>
+        <TableCell align="center">
     <FormControlLabel
           value="view"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
           {...register("vcenter-options", {})}
         />
+        </TableCell>
+        <TableCell align="center">
         <FormControlLabel
           value="add"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
           {...register("vcenter-options", {})}
         />
+        </TableCell>
+        <TableCell align="center">
         <FormControlLabel
           value="edit"
           control={<Checkbox  size="small" />} 
           labelPlacement="top"
           {...register("vcenter-options", {})}
         />
+        </TableCell>
+        <TableCell align="center">
         <FormControlLabel
           value="delete"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
         />
+        </TableCell>
+        <TableCell align="center">
         <FormControlLabel
           value="export"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
           {...register("vcenter-options", {})}
         />
+        </TableCell>
+        <TableCell align="center">
         <FormControlLabel
           value="import"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
           {...register("vcenter-options", {})}
         />
+        </TableCell>
+        <TableCell align="center">
         <FormControlLabel
           value="admin"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
           {...register("vcenter-options", {})}
         />
-        </FormGroup>
-        </FormControl>
-        {/* Smart Sheet */}
-<FormControl sx={{ m: 3 }} component="fieldset" variant="standard">
-    <FormLabel component="legend">Smart Sheet</FormLabel>
-    <FormGroup aria-label="position" row>
+        </TableCell>
+            </TableRow>
+
+            <TableRow
+              sx={{ '&:last-child td, &:last-child th': { border: 2 } }}
+            >
+        <TableCell component="th" scope="row" align="center"><h3>Smart Sheet</h3></TableCell>
+        <TableCell align="center">
     <FormControlLabel
           value="view"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
           {...register("smartsheet-options", {})}
         />
+        </TableCell>
+        <TableCell align="center">
         <FormControlLabel
           value="add"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
           {...register("smartsheet-options", {})}
         />
+        </TableCell>
+        <TableCell align="center">
         <FormControlLabel
           value="edit"
           control={<Checkbox  size="small" />} 
           labelPlacement="top"
           {...register("smartsheet-options", {})}
         />
+        </TableCell>
+        <TableCell align="center">
         <FormControlLabel
           value="delete"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
         />
+        </TableCell>
+        <TableCell align="center">
         <FormControlLabel
           value="export"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
           {...register("smartsheet-options", {})}
         />
+        </TableCell>
+        <TableCell align="center">
         <FormControlLabel
           value="import"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
           {...register("smartsheet-options", {})}
         />
+        </TableCell>
+        <TableCell align="center">
         <FormControlLabel
           value="admin"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
           {...register("smartsheet-options", {})}
         />
-        </FormGroup>
-        </FormControl>
-{/* Domain Controller */}
-<FormControl sx={{ m: 3 }} component="fieldset" variant="standard">
-    <FormLabel component="legend">Domain Controller</FormLabel>
-    <FormGroup aria-label="position" row>
+        </TableCell>
+            </TableRow>
+       <TableRow
+              sx={{ '&:last-child td, &:last-child th': { border: 2 } }}
+            >
+        <TableCell component="th" scope="row" align="center"><h3>Tableau</h3></TableCell>
+        <TableCell align="center">
     <FormControlLabel
           value="view"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
-          {...register("domaincontroller-options", {})}
+          {...register("tableau-options", {})}
         />
+        </TableCell>
+        <TableCell align="center">
         <FormControlLabel
           value="add"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
-          {...register("domaincontroller-options", {})}
+          {...register("tableau-options", {})}
         />
+        </TableCell>
+        <TableCell align="center">
         <FormControlLabel
           value="edit"
           control={<Checkbox  size="small" />} 
           labelPlacement="top"
-          {...register("domaincontroller-options", {})}
+          {...register("tableau-options", {})}
         />
+        </TableCell>
+        <TableCell align="center">
         <FormControlLabel
           value="delete"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
         />
+        </TableCell>
+        <TableCell align="center">
         <FormControlLabel
           value="export"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
-          {...register("domaincontroller-options", {})}
+          {...register("tableau-options", {})}
         />
+        </TableCell>
+        <TableCell align="center">
         <FormControlLabel
           value="import"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
-          {...register("domaincontroller-options", {})}
+          {...register("tableau-options", {})}
         />
+        </TableCell>
+        <TableCell align="center">
         <FormControlLabel
           value="admin"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
-          {...register("domaincontroller-options", {})}
+          {...register("tableau-options", {})}
         />
-        </FormGroup>
-        </FormControl> 
-        </Container>
-        {/* </div> */}
+        </TableCell>
+        </TableRow>
    {/* Productivity Tools */}
-   <FormControl sx={{ m: 3 }} component="fieldset" variant="standard">
-    <FormLabel component="legend">Productivity Tools</FormLabel>
-    <FormGroup aria-label="position" row>
+   <TableRow>
+   <TableCell component="th" scope="row" align="center"><h3>Productivity Tools</h3></TableCell> 
+    <TableCell align="center">
     <FormControlLabel
-          value="view"
+          value="msoffice"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
           label="MS Office"
-          {...register("smartsheet-options", {})}
+          {...register("msoffice", {})}
         />
+        </TableCell>
+        <TableCell align="center">
         <FormControlLabel
-          value="add"
+          value="instantmessage"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
           label="Instant Message"
-          {...register("smartsheet-options", {})}
+          {...register("instantmessage", {})}
         />
+        </TableCell>
+        <TableCell align="center">
         <FormControlLabel
-          value="delete"
+          value="autocad"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
           label="Auto CAD"
+          {...register("autocad", {})}
         />
+        </TableCell>
+        <TableCell align="center">
         <FormControlLabel
-          value="export"
+          value="winscp"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
           label="WinSCP"
-          {...register("smartsheet-options", {})}
+          {...register("winscp", {})}
         />
+        </TableCell>
+        <TableCell align="center">
         <FormControlLabel
-          value="import"
+          value="foxitreader"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
           label="Foxit Reader"
-          {...register("smartsheet-options", {})}
+          {...register("foxitreader", {})}
         />
+        </TableCell>
+        <TableCell align="center">
         <FormControlLabel
-          value="admin"
+          value="biapplication"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
           label="BI Application"
-          {...register("smartsheet-options", {})}
+          {...register("biapplication", {})}
         />
-        </FormGroup>
-        </FormControl>
+        </TableCell>
+</TableRow> 
+
+        </TableBody>
+      </Table>
+    </TableContainer>
+</div>
+
+
           <Box
             sx={{
               display: "flex",
