@@ -1,11 +1,25 @@
-FROM node:18 
+# pull official base image
+FROM node:16.3.0-alpine
 
-WORKDIR /usr/App
+# set working directory
+WORKDIR /app
 
-COPY . .
+# add `/app/node_modules/.bin` to $PATH
+ENV PATH /app/node_modules/.bin:$PATH
+
+# install app dependencies
+COPY package.json ./
+COPY package-lock.json ./
+RUN npm install --silent
+RUN npm install react-scripts@3.4.1 -g --silent
+
+# add app
+COPY . ./
+
 
 EXPOSE 3000
 # required for docker desktop port mapping
 
 
+# start app
 CMD ["npm", "start"]
