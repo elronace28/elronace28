@@ -2,14 +2,13 @@
 import { PDFDocument, rgb } from "pdf-lib";
 import { useForm } from "react-hook-form";
 import React, { useState } from "react";
-import Brightness4Icon from "@mui/icons-material/Brightness4";
-import Brightness7Icon from "@mui/icons-material/Brightness7";
 import "./App.css";
 import Box from "@mui/material/Box";
-import { useTheme, ThemeProvider, createTheme } from "@mui/material/styles";
 import {
   Autocomplete,
   Button,
+  // Menu,
+  // MenuItem,
   Paper,
   Stack,
   styled,
@@ -20,6 +19,7 @@ import {
   TableHead,
   TableRow,
   TextareaAutosize,
+  // Toolbar,
 } from "@mui/material";
 import {
   Checkbox,  
@@ -30,13 +30,11 @@ import {
   RadioGroup,
   TextField,
 } from "@mui/material";
-import IconButton from "@mui/material/IconButton";
 import { purple } from "@mui/material/colors";
 import FilePresentIcon from "@mui/icons-material/FilePresent";
 import WarningAmberIcon from "@mui/icons-material/WarningAmber";
-// import { DataGridPro } from '@mui/x-data-grid-pro';
-// import { useDemoData } from '@mui/x-data-grid-generator';
-const ColorModeContext = React.createContext({ toggleColorMode: () => {} });
+// import CancelIcon from '@mui/icons-material/Cancel';
+
 
 //Other Select Location
 const otherLocations = [
@@ -236,7 +234,6 @@ firstPage.drawText(data.locationRadioButton, {
   size: 6,
 },
 )
-  console.log(data)
 
   const svgPath = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18px" height="18px" viewBox="0 0 18 18" version="1.1">
  <g id="surface1">
@@ -344,7 +341,7 @@ firstPage.drawText(data.locationRadioButton, {
 
   //Applications
   var arrayApplication = [
-    "bss",
+    "bss",//name
     "oss",
     "ssp",
     "otrs",
@@ -384,7 +381,7 @@ firstPage.drawText(data.locationRadioButton, {
       actionsStartingYCoordinate - yCoordinateInterval;
     var arrayYaxis = [];
     var actionArray = [
-      "view",
+      "view",//value
       "add",
       "edit",
       "delete",
@@ -413,74 +410,56 @@ firstPage.drawText(data.locationRadioButton, {
       }
     });
   });
+
   // Productivity Tools 
-  //Application MS Office Checkbox
-  var arrayProductivityTools = [
-    "msoffice",
+  var arrayProductivity = [
+    'msoffice', //name
+    'instantmessage',
+    'autocad',
+    'winscp',
+    'foxitreader',
+    'biapplication',
   ];
-  arrayProductivityTools.forEach((data) => {
-  var checkboxes = document.querySelectorAll(`input[name=${data}]:checked`);
+  let actionsStartingYCoordinates = 349.5;
+  arrayProductivity.forEach((type, index) => {
+    let yCoordinateInterval = 7;
 
-  for (var i = 0; i < checkboxes.length; i++) {
-    arrayProductivityTools.push(checkboxes[i].value);
-  }
-
-  if (data.includes(arrayProductivityTools)) {
-    firstPage.drawSvgPath(svgPath, {
-      color: rgb(0, 0, 0),
-      x: 265.5,
-      y: 342.5,
-      scale: 0.5,
+    if (index >= 4 && index <= 8) {
+      yCoordinateInterval = yCoordinateInterval + 0.5;
+    }
+    if (index === 23) {
+      yCoordinateInterval = yCoordinateInterval + 3.5;
+    }
+    actionsStartingYCoordinates =
+      actionsStartingYCoordinates - yCoordinateInterval;
+    var arrayYaxis = [];
+    var actionArray = [
+      'msOffice', //value
+      'instantMessage',
+      'autoCad',
+      'winScp',
+      'foxitReader',
+      'biApplication',
+    ];
+    var checkboxes = document.querySelectorAll(
+      `input[name=${type}]:checked`
+    );
+    for (var i = 0; i < checkboxes.length; i++) {
+      arrayYaxis.push(checkboxes[i].value);
+    }
+    actionArray.forEach((action) => {
+      //console.log(arrayYaxis.includes(action));
+      if (arrayYaxis.includes(action)) {
+        firstPage.drawSvgPath(svgPath, {
+          color: rgb(0, 0, 0),
+          x: 265.5,
+          y: actionsStartingYCoordinates,
+          scale: 0.5,
+        });
+      }
     });
-  }
-  // //Application Instant Message check Box
-  // if (arrayProductivityTools.includes("instantmessage")) {
-  //   firstPage.drawSvgPath(svgPath, {
-  //     color: rgb(0, 0, 0),
-  //     x: 265.5,
-  //     y: 335,
-  //     scale: 0.5,
-  //   });
-  // }
-});
-  // //Application Auto CAD check Box
-  // if (arrayProductivityTools.includes("autocad")) {
-  //   firstPage.drawSvgPath(svgPath, {
-  //     color: rgb(0, 0, 0),
-  //     x: 265.5,
-  //     y: 328,
-  //     scale: 0.5,
-  //   });
-  // }
-
-  // //Application WinSCP check Box
-  // if (arrayProductivityTools.includes("winscp")) {
-  //   firstPage.drawSvgPath(svgPath, {
-  //     color: rgb(0, 0, 0),
-  //     x: 265.5,
-  //     y: 321,
-  //     scale: 0.5,
-  //   });
-  // }
-
-  // //Application Foxit Reader check Box
-  // if (arrayProductivityTools.includes("foxitreader")) {
-  //   firstPage.drawSvgPath(svgPath, {
-  //     color: rgb(0, 0, 0),
-  //     x: 265.5,
-  //     y: 314,
-  //     scale: 0.5,
-  //   });
-  // }
-  // //Application BI Application check Box
-  // if (arrayProductivityTools.includes("biapplication")) {
-  //   firstPage.drawSvgPath(svgPath, {
-  //     color: rgb(0, 0, 0),
-  //     x: 265.5,
-  //     y: 307,
-  //     scale: 0.5,
-  //   });
-  // }
+  });
+ 
   // Yes or No Popup Alert
   var result = window.confirm("Are You Sure?");
   if (result === false) {
@@ -498,6 +477,15 @@ firstPage.drawText(data.locationRadioButton, {
 };
 
 function App() {
+  // const [anchorEl, setAnchorEl] = React.useState(null);
+  // const open = Boolean(anchorEl);
+  // const handleClick = (event) => {
+  //   setAnchorEl(event.currentTarget);
+  // };
+  // const handleClose = () => {
+  //   setAnchorEl(null);
+  // };
+
   const {
     register,
     handleSubmit,
@@ -507,25 +495,7 @@ function App() {
   if (register === "") {
   }
   console.log(watch("example"));
-  //DarkMode
-  const theme = useTheme();
-  const colorMode = React.useContext(ColorModeContext);
-
-  //Check Box
-  // const [state, setState] = React.useState({});
-  // const handleChange = (event) => {
-  //   setState({
-  //     ...state,
-  //     [event.target.name]: event.target.checked,
-  //   });
-  // };
-
-  // const { bss, oss } = state;
-
-  // const { data } =useDemoData({
-  //   rowLength: 100,
-  //   maxColumns: 6,
-  // });
+ 
   // Other Location Auto Complete
   // Location Radio Button
   const [value2, setValue2] = useState("");
@@ -537,9 +507,27 @@ function App() {
   }
 
   return (
+    
     <form onSubmit={handleSubmit(onClick)}>
       <div className="header">
         
+      {/* <div className="addTools">
+       <Button 
+       endIcon={<NoteAddIcon/>}
+       >
+        Add Input
+        </Button>
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              "& > :not(style)": { m: 3, width: "20%" },
+              
+            }}
+          >
+            <TextField label='Enter Here' /> 
+            </Box>
+         </div> */}
         <Box
           sx={{
             display: "block",
@@ -551,18 +539,7 @@ function App() {
             
           }}
         >
-          {theme.palette.mode} mode
-          <IconButton
-            sx={{ ml: 3 }}
-            onClick={colorMode.toggleColorMode}
-            color="inherit"
-          >
-            {theme.palette.mode === "dark" ? (
-              <Brightness7Icon />
-            ) : (
-              <Brightness4Icon />
-            )}
-          </IconButton>
+        
           <h1>Employee Account Request Form</h1>
           <Box
             sx={{
@@ -2539,7 +2516,7 @@ function App() {
    <TableCell component="th" scope="row" align="center"><h3>Productivity Tools</h3></TableCell> 
     <TableCell align="center">
     <FormControlLabel
-          value="msoffice"
+          value="msOffice"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
           label="MS Office"
@@ -2548,7 +2525,7 @@ function App() {
         </TableCell>
         <TableCell align="center">
         <FormControlLabel
-          value="instantmessage"
+          value="instantMessage"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
           label="Instant Message"
@@ -2557,7 +2534,7 @@ function App() {
         </TableCell>
         <TableCell align="center">
         <FormControlLabel
-          value="autocad"
+          value="autoCad"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
           label="Auto CAD"
@@ -2566,7 +2543,7 @@ function App() {
         </TableCell>
         <TableCell align="center">
         <FormControlLabel
-          value="winscp"
+          value="winScp"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
           label="WinSCP"
@@ -2575,7 +2552,7 @@ function App() {
         </TableCell>
         <TableCell align="center">
         <FormControlLabel
-          value="foxitreader"
+          value="foxitReader"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
           label="Foxit Reader"
@@ -2584,7 +2561,7 @@ function App() {
         </TableCell>
         <TableCell align="center">
         <FormControlLabel
-          value="biapplication"
+          value="biApplication"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
           label="BI Application"
@@ -2597,7 +2574,42 @@ function App() {
       </Table>
     </TableContainer>
 </div>
+{/* <Toolbar>
+      <Button
+        variant="outlined"
+        id="basic-button"
+        aria-controls={open ? 'basic-menu' : undefined}
+        aria-haspopup="true"
+        aria-expanded={open ? 'true' : undefined}
+        onClick={handleClick}
+      >
+       Add Inputs +
+      </Button>
+      <Menu
+        id="basic-menu"
+        anchorEl={anchorEl}
+        open={open}
+        onSubmit={handleClose}
+        MenuListProps={{
+          'aria-labelledby': 'basic-button',
+        }}
+      >
+        <MenuItem>
+        <Button  onClick={handleClose}></Button>
+        <TextField label='Enter Tools (Optional)' 
+         {...register("toolsInputs", {
+        })}
+        /> 
+        </MenuItem>
+        <MenuItem>
+        <TextField label='Enter Tools (Optional)' 
+        {...register("toolsInputs1", {
+       })}
+       />
+      </MenuItem>
+      </Menu>
 
+    </Toolbar> */}
 
           <Box
             sx={{
@@ -2617,63 +2629,12 @@ function App() {
               </ColorButton>
             </Stack>
           </Box>
+          
         </Box>
       </div>
     </form>
   );
+  
 }
 
-export default function ToggleColorMode() {
-  const [mode, setMode] = React.useState("light");
-  const colorMode = React.useMemo(
-    () => ({
-      toggleColorMode: () => {
-        setMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
-      },
-    }),
-    []
-  );
-
-  const theme = React.useMemo(
-    () =>
-      createTheme({
-        palette: {
-          mode,
-        },
-      }),
-    [mode]
-  );
-
-  return (
-    <ColorModeContext.Provider value={colorMode}>
-      <ThemeProvider theme={theme}>
-        <App />
-      </ThemeProvider>
-    </ColorModeContext.Provider>
-  );
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+export default App; 
