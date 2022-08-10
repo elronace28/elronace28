@@ -9,6 +9,7 @@
     "@mui/icons-material": "^5.8.4",
     "@mui/material": "^5.9.3",
     "@mui/styled-engine-sc": "^5.8.0",
+    "@mui/styles": "^5.9.3",
     "@mui/x-data-grid": "^5.15.0",
     "@mui/x-data-grid-generator": "^5.15.0",
     "@mui/x-data-grid-premium": "^5.15.0",
@@ -31,7 +32,6 @@
     "react-super-responsive-table": "^5.2.1",
     "styled-components": "^5.3.5",
     "web-vitals": "^2.1.4"
-    
   },
   "scripts": {
     "start": "react-scripts start",

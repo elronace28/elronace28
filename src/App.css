@@ -30,3 +30,15 @@ input[type="number"] {
  
   margin-top: 1%;
 }
+
+.navbar {
+  overflow: hidden;
+  background-color: #333;
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.textfield{
+  color:#f2f2f2;
+}

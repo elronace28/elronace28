@@ -34,9 +34,7 @@ import { purple } from "@mui/material/colors";
 import FilePresentIcon from "@mui/icons-material/FilePresent";
 import WarningAmberIcon from "@mui/icons-material/WarningAmber";
 import Applications from "./Components/Applications";
-
-// import CancelIcon from '@mui/icons-material/Cancel';
-
+import { makeStyles } from '@mui/styles';
 
 //Other Select Location
 const otherLocations = [
@@ -57,6 +55,11 @@ const ColorButton = styled(Button)(({ theme }) => ({
   },
 }));
 
+const useStyles = makeStyles({
+  input: {
+    color: "white"
+  }
+});
 
 //PDF COORDINATE
 const Generatepdf = async (data) => {
@@ -488,7 +491,14 @@ function App() {
   // const handleClose = () => {
   //   setAnchorEl(null);
   // };
+  const classes = useStyles();
+  
+  const [page, setPage] = useState("add")
+  
 
+  const handleCancel = () => {
+      setPage("");
+  };
   const {
     register,
     handleSubmit,
@@ -512,25 +522,51 @@ function App() {
   return (
     
     <form onSubmit={handleSubmit(onClick)}>
-      <div className="header">
-        
-      {/* <div className="addTools">
-       <Button 
-       endIcon={<NoteAddIcon/>}
-       >
-        Add Input
-        </Button>
-          <Box
+      <div className="navbar">
+    <Box
+            sx={{
+              display: "flex",
+
+              "& > :not(style)": { m: 3 , width:'10%', height:'50px' },
+            }}
+          >
+                <ColorButton className="menu-item" onClick={() => setPage("addtools")}>Add Tools +</ColorButton>
+               
+</Box>
+        <div className="container">
+            {page === "addtools" &&  <Box
+            sx={{
+              display: "flex",
+
+              "& > :not(style)": { m: 3 , width:'10%', height:'50px'},
+            }}
+          ><ColorButton className="menu-item" onClick={ handleCancel } >Cancel</ColorButton></Box>}
+            {page === "addtools" &&  
+            <Box
             sx={{
               display: "flex",
               alignItems: "center",
-              "& > :not(style)": { m: 3, width: "20%" },
-              
+              "& > :not(style)": { m: 3, width:'50%' },
             }}
           >
-            <TextField label='Enter Here' /> 
-            </Box>
-         </div> */}
+            <TextField 
+            inputProps={{ className: classes.input }}
+             label="Input Here:(Optional)" 
+             color="secondary"
+             error
+             {...register("toolsElementInput1", {
+              required: true,
+             })}
+           />  
+            {errors?.toolsElementInput1?.type === "required" && (
+            <p style={{ color: "red" }}>
+              {<WarningAmberIcon />}This field is required
+            </p>
+          )}
+          </Box>}
+        </div>
+        </div>
+      <div className="header">
         <Box
           sx={{
             display: "block",
@@ -1031,45 +1067,9 @@ function App() {
       {...register("remarksTextArea", {})}
     />
     </Box>
+    
+    {/* Applications Table */}
     <Applications/>
-
-{/* <Toolbar>
-      <Button
-        variant="outlined"
-        id="basic-button"
-        aria-controls={open ? 'basic-menu' : undefined}
-        aria-haspopup="true"
-        aria-expanded={open ? 'true' : undefined}
-        onClick={handleClick}
-      >
-       Add Inputs +
-      </Button>
-      <Menu
-        id="basic-menu"
-        anchorEl={anchorEl}
-        open={open}
-        onSubmit={handleClose}
-        MenuListProps={{
-          'aria-labelledby': 'basic-button',
-        }}
-      >
-        <MenuItem>
-        <Button  onClick={handleClose}></Button>
-        <TextField label='Enter Tools (Optional)' 
-         {...register("toolsInputs", {
-        })}
-        /> 
-        </MenuItem>
-        <MenuItem>
-        <TextField label='Enter Tools (Optional)' 
-        {...register("toolsInputs1", {
-       })}
-       />
-      </MenuItem>
-      </Menu>
-
-    </Toolbar> */}
-
           <Box
             sx={{
               display: "flex",
@@ -1088,7 +1088,6 @@ function App() {
               </ColorButton>
             </Stack>
           </Box>
-      
         </Box>
       </div>
     </form>
