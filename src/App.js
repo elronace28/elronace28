@@ -1,12 +1,18 @@
 // import { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer';
 import { PDFDocument, rgb } from "pdf-lib";
-import { useForm } from "react-hook-form";
+import { useForm, useFieldArray } from "react-hook-form";
 import React, { useState } from "react";
 import "./App.css";
 import Box from "@mui/material/Box";
 import {
+  // Alert,
   Autocomplete,
   Button,
+  Chip,
+  Grid,
+  IconButton,
+  // IconButton,
+  // Snackbar,
   // Menu,
   // MenuItem,
   // Paper,
@@ -32,9 +38,10 @@ import {
 } from "@mui/material";
 import { purple } from "@mui/material/colors";
 import FilePresentIcon from "@mui/icons-material/FilePresent";
-import WarningAmberIcon from "@mui/icons-material/WarningAmber";
 import Applications from "./Components/Applications";
-import { makeStyles } from '@mui/styles';
+import NoteAddIcon from '@mui/icons-material/NoteAdd';
+import CancelIcon from '@mui/icons-material/Cancel';
+import ErrorOutlineOutlinedIcon from '@mui/icons-material/ErrorOutlineOutlined';
 
 //Other Select Location
 const otherLocations = [
@@ -45,7 +52,13 @@ const otherLocations = [
   { label: "Antipolo" },
   { label: "Bulacan" },
 ];
-
+const immidiateHead = [
+  { label: "Steven Maverick Paradeza" },
+  { label: "Jominee Mangaser" },
+  { label: 'Fregie A. Chanjueco'},
+  { label: "Erwin M. Apolonio" },
+  { label: "Sir Budds" },
+];
 //Button style for Generate PDF
 const ColorButton = styled(Button)(({ theme }) => ({
   color: theme.palette.getContrastText(purple[500]),
@@ -55,17 +68,12 @@ const ColorButton = styled(Button)(({ theme }) => ({
   },
 }));
 
-const useStyles = makeStyles({
-  input: {
-    color: "white"
-  }
-});
 
 //PDF COORDINATE
 const Generatepdf = async (data) => {
   // Fetch an existing PDF document
   const url =
-    "https://www.dl.dropboxusercontent.com/s/kmdee75w44goksm/EARF_Template.pdf";
+    "https://www.dl.dropboxusercontent.com/s/b9grgxgseytqubs/EARF_Template.pdf";
   const existingPdfBytes = await fetch(url).then((res) => res.arrayBuffer());
 
   // Load a PDFDocument from the existing PDF bytes
@@ -104,142 +112,276 @@ const Generatepdf = async (data) => {
   let header = date + "(" + time + ")";
   firstPage.drawText(header, {
     x: 105,
-    y: 641,
-    size: 7,
+    y: 637,
+    size: 8,
   });
  
   //Employee Number*
     firstPage.drawText(data.employeeNumber, {
       x: 160,
-      y: 706,
-      size: 8,
+      y: 705,
+      size: 9,
     },
   )
   // Ticket Number
     firstPage.drawText(data.ticketNumber, {
-      x: 420,
-      y: 731.5,
+      x: 422,
+      y: 729.5,
       size: 6.5,
     },
   )
   //Last Name
   firstPage.drawText(data.lastName, {
-    x: 160,
+    x: 145,
     y: 685,
-    size: 8,
+    size: 10,
   },
 
 )
-//Last Name
+//First Name
 firstPage.drawText(data.firstName, {
-  x: 280,
+  x: 235,
   y: 685,
-  size: 8,
+  size: 10,
 },
 )
+//Middle Name
 firstPage.drawText(data.middleName, {
-  x: 420,
+  x: 410,
   y: 685,
-  size: 8,
+  size: 10,
 },
 )
 let fullName = `${data.firstName} ${data.middleName} ${data.lastName} `;
 if (fullName) {
   firstPage.drawText(fullName.toUpperCase(), {
-    x: 130,
-    y: 115,
-    size: 6,
+    x: 143.5,
+    y: 136,
+    size: 7,
   });
 }
 firstPage.drawText(data.emailInput, {
-  x: 150,
-  y: 674.5,
-  size: 6,
+  x: 140,
+  y: 672,
+  size: 7,
 },
 )
 firstPage.drawText(data.departmentInput, {
-  x: 150,
-  y: 667,
-  size: 6,
+  x: 140,
+  y: 663,
+  size: 7,
 },
 )
 firstPage.drawText(data.contactNumber, {
-  x: 387,
-  y: 674,
-  size: 6,
+  x: 425,
+  y: 671,
+  size: 7,
 },
 )
 firstPage.drawText(data.jobTitle, {
-  x: 387,
-  y: 667,
-  size: 6,
+  x: 420,
+  y: 663,
+  size: 7,
+},
+)
+firstPage.drawText(data.immidiateHead, {
+  x: 140,
+  y: 655,
+  size: 7,
+},
+)
+let immidiateHead = `${data.immidiateHead} `
+firstPage.drawText(immidiateHead.toUpperCase(), {
+  x: 120,
+  y: 270,
+  size: 7,
 },
 )
  // Workstation: To be filled by BUH
  firstPage.drawText(data.windowsDesktop, {
-  x: 210,
-  y: 626.5,
-  size: 6,
+  x: 202,
+  y: 620.5,
+  size: 7,
 },
 )
 firstPage.drawText(data.windowsLaptop, {
-  x: 210,
-  y: 619,
-  size: 6,
+  x: 202,
+  y: 612.5,
+  size: 7,
 },
 )
 firstPage.drawText(data.appleMac, {
-  x: 210,
-  y: 612,
-  size: 6,
+  x: 202,
+  y: 605,
+  size: 7,
 },
 )
 // Justification
 firstPage.drawText(data.justificationInput, {
-  x: 147,
-  y: 601,
+  x: 138,
+  y: 595,
   size: 6,
 },
 )
 // Enterprise Access Request
 firstPage.drawText(data.ntLogin, {
-  x: 210,
-  y: 582,
-  size: 6,
+  x: 202,
+  y: 576.4,
+  size: 7,
 },
 )
 firstPage.drawText(data.emailId, {
-  x: 210,
-  y: 575,
-  size: 6,
+  x: 202,
+  y: 568.5,
+  size: 7,
 },
 )
 firstPage.drawText(data.fileServerAccess, {
-  x: 210,
-  y: 567,
-  size: 6,
+  x: 202,
+  y: 560,
+  size: 7,
 },
 )
 firstPage.drawText(data.vpnInput, {
-  x: 210,
-  y: 559,
-  size: 6,
+  x: 202,
+  y: 551,
+  size: 7,
 },
 )
-//Remarks
-firstPage.drawText(data.remarksTextArea, {
-  x: 370,
-  y: 535,
-  size: 6,
+firstPage.drawText(data.ossRemarks, {
+  x: 367,
+  y: 522.9,
+  size: 5,
 },
 )
-//Metro Manila
-firstPage.drawText(data.locationRadioButton, {
-  x: 434.5,
-  y: 660,
-  size: 6,
+firstPage.drawText(data.sspRemarks, {
+  x: 367,
+  y: 515.9,
+  size: 5,
 },
 )
+firstPage.drawText(data.otrsRemarks, {
+  x: 367,
+  y: 508.5,
+  size: 5,
+},
+)
+firstPage.drawText(data.uspRemarks, {
+  x: 367,
+  y: 501.5,
+  size: 5,
+},
+)
+firstPage.drawText(data.ibasRemarks, {
+  x: 367,
+  y: 494,
+  size: 5,
+},
+)
+firstPage.drawText(data.docsisRemarks, {
+  x: 367,
+  y: 487,
+  size: 5,
+},
+)
+firstPage.drawText(data.u2000Remarks, {
+  x: 367,
+  y: 479.5,
+  size: 5,
+},
+)
+firstPage.drawText(data.avsystemRemarks, {
+  x: 367,
+  y: 472,
+  size: 5,
+},
+)
+firstPage.drawText(data.mrtgRemarks, {
+  x: 367,
+  y: 465,
+  size: 5,
+},
+)
+firstPage.drawText(data.coriantRemarks, {
+  x: 367,
+  y: 457.5,
+  size: 5,
+},
+)
+firstPage.drawText(data.facebookRemarks, {
+  x: 367,
+  y: 450,
+  size: 5,
+},
+)
+firstPage.drawText(data.youtubeRemarks, {
+  x: 367,
+  y: 442.5,
+  size: 5,
+},
+)
+firstPage.drawText(data.itTicketingToolRemarks, {
+  x: 367,
+  y: 435,
+  size: 5,
+},
+)
+firstPage.drawText(data.tpdTicketingToolRemarks, {
+  x: 367,
+  y: 427.5,
+  size: 5,
+},
+)
+firstPage.drawText(data.hcmRemarks, {
+  x: 367,
+  y: 420,
+  size: 5,
+},
+)
+firstPage.drawText(data.erpRemarks, {
+  x: 367,
+  y: 413,
+  size: 5,
+},
+)
+firstPage.drawText(data.gsuiteRemarks, {
+  x: 367,
+  y: 406,
+  size: 5,
+},
+)
+firstPage.drawText(data.domainControllerRemarks, {
+  x: 367,
+  y: 398.5,
+  size: 5,
+},
+)
+firstPage.drawText(data.ossUserManageMentRemarks, {
+  x: 367,
+  y: 391,
+  size: 5,
+},
+)
+firstPage.drawText(data.vcenterRemarks, {
+  x: 367,
+  y: 383.5,
+  size: 5,
+},
+)
+firstPage.drawText(data.smartSheetRemarks, {
+  x: 367,
+  y: 376,
+  size: 5,
+},
+)
+
+  firstPage.drawText(data.toString('otherTools'), {
+  x: 367,
+  y: 376,
+  size: 5,
+},
+)
+
 
   const svgPath = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18px" height="18px" viewBox="0 0 18 18" version="1.1">
  <g id="surface1">
@@ -262,17 +404,17 @@ firstPage.drawText(data.locationRadioButton, {
   if (arraynewaccount.includes("yesRadioButton")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
-      x: 284.5,
-      y: 716.5,
-      scale: 0.7,
+      x: 285.5,
+      y: 715.5,
+      scale: 0.8,
     });
-    //No
+    //Modify
   } else if (arraynewaccount.includes("noRadioButton")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
-      x: 386.5,
-      y: 716.5,
-      scale: 0.7,
+      x: 395.5,
+      y: 715.6,
+      scale: 0.8,
     });
   }
   //Select Converge and Subsidiary Radio Button
@@ -291,9 +433,9 @@ firstPage.drawText(data.locationRadioButton, {
   if (arraycon.includes("convergeRadioButton")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
-      x: 387.5,
-      y: 731.8,
-      scale: 0.6,
+      x: 395.5,
+      y: 731,
+      scale: 0.7,
     });
     //Subsidiary
   } else if (arraycon.includes("subsidiaryRadioButton")) {
@@ -301,7 +443,7 @@ firstPage.drawText(data.locationRadioButton, {
       color: rgb(0, 0, 0),
       x: 387.5,
       y: 724.3,
-      scale: 0.6,
+      scale: 0.7,
     });
   }
   //Location Radio Button
@@ -320,18 +462,18 @@ firstPage.drawText(data.locationRadioButton, {
   if (arrayloc.includes("Metro Manila")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
-      x: 388.5,
-      y: 667,
-      scale: 0.5,
+      x: 395.5,
+      y: 664,
+      scale: 0.7,
     });
 
     //Others
   } else if (arrayloc.includes("Other Location")) {
     firstPage.drawSvgPath(svgPath, {
       color: rgb(0, 0, 0),
-      x: 388.5,
-      y: 660,
-      scale: 0.5,
+      x: 395.5,
+      y: 656,
+      scale: 0.7,
     });
   }
   //Enter Location
@@ -339,16 +481,15 @@ firstPage.drawText(data.locationRadioButton, {
   const location = document.getElementById("othersAutoComplete");
   if (arrayloc.includes("Other Location")) {// value="" yung kinukuha
     firstPage.drawText(location.value, {
-      x: 387,
-      y: 643,
-      size: 7,
+      x: 390,
+      y: 638,
+      size: 8,
     });
   }
 
   //Applications
-  var arrayApplication = [
-    "bss",//name
-    "oss",
+  var arrayApplication = [         
+    "oss",//name
     "ssp",
     "otrs",
     "usp",
@@ -364,7 +505,6 @@ firstPage.drawText(data.locationRadioButton, {
     "tpd-ticketing-tool",
     "hcm",
     "erp",
-    "naplocator",
     "gsuite",
     "domain-controller",
     "oss-user-management",
@@ -372,15 +512,15 @@ firstPage.drawText(data.locationRadioButton, {
     "smartsheet",
     "tableau",
   ];
-  let actionsStartingYCoordinate = 550.5;
+  let actionsStartingYCoordinate = 537.5;
   arrayApplication.forEach((type, index) => {
-    let yCoordinateInterval = 7;
+    let yCoordinateInterval = 7.2;
     //console.log(yCoordinateInterval);
-    if (index >= 4 && index <= 8) {
-      yCoordinateInterval = yCoordinateInterval + 0.5;
+    if (index >= 1 && index <= 6) {
+      yCoordinateInterval = yCoordinateInterval + 0.3;
     }
-    if (index === 23) {
-      yCoordinateInterval = yCoordinateInterval + 3.5;
+    if (index === 21) {
+      yCoordinateInterval = yCoordinateInterval +3;
     }
     //console.log(yCoordinateInterval);
     actionsStartingYCoordinate =
@@ -402,16 +542,23 @@ firstPage.drawText(data.locationRadioButton, {
     for (var i = 0; i < checkboxes.length; i++) {
       arrayYaxis.push(checkboxes[i].value);
     }
-    let ActionsStartingXCoordinate = 162.5;
-    actionArray.forEach((action) => {
-      ActionsStartingXCoordinate = ActionsStartingXCoordinate + 26;
+    let ActionsStartingXCoordinate = 155.5;
+    actionArray.forEach((action,index) => {
+      let xCoordinateInterval = 5;
+
+      ActionsStartingXCoordinate = ActionsStartingXCoordinate + 33;
       //console.log(arrayYaxis.includes(action));
+      if (index >= 1 && index <= 6) {
+        xCoordinateInterval = xCoordinateInterval + 0.5;
+      }
+      ActionsStartingXCoordinate = 
+      ActionsStartingXCoordinate - xCoordinateInterval;
       if (arrayYaxis.includes(action)) {
         firstPage.drawSvgPath(svgPath, {
           color: rgb(0, 0, 0),
           x: ActionsStartingXCoordinate,
           y: actionsStartingYCoordinate,
-          scale: 0.5,
+          scale: 0.6,
         });
       }
     });
@@ -426,7 +573,7 @@ firstPage.drawText(data.locationRadioButton, {
     'foxitreader',
     'biapplication',
   ];
-  let actionsStartingYCoordinates = 349.5;
+  let actionsStartingYCoordinates = 360;
   arrayProductivity.forEach((type, index) => {
     let yCoordinateInterval = 7;
 
@@ -466,6 +613,7 @@ firstPage.drawText(data.locationRadioButton, {
     });
   });
  
+  
   // Yes or No Popup Alert
   var result = window.confirm("Are You Sure?");
   if (result === false) {
@@ -483,37 +631,61 @@ firstPage.drawText(data.locationRadioButton, {
 };
 
 function App() {
-  // const [anchorEl, setAnchorEl] = React.useState(null);
-  // const open = Boolean(anchorEl);
-  // const handleClick = (event) => {
-  //   setAnchorEl(event.currentTarget);
-  // };
-  // const handleClose = () => {
-  //   setAnchorEl(null);
-  // };
-  const classes = useStyles();
+
+
   
-  const [page, setPage] = useState("add")
+  //
+  // const [open, setSuccess] = React.useState(false);
+
+  // const handleChange = () => {
+  //   setSuccess(true);
+  // };
+
+  // const handleClose = (event, reason) => {
+  //   if (reason === 'clickaway') {
+  //     return;
+  //   }
+
+  //   setSuccess(false);
+  // };
+
+  // const [page, setPage] = useState("add")
   
 
-  const handleCancel = () => {
-      setPage("");
-  };
+  // const handleCancel = () => {
+  //     setPage("");
+  // };
+
+  
   const {
     register,
     handleSubmit,
     watch,
+    control,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    defaultValues: {
+      toolList: [{ type: "text", value: "", name: "otherTools" }]
+    }
+  });
+
+  const { fields, append, remove } = useFieldArray({
+    control,
+    name: "toolList"
+    
+  });
+  // Specify Tools 
+  
+  
   if (register === "") {
   }
-  console.log(watch("example"));
+  console.log(watch('toolList'));
  
   // Other Location Auto Complete
   // Location Radio Button
   const [value2, setValue2] = useState("");
 
-  //PDF Trigger Download File
+  //PDF Trigger Download File  
   const onClick=(data) => Generatepdf(data);
   if (Generatepdf === true) {
     return false;
@@ -522,50 +694,26 @@ function App() {
   return (
     
     <form onSubmit={handleSubmit(onClick)}>
-      <div className="navbar">
-    <Box
-            sx={{
-              display: "flex",
+ {/* <Snackbar open={open} autoHideDuration={2000} onClose={handleClose} >
+        <Alert 
+              onClose={handleClose} 
+              severity={errors?.lastName ?'error' : 'success'}
+              sx={{ width: '100%' }}
+              >
+              {errors?.lastName?.type === 'required' && ('Fill out the required fields')}
+              {errors?.lastName ? null : 'success' &&('Successfully Added')}    
+             
+        </Alert>
+      </Snackbar> */}
 
-              "& > :not(style)": { m: 3 , width:'10%', height:'50px' },
-            }}
-          >
-                <ColorButton className="menu-item" onClick={() => setPage("addtools")}>Add Tools +</ColorButton>
-               
-</Box>
-        <div className="container">
-            {page === "addtools" &&  <Box
-            sx={{
-              display: "flex",
+    
+ <Grid container spacing={3} alignItems="center">
+        {Array.from(Array(1)).map((_, index) => (
+          <Grid item  xs="auto" key={index}>
 
-              "& > :not(style)": { m: 3 , width:'10%', height:'50px'},
-            }}
-          ><ColorButton className="menu-item" onClick={ handleCancel } >Cancel</ColorButton></Box>}
-            {page === "addtools" &&  
-            <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              "& > :not(style)": { m: 3, width:'50%' },
-            }}
-          >
-            <TextField 
-            inputProps={{ className: classes.input }}
-             label="Input Here:(Optional)" 
-             color="secondary"
-             error
-             {...register("toolsElementInput1", {
-              required: true,
-             })}
-           />  
-            {errors?.toolsElementInput1?.type === "required" && (
-            <p style={{ color: "red" }}>
-              {<WarningAmberIcon />}This field is required
-            </p>
-          )}
-          </Box>}
-        </div>
-        </div>
+
+     
+     
       <div className="header">
         <Box
           sx={{
@@ -578,7 +726,7 @@ function App() {
             
           }}
         >
-        
+       
           <h1>Employee Account Request Form</h1>
           <Box
             sx={{
@@ -587,31 +735,30 @@ function App() {
               "& > :not(style)": { m: 3 },
             }}
           >
+            
             <TextField
-              type="number"
-              color="secondary"
-              label="Employee Number"
+              type='text'
+              color='success'
+              label={errors?.employeeNumber ? "Employee Number!" : 'Employee Number' }
               onKeyDown={(evt) =>
-                ["e", "E", "+", "-"].includes(evt.key) && evt.preventDefault()
-              }
-              style={{ color: "red" }}
+                ["e", "E", "+", "-"].includes(evt.key) && evt.preventDefault()}
+              error={errors?.employeeNumber}
+              helperText = {errors?.employeeNumber ? errors?.employeeNumber.message : null   
+                           }
               {...register("employeeNumber", {
-                required: true,
-                maxLength: 20,
-                pattern: /[0-9]{5}/,
+                required: <Chip label="This field is required" 
+                style={{ color: "red"}} 
+                icon={<ErrorOutlineOutlinedIcon style={{ color: "red"}} />
+                 }/>,
+                pattern:{ 
+                  value:/[0-9]{3}/,
+                message: <Chip label="Please follow the requested format" 
+                style={{ color: "red"}} 
+                icon={<ErrorOutlineOutlinedIcon style={{ color: "red"}} />
+              }/>,
+              },
               })}
-              
             />
-            {errors?.employeeNumber?.type === "required" && (
-              <p style={{ color: "red" }}>
-                {<WarningAmberIcon />}This field is required
-              </p>
-            )}
-            {errors?.employeeNumber?.type === "pattern" && (
-              <p style={{ color: "red" }}>
-                {<WarningAmberIcon />}Please match the Requested Format
-              </p>
-            )}
           </Box>
   
           <Box
@@ -639,82 +786,70 @@ function App() {
           >
             <TextField
               type="text"
-              color="secondary"
-              label="Last Name"
+              color="success"
+              label={errors?.lastName ? "Last Name!" : 'Last Name' }
+              error={errors?.lastName}
+              helperText= {errors?.lastName ? errors?.lastName.message : null }
               {...register("lastName", {
-                required: true,
-                min: 1,
-                pattern: /^[ A-Za-z ]{5}/,
+                required: <Chip label="This field is required" 
+                style={{ color: "red"}} 
+                icon={<ErrorOutlineOutlinedIcon style={{ color: "red"}} />
+                 }/>,
+                pattern:{ 
+                  value:/^[ A-Za-z ]{3}/,
+                message: <Chip label="Please follow the requested format" 
+                style={{ color: "red"}} 
+                icon={<ErrorOutlineOutlinedIcon style={{ color: "red"}} />
+              }/>,
+              },
               })}
             />
-            {errors?.lastName?.type === "required" && (
-              <p style={{ color: "red" }}>
-                {<WarningAmberIcon />}This field is required
-              </p>
-            )}
-            {errors?.lastName?.type === "pattern" && (
-              <p style={{ color: "red" }}>
-                {<WarningAmberIcon />}Please match the Requested Format
-              </p>
-            )}
-            {errors?.lastName?.type === "min" && (
-              <p style={{ color: "red" }}>
-                {<WarningAmberIcon />}Enter some characters
-              </p>
-            )}
-
+             
+             
+            
             <TextField
               type="text"
-              color="secondary"
-              label="First Name"
+              color="success"
+              error={errors?.firstName}
+              label={errors?.firstName ? "First Name!" : 'First Name' }
+              helperText={errors?.firstName ? errors?.firstName.message : null }
               {...register("firstName", {
-                required: true,
-                min: 4,
-                pattern: /^[A-Za-z ]{4,32}/,
+                required: <Chip label="This field is required" 
+                style={{ color: "red"}} 
+                icon={<ErrorOutlineOutlinedIcon style={{ color: "red"}} />
+                 }/>,
+                pattern:{ 
+                  value:/^[A-Za-z ]{4,32}/,
+                message: <Chip label="Please follow the requested format" 
+                style={{ color: "red"}} 
+                icon={<ErrorOutlineOutlinedIcon style={{ color: "red"}} />
+              }/>,
+              },
               })}
             />
-            {errors?.firstName?.type === "required" && (
-              <p style={{ color: "red" }}>
-                {<WarningAmberIcon />}This field is required
-              </p>
-            )}
-            {errors?.firstName?.type === "pattern" && (
-              <p style={{ color: "red" }}>
-                {<WarningAmberIcon />}Please match the Requested Format
-              </p>
-            )}
-            {errors?.firstName?.type === "min" && (
-              <p style={{ color: "red" }}>
-                {<WarningAmberIcon />}Enter some characters
-              </p>
-            )}
-
+  
             <TextField
               type="text"
-              color="secondary"
-              label="Middle Name"
+              color="success"
+              error={errors?.middleName}
+              label={errors?.middleName ? "Middle Name!" : 'Middle Name' }
+              helperText= {errors?.middleName ? errors?.middleName.message : null }
               {...register("middleName", {
-                required: true,
-                min: 1,
-                pattern: /^[A-Za-z ]{1,32}/,
+                required: <Chip label="This field is required" 
+                style={{ color: "red"}} 
+                icon={<ErrorOutlineOutlinedIcon style={{ color: "red"}} />
+                 }/>,
+                pattern:{ 
+                  value:/^[A-Za-z ]{1,32}/,
+                message: <Chip label="Please follow the requested format" 
+                style={{ color: "red"}} 
+                icon={<ErrorOutlineOutlinedIcon style={{ color: "red"}} />
+              }/>,
+              },
               })}
             />
-            {errors?.middleName?.type === "required" && (
-              <p style={{ color: "red" }}>
-                {<WarningAmberIcon />}This field is required
-              </p>
-            )}
-            {errors?.middleName?.type === "pattern" && (
-              <p style={{ color: "red" }}>
-                {<WarningAmberIcon />}Please match the Requested Format
-              </p>
-            )}
-            {errors?.middleName?.type === "min" && (
-              <p style={{ color: "red" }}>
-                {<WarningAmberIcon />}Enter some characters
-              </p>
-            )}
           </Box>
+
           <Box
             sx={{
               display: "flex",
@@ -724,44 +859,46 @@ function App() {
           >
             <TextField
               type="email"
-              color="secondary"
+              color="success"
               placeholder="@example.com"
-              label="Email"
+              error={errors?.emailInput}
+              label={errors?.emailInput ? "Email Address!" : 'Email Address' }
+              helperText= {errors?.emailInput ? errors?.emailInput.message : null }
               {...register("emailInput", {
-                required: true,
-                // pattern: /^[a-zA-Z0-9]+[\.]?([a-zA-Z0-9]+)?[\@][a-z]{3,9}[\.][a-z]{2,5}/
+                required: <Chip label="This field is required" 
+                style={{ color: "red"}} 
+                icon={<ErrorOutlineOutlinedIcon style={{ color: "red"}} />
+                 }/>,
+                pattern:{ 
+                  value:/.+@.+\..+$/,
+                message: <Chip label="Please follow the requested format" 
+                style={{ color: "red"}} 
+                icon={<ErrorOutlineOutlinedIcon style={{ color: "red"}} />
+              }/>,
+              },
               })}
             />
-            {errors?.emailInput?.type === "required" && (
-              <p style={{ color: "red" }}>
-                {<WarningAmberIcon />}This field is required
-              </p>
-            )}
-            {errors?.emailInput?.type === "pattern" && (
-              <p style={{ color: "red" }}>
-                {<WarningAmberIcon />}Invalid Email Address
-              </p>
-            )}
-
+           
             <TextField
               type="text"
-              color="secondary"
-              label="Department"
+              color="success"
+              error={errors?.departmentInput}
+              label={errors?.departmentInput ? "Department!" : 'Department' }
+              helperText= {errors?.departmentInput ? errors?.departmentInput.message : null }
               {...register("departmentInput", {
-                required: true,
-                pattern: /^[A-Za-z ]{2,32}/,
+                required: <Chip label="This field is required" 
+                style={{ color: "red"}} 
+                icon={<ErrorOutlineOutlinedIcon style={{ color: "red"}} />
+                 }/>,
+                pattern:{ 
+                  value:/^[A-Za-z ]{2,32}/,
+                message: <Chip label="Please follow the requested format" 
+                style={{ color: "red"}} 
+                icon={<ErrorOutlineOutlinedIcon style={{ color: "red"}} />
+              }/>,
+              },
               })}
             />
-            {errors?.departmentInput?.type === "required" && (
-              <p style={{ color: "red" }}>
-                {<WarningAmberIcon />}This field is required
-              </p>
-            )}
-            {errors?.departmentInput?.type === "pattern" && (
-              <p style={{ color: "red" }}>
-                {<WarningAmberIcon />}Please match the Requested Format
-              </p>
-            )}
           </Box>
           <Box
             sx={{
@@ -771,58 +908,80 @@ function App() {
             }}
           >
             <TextField
-              inputProps={{ pattern: "[0-9]{10,11}" }}
               type="number"
-              color="secondary"
+              color="success"
               placeholder="09********"
-              label="Contact Number"
+              error={errors?.contactNumber}
+              label={errors?.contactNumber ? "09*********!" : 'Contact Number' }
+              helperText= {errors?.contactNumber ? errors?.contactNumber.message : null }
               onKeyDown={(evt) =>
                 ["e", "E", "+", "-"].includes(evt.key) && evt.preventDefault()
               }
-              style={{ color: "red" }}
               {...register("contactNumber", {
-                required: true,
-                maxLength: 11,
-                pattern: /[0-9]{10}/,
+                required: <Chip label="This field is required" 
+                style={{ color: "red"}} 
+                icon={<ErrorOutlineOutlinedIcon style={{ color: "red"}} />
+                 }/>,
+                pattern:{ 
+                  value:/[0-9]{10}/,
+                message: <Chip label="Please follow the requested format" 
+                style={{ color: "red"}} 
+                icon={<ErrorOutlineOutlinedIcon style={{ color: "red"}} />
+              }/>,
+              },
               })}
             />
-            {errors?.contactNumber?.type === "required" && (
-              <p style={{ color: "red" }}>
-                {<WarningAmberIcon />}This field is required
-              </p>
-            )}
-            {errors?.contactNumber?.type === "pattern" && (
-              <p style={{ color: "red" }}>
-                {<WarningAmberIcon />}Please match the Requested Format
-              </p>
-            )}
-            {errors?.contactNumber?.type === "maxLength" && (
-              <p style={{ color: "red" }}>
-                {<WarningAmberIcon />}Please match the Requested Format
-              </p>
-            )}
-
+             
             <TextField
               inputProps={{ pattern: "[A-Za-z ]{1,32}" }}
               type="text"
-              color="secondary"
-              label="Job Title"
+              color="success"
+              error={errors?.jobTitle}
+              label={errors?.jobTitle ? "Job Title" : 'Job Title' }
+              helperText= {errors?.jobTitle ? errors?.jobTitle.message : null }
               {...register("jobTitle", {
-                required: true,
-                pattern: /^[A-Za-z ]{5,32}/,
+                required: <Chip label="This field is required" 
+                style={{ color: "red"}} 
+                icon={<ErrorOutlineOutlinedIcon style={{ color: "red"}} />
+                 }/>,
+                pattern:{ 
+                  value:/^[A-Za-z ]{5,32}/,
+                message: <Chip label="Please follow the requested format" 
+                style={{ color: "red"}} 
+                icon={<ErrorOutlineOutlinedIcon style={{ color: "red"}} />
+              }/>,
+              },
               })}
             />
-            {errors?.jobTitle?.type === "required" && (
-              <p style={{ color: "red" }}>
-                {<WarningAmberIcon />}This field is required
-              </p>
-            )}
-            {errors?.jobTitle?.type === "pattern" && (
-              <p style={{ color: "red" }}>
-                {<WarningAmberIcon />}Please match the Requested Format
-              </p>
-            )}
           </Box>
+          
+                  <Autocomplete 
+                    id="immidiateHead"
+                    freeSolo
+                    name = 'immidiateHead'
+                    options={immidiateHead}
+                    sx={{ m: 2, width: 520 }}
+                    renderInput={(params) => (
+                      <TextField {...params}  label={errors?.immidiateHead ? "Immidiate Head!" : 'Immidiate Head' } 
+                            color='success'
+                            error={errors?.immidiateHead}
+                            helperText= {errors?.immidiateHead ? errors?.immidiateHead.message : null }
+                          {...register("immidiateHead", {
+                            required: <Chip label="This field is required" 
+                            style={{ color: "red"}} 
+                            icon={<ErrorOutlineOutlinedIcon style={{ color: "red"}} />
+                            }/>,
+                            pattern:{ 
+                              value:/^[A-Za-z ]/,
+                            message: <Chip label="Please follow the requested format" 
+                            style={{ color: "red"}} 
+                            icon={<ErrorOutlineOutlinedIcon style={{ color: "red"}} />
+                          }/>,
+                          },
+                          })}                   
+                      />
+                    )}
+                  />
           <div>
             <FormControl>
               <FormLabel sx={{ m: 1 }}>
@@ -835,9 +994,10 @@ function App() {
                 sx={{ m: 1 }}
               >
                 {errors?.newAccountRadio?.type === "required" && (
-                  <p style={{ color: "red" }}>
-                    {<WarningAmberIcon />}This field is required
-                  </p>
+                <Chip label="This field is required" 
+                style={{ color: "red"}} 
+                icon={<ErrorOutlineOutlinedIcon style={{ color: "red"}} />
+                 }/>
                 )}
                 <FormControlLabel
                   value="yesRadioButton"
@@ -860,13 +1020,14 @@ function App() {
           {/* Select Converge or Sub */}
           <div>
             <FormControl>
-              <FormLabel sx={{ m: 2 }}>
-                Select(Converge and Subsidiary)
+              <FormLabel sx={{ m: 1 }}>
+              Select(Converge and Subsidiary)
               </FormLabel>
               {errors?.selectRadioButton?.type === "required" && (
-                <p style={{ color: "red" }}>
-                  {<WarningAmberIcon />}This field is required
-                </p>
+                <Chip label="This field is required" 
+                style={{ color: "red"}} 
+                icon={<ErrorOutlineOutlinedIcon style={{ color: "red"}} />
+                 }/>
               )}
               <RadioGroup
                 aria-labelledby="selectRadioButton"
@@ -874,7 +1035,7 @@ function App() {
                 defaultValue="selectRadioButton"
                 sx={{ m: 2 }}
                 className=""
-              >
+                >
                 <FormControlLabel
                   value="convergeRadioButton"
                   control={<Radio />}
@@ -894,20 +1055,22 @@ function App() {
               </RadioGroup>
             </FormControl>
           </div>
-          {/* Location Radio Button */}
-          <h2>Location</h2>
+                 {/* Location Radio Button */}
+                      <h2>Location</h2>
           <div>
             <FormControl>
               <RadioGroup
                 aria-labelledby="locationRadioButton"
                 name="locationRadioButton"
                 defaultValue="locationRadioButton"
-              >
+                >
                 {errors?.locationRadioButton?.type === "required" && (
-                <p style={{ color: "red" }}>
-                  {<WarningAmberIcon />}This field is required
-                </p>
-              )}
+                <Chip label="This field is required" 
+                 style={{ color: "red"}} 
+                 icon={<ErrorOutlineOutlinedIcon style={{ color: "red"}} />
+                 }
+                />
+                )}
                 <FormControlLabel
                   control={<Radio />}
                   sx={{ m: 1 }}
@@ -918,7 +1081,6 @@ function App() {
                   onChange={(locationRadioButton) =>
                     setValue2(locationRadioButton.currentTarget.value)
                   }
-                 
                 />
 
                 <FormControlLabel
@@ -930,30 +1092,39 @@ function App() {
                   checked={value2 === "Other Location"}
                   onChange={(locationRadioButton) =>
                     setValue2(locationRadioButton.currentTarget.value)
-                  }
-                  
+                  } 
                 />
 
                 {value2 === "Other Location" && (
-                  <Autocomplete
-                    disablePortal
+                  <Stack spacing={2} sx={{ width: 300 }}>
+                  <Autocomplete 
                     id="othersAutoComplete"
+                    freeSolo
                     name = 'othersAutoComplete'
                     options={otherLocations}
                     sx={{ m: 1, width: 300 }}
                     renderInput={(params) => (
                       <TextField {...params} label="Select Location" 
-                      {...register("othersAutoComplete", { required: true })}
-                     
+                      helperText= {errors?.othersAutoComplete ? errors?.othersAutoComplete.message : null }
+                          {...register("othersAutoComplete", {
+                            required: <Chip label="This field is required" 
+                            style={{ color: "red"}} 
+                            icon={<ErrorOutlineOutlinedIcon style={{ color: "red"}} />
+                            }/>,
+                            pattern:{ 
+                              value:/^[A-Za-z ]/,
+                            message: <Chip label="Please follow the requested format" 
+                            style={{ color: "red"}} 
+                            icon={<ErrorOutlineOutlinedIcon style={{ color: "red"}} />
+                          }/>,
+                          },
+                          })}                   
                       />
                     )}
                   />
+                  </Stack>
                 )}
-                {errors?.othersAutoComplete?.type === "required" && (
-                        <p style={{ color: "red" }}>
-                          {<WarningAmberIcon />}This field is required
-                        </p>
-                      )}
+                
               </RadioGroup>
             </FormControl>
           </div>
@@ -968,14 +1139,17 @@ function App() {
           >
             {/* Workstation: To be filled by BUH */}
             <TextField
+              color="secondary"
               label="Windows Desktop"
               {...register("windowsDesktop", {})}
             />
              <TextField
+              color="secondary"
               label="Windows Laptop"
               {...register("windowsLaptop", {})}
             />
              <TextField
+              color="secondary"
               label="MAC Apple"
               {...register("appleMac", {})}
             />
@@ -1009,6 +1183,7 @@ function App() {
           >
             {/* Enterprise Access Request */}
             <TextField
+              color="secondary"
               label="NT Login"
               {...register("ntLogin", {})}
             />
@@ -1023,6 +1198,7 @@ function App() {
           
             
              <TextField
+              color="secondary"
               label="Email ID"
               {...register("emailId", {})}
             /> 
@@ -1035,6 +1211,7 @@ function App() {
             }}
           >
              <TextField
+              color="secondary"
               label="File Server Access"
               {...register("fileServerAccess", {})}
             />
@@ -1047,29 +1224,51 @@ function App() {
             }}
           >
             <TextField
+              color="secondary"
               label="VPN"
               {...register("vpnInput", {})}
             />
           </Box>
-          {/* Remarks */}
-          <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              "& > :not(style)": { m: 3 },
-            }}
-          >
-          <TextareaAutosize
-      aria-label="minimum height"
-      minRows={3}
-      placeholder="Remarks"
-      style={{ m:2 ,width: 200 }}
-      {...register("remarksTextArea", {})}
-    />
-    </Box>
-    
+         
+          {/* Specify Tools */}
+        <h3>Other Tools (Please specify)</h3>
+        
+              {fields.map((item, index) => {
+               return (
+          <ul key={item.id}>
+            
+            <TextField 
+              type="text"
+              color="secondary"
+              label='Input Here (Optional)'
+              defaultValue={`${item.otherTools}`}
+              {...register(`toolList.${index}.value`,{
+              })}
+            />
+              {fields.length > 1 && 
+              (
+              <IconButton color='error' onClick={() => remove(index)}>
+                <CancelIcon />
+              </IconButton>
+              )}
+               
+           </ul>
+              );
+              })}
+      <section>
+              {fields.length -1 <= 8 && (
+            <IconButton 
+                  color='success'
+                  onClick={() => {
+                  append({ otherTools: ""});
+                 }}
+              > Add Tools
+              <NoteAddIcon/>
+            </IconButton>
+         )}
+      </section>
     {/* Applications Table */}
-    <Applications/>
+    <Applications register={register} />
           <Box
             sx={{
               display: "flex",
@@ -1081,16 +1280,23 @@ function App() {
               <ColorButton
                 variant="contained"
                 type="submit"
-                id="copyBtn"
+                // onClick={handleChange}
                 endIcon={<FilePresentIcon />}
               >
+               
                 Generate PDF
               </ColorButton>
             </Stack>
           </Box>
         </Box>
-      </div>
+        
+        </div>
+      </Grid>
+      
+        ))}
+      </Grid>
     </form>
+    
   );
   
 }

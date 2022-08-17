@@ -1,23 +1,10 @@
 
-import { Checkbox, FormControlLabel, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
-import { useForm } from "react-hook-form";
+import { Checkbox, FormControlLabel, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField } from "@mui/material";
 
 
 
-function Applications() {
-    const {
-        register,
-        watch,
-      } = useForm();
-      if (register === "") {
-      }
-      console.log(watch("example"));
-     
-    // //PDF Trigger Download File
-    // const onClick=(data) => Generatepdf(data);
-    // if (Generatepdf === true) {
-    //   return false;
-    // }
+
+function Applications({ register }) {
 
     return (
 <div className="tableapplication">
@@ -33,73 +20,10 @@ function Applications() {
             <TableCell align="center"><h3>Export</h3></TableCell>
             <TableCell align="center"><h3>Import</h3></TableCell>
             <TableCell align="center"><h3>Admin</h3></TableCell>
+            <TableCell align="center"><h3>Remarks</h3></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-        
-          <TableRow
-              sx={{ '&:last-child td, &:last-child th': { border: 1 } }}
-            >
-          <TableCell component="th" scope="row" align="center"><h3>BSS</h3></TableCell>
-          <TableCell align="center">
-          <FormControlLabel
-          value="view"
-          control={<Checkbox size="small"/>}
-          labelPlacement="top"
-          {...register("bss-options", {})}
-          />
-          </TableCell>
-          
-          <TableCell align="center">
-        <FormControlLabel
-          value="add"
-          control={<Checkbox size="small"/>}
-          labelPlacement="top"
-          {...register("bss-options", {})}
-        />
-        </TableCell>
-        <TableCell align="center">
-        <FormControlLabel
-          value="edit"
-          control={<Checkbox size="small"/>}
-          labelPlacement="top"
-          {...register("bss-options", {})}
-        />
-        </TableCell>
-        <TableCell align="center">
-        <FormControlLabel
-          value="delete"
-          control={<Checkbox size="small"/>}
-          labelPlacement="top"
-          {...register("bss-options", {})}
-        />
-        </TableCell>
-        <TableCell align="center">
-        <FormControlLabel
-          value="export"
-          control={<Checkbox size="small"/>}
-          labelPlacement="top"
-          {...register("bss-options", {})}
-        />
-        </TableCell>
-        <TableCell align="center">
-        <FormControlLabel
-          value="import"
-          control={<Checkbox size="small"/>}
-          labelPlacement="top"
-          {...register("bss-options", {})}
-        />
-        </TableCell>
-        <TableCell align="center">
-        <FormControlLabel
-          value="admin"
-          control={<Checkbox size="small"/>}
-          labelPlacement="top"
-          {...register("bss-options", {})}
-        />
-        </TableCell>
-        </TableRow>
-
          <TableRow
               sx={{ '&:last-child td, &:last-child th': { border: 1 } }}
             >
@@ -133,6 +57,7 @@ function Applications() {
           value="delete"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
+          {...register("oss-options", {})}
         />
         </TableCell>
         <TableCell align="center">
@@ -155,6 +80,19 @@ function Applications() {
         <FormControlLabel
           value="admin"
           control={<Checkbox  size="small" />}
+          labelPlacement="top"
+          {...register("oss-options", {})}
+        />
+        </TableCell>
+        <TableCell align="center" sx={{ minWidth: 200 }}>
+        <FormControlLabel
+          control={<TextField 
+            type='text' 
+            color="secondary" 
+            label="OSS"
+            inputProps={{ maxLength: 48 }}  
+            {...register("ossRemarks", {})}
+            />}
           labelPlacement="top"
           {...register("oss-options", {})}
         />
@@ -194,6 +132,7 @@ function Applications() {
           value="delete"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
+          {...register("ssp-options", {})}
         />
         </TableCell>
         <TableCell align="center">
@@ -216,6 +155,19 @@ function Applications() {
         <FormControlLabel
           value="admin"
           control={<Checkbox  size="small" />}
+          labelPlacement="top"
+          {...register("ssp-options", {})}
+        />
+        </TableCell>
+        <TableCell align="center">
+        <FormControlLabel
+          control={<TextField 
+            type='text' 
+            color="secondary" 
+            label="SSP"
+            inputProps={{ maxLength: 48 }}  
+            {...register("sspRemarks", {})}
+            />}
           labelPlacement="top"
           {...register("ssp-options", {})}
         />
@@ -255,6 +207,7 @@ function Applications() {
           value="delete"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
+          {...register("otrs-options", {})}
         />
         </TableCell>
         <TableCell align="center">
@@ -277,6 +230,19 @@ function Applications() {
         <FormControlLabel
           value="admin"
           control={<Checkbox  size="small" />}
+          labelPlacement="top"
+          {...register("otrs-options", {})}
+        />
+        </TableCell>
+        <TableCell align="center">
+        <FormControlLabel
+          control={<TextField 
+            type='text' 
+            color="secondary" 
+            label="OTRS"
+            inputProps={{ maxLength: 48 }}  
+            {...register("otrsRemarks", {})}
+            />}
           labelPlacement="top"
           {...register("otrs-options", {})}
         />
@@ -316,6 +282,7 @@ function Applications() {
           value="delete"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
+          {...register("usp-options", {})}
         />
         </TableCell>
         <TableCell align="center">
@@ -338,6 +305,19 @@ function Applications() {
         <FormControlLabel
           value="admin"
           control={<Checkbox  size="small" />}
+          labelPlacement="top"
+          {...register("usp-options", {})}
+        />
+        </TableCell>
+        <TableCell align="center">
+        <FormControlLabel
+          control={<TextField 
+            type='text' 
+            color="secondary" 
+            label="USP"
+            inputProps={{ maxLength: 48 }}  
+            {...register("uspRemarks", {})}
+            />}
           labelPlacement="top"
           {...register("usp-options", {})}
         />
@@ -377,6 +357,7 @@ function Applications() {
           value="delete"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
+          {...register("ibas-options", {})}
         />
         </TableCell>
         <TableCell align="center">
@@ -399,6 +380,19 @@ function Applications() {
         <FormControlLabel
           value="admin"
           control={<Checkbox  size="small" />}
+          labelPlacement="top"
+          {...register("ibas-options", {})}
+        />
+        </TableCell>
+        <TableCell align="center">
+        <FormControlLabel
+          control={<TextField 
+            type='text' 
+            color="secondary" 
+            label="iBAS"
+            inputProps={{ maxLength: 48 }}  
+            {...register("ibasRemarks", {})}
+            />}
           labelPlacement="top"
           {...register("ibas-options", {})}
         />
@@ -438,6 +432,7 @@ function Applications() {
           value="delete"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
+          {...register("docsis-options", {})}
         />
         </TableCell>
         <TableCell align="center">
@@ -460,6 +455,19 @@ function Applications() {
         <FormControlLabel
           value="admin"
           control={<Checkbox  size="small" />}
+          labelPlacement="top"
+          {...register("docsis-options", {})}
+        />
+        </TableCell>
+        <TableCell align="center">
+        <FormControlLabel
+          control={<TextField 
+            type='text' 
+            color="secondary" 
+            label="DOCSIS"
+            inputProps={{ maxLength: 48 }}  
+            {...register("docsisRemarks", {})}
+            />}
           labelPlacement="top"
           {...register("docsis-options", {})}
         />
@@ -499,6 +507,7 @@ function Applications() {
           value="delete"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
+          {...register("u2000-options", {})}
         />
         </TableCell>
         <TableCell align="center">
@@ -521,6 +530,19 @@ function Applications() {
         <FormControlLabel
           value="admin"
           control={<Checkbox  size="small" />}
+          labelPlacement="top"
+          {...register("u2000-options", {})}
+        />
+        </TableCell>
+        <TableCell align="center">
+        <FormControlLabel
+          control={<TextField 
+            type='text' 
+            color="secondary" 
+            label="U2000"
+            inputProps={{ maxLength: 48 }}  
+            {...register("u2000Remarks", {})}
+            />}
           labelPlacement="top"
           {...register("u2000-options", {})}
         />
@@ -560,6 +582,7 @@ function Applications() {
           value="delete"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
+          {...register("avsystem-options", {})}
         />
         </TableCell>
         <TableCell align="center">
@@ -582,6 +605,19 @@ function Applications() {
         <FormControlLabel
           value="admin"
           control={<Checkbox  size="small" />}
+          labelPlacement="top"
+          {...register("avsystem-options", {})}
+        />
+        </TableCell>
+        <TableCell align="center">
+        <FormControlLabel
+          control={<TextField 
+            type='text' 
+            color="secondary" 
+            label="AVSystem"
+            inputProps={{ maxLength: 48 }}  
+            {...register("avsystemRemarks", {})}
+            />}
           labelPlacement="top"
           {...register("avsystem-options", {})}
         />
@@ -621,6 +657,7 @@ function Applications() {
           value="delete"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
+          {...register("mrtg-options", {})}
         />
         </TableCell>
         <TableCell align="center">
@@ -643,6 +680,19 @@ function Applications() {
         <FormControlLabel
           value="admin"
           control={<Checkbox  size="small" />}
+          labelPlacement="top"
+          {...register("mrtg-options", {})}
+        />
+        </TableCell>
+        <TableCell align="center">
+        <FormControlLabel
+          control={<TextField 
+            type='text' 
+            color="secondary" 
+            label="MRTG"
+            inputProps={{ maxLength: 48 }}  
+            {...register("mrtgRemarks", {})}
+            />}
           labelPlacement="top"
           {...register("mrtg-options", {})}
         />
@@ -682,6 +732,7 @@ function Applications() {
           value="delete"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
+          {...register("coriant-options", {})}
         />
         </TableCell>
         <TableCell align="center">
@@ -704,6 +755,19 @@ function Applications() {
         <FormControlLabel
           value="admin"
           control={<Checkbox  size="small" />}
+          labelPlacement="top"
+          {...register("coriant-options", {})}
+        />
+        </TableCell>
+        <TableCell align="center">
+        <FormControlLabel
+          control={<TextField 
+            type='text' 
+            color="secondary" 
+            label="CORIANT"
+            inputProps={{ maxLength: 48 }}  
+            {...register("coriantRemarks", {})}
+            />}
           labelPlacement="top"
           {...register("coriant-options", {})}
         />
@@ -743,6 +807,7 @@ function Applications() {
           value="delete"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
+          {...register("facebook-options", {})}
         />
         </TableCell>
         <TableCell align="center">
@@ -765,6 +830,19 @@ function Applications() {
         <FormControlLabel
           value="admin"
           control={<Checkbox  size="small" />}
+          labelPlacement="top"
+          {...register("facebook-options", {})}
+        />
+        </TableCell>
+        <TableCell align="center">
+        <FormControlLabel
+          control={<TextField 
+            type='text' 
+            color="secondary" 
+            label="Facebook"
+            inputProps={{ maxLength: 48 }}  
+            {...register("facebookRemarks", {})}
+            />}
           labelPlacement="top"
           {...register("facebook-options", {})}
         />
@@ -804,6 +882,7 @@ function Applications() {
           value="delete"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
+          {...register("youtube-options", {})}
         />
         </TableCell>
         <TableCell align="center">
@@ -826,6 +905,19 @@ function Applications() {
         <FormControlLabel
           value="admin"
           control={<Checkbox  size="small" />}
+          labelPlacement="top"
+          {...register("youtube-options", {})}
+        />
+        </TableCell>
+        <TableCell align="center">
+        <FormControlLabel
+          control={<TextField 
+            type='text' 
+            color="secondary" 
+            label="Youtube"
+            inputProps={{ maxLength: 48 }}  
+            {...register("youtubeRemarks", {})}
+            />}
           labelPlacement="top"
           {...register("youtube-options", {})}
         />
@@ -865,6 +957,7 @@ function Applications() {
           value="delete"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
+          {...register("it-ticketing-tool-options", {})}
         />
         </TableCell>
         <TableCell align="center">
@@ -887,6 +980,19 @@ function Applications() {
         <FormControlLabel
           value="admin"
           control={<Checkbox  size="small" />}
+          labelPlacement="top"
+          {...register("it-ticketing-tool-options", {})}
+        />
+        </TableCell>
+        <TableCell align="center">
+        <FormControlLabel
+          control={<TextField 
+            type='text' 
+            color="secondary" 
+            label="IT Ticketing Tool"
+            inputProps={{ maxLength: 48 }}  
+            {...register("itTicketingToolRemarks", {})}
+            />}
           labelPlacement="top"
           {...register("it-ticketing-tool-options", {})}
         />
@@ -926,6 +1032,7 @@ function Applications() {
           value="delete"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
+          {...register("tpd-ticketing-tool-options", {})}
         />
         </TableCell>
         <TableCell align="center">
@@ -948,6 +1055,19 @@ function Applications() {
         <FormControlLabel
           value="admin"
           control={<Checkbox  size="small" />}
+          labelPlacement="top"
+          {...register("tpd-ticketing-tool-options", {})}
+        />
+        </TableCell>
+        <TableCell align="center">
+        <FormControlLabel
+          control={<TextField 
+            type='text' 
+            color="secondary" 
+            label="TPD Ticketing Tool"
+            inputProps={{ maxLength: 48 }}  
+            {...register("tpdTicketingToolRemarks", {})}
+            />}
           labelPlacement="top"
           {...register("tpd-ticketing-tool-options", {})}
         />
@@ -987,6 +1107,7 @@ function Applications() {
           value="delete"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
+          {...register("hcm-options", {})}
         />
         </TableCell>
         <TableCell align="center">
@@ -1009,6 +1130,19 @@ function Applications() {
         <FormControlLabel
           value="admin"
           control={<Checkbox  size="small" />}
+          labelPlacement="top"
+          {...register("hcm-options", {})}
+        />
+        </TableCell>
+        <TableCell align="center">
+        <FormControlLabel
+          control={<TextField 
+            type='text' 
+            color="secondary" 
+            label="HCM Ticketing Tool"
+            inputProps={{ maxLength: 48 }}  
+            {...register("hcmRemarks", {})}
+            />}
           labelPlacement="top"
           {...register("hcm-options", {})}
         />
@@ -1048,6 +1182,7 @@ function Applications() {
           value="delete"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
+          {...register("erp-options", {})}
         />
         </TableCell>
         <TableCell align="center">
@@ -1074,69 +1209,20 @@ function Applications() {
           {...register("erp-options", {})}
         />
         </TableCell>
-            </TableRow>
-
-            <TableRow
-              sx={{ '&:last-child td, &:last-child th': { border: 2 } }}
-            >
-        <TableCell component="th" scope="row" align="center"><h3>NAP Locator</h3></TableCell>
-        <TableCell align="center">
-    <FormControlLabel
-          value="view"
-          control={<Checkbox  size="small" />}
-          labelPlacement="top"
-          {...register("naplocator-options", {})}
-        />
-        </TableCell>
         <TableCell align="center">
         <FormControlLabel
-          value="add"
-          control={<Checkbox  size="small" />}
+          control={<TextField 
+            type='text' 
+            color="secondary" 
+            label="ERP"
+            inputProps={{ maxLength: 48 }}  
+            {...register("erpRemarks", {})}
+            />}
           labelPlacement="top"
-          {...register("naplocator-options", {})}
-        />
-        </TableCell>
-        <TableCell align="center">
-        <FormControlLabel
-          value="edit"
-          control={<Checkbox  size="small" />} 
-          labelPlacement="top"
-          {...register("naplocator-options", {})}
-        />
-        </TableCell>
-        <TableCell align="center">
-        <FormControlLabel
-          value="delete"
-          control={<Checkbox  size="small" />}
-          labelPlacement="top"
-        />
-        </TableCell>
-        <TableCell align="center">
-        <FormControlLabel
-          value="export"
-          control={<Checkbox  size="small" />}
-          labelPlacement="top"
-          {...register("naplocator-options", {})}
-        />
-        </TableCell>
-        <TableCell align="center">
-        <FormControlLabel
-          value="import"
-          control={<Checkbox  size="small" />}
-          labelPlacement="top"
-          {...register("naplocator-options", {})}
-        />
-        </TableCell>
-        <TableCell align="center">
-        <FormControlLabel
-          value="admin"
-          control={<Checkbox  size="small" />}
-          labelPlacement="top"
-          {...register("naplocator-options", {})}
+          {...register("erp-options", {})}
         />
         </TableCell>
             </TableRow>
-
             <TableRow
               sx={{ '&:last-child td, &:last-child th': { border: 2 } }}
             >
@@ -1170,6 +1256,7 @@ function Applications() {
           value="delete"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
+          {...register("gsuite-options", {})}
         />
         </TableCell>
         <TableCell align="center">
@@ -1192,6 +1279,19 @@ function Applications() {
         <FormControlLabel
           value="admin"
           control={<Checkbox  size="small" />}
+          labelPlacement="top"
+          {...register("gsuite-options", {})}
+        />
+        </TableCell>
+        <TableCell align="center">
+        <FormControlLabel
+          control={<TextField 
+            type='text' 
+            color="secondary" 
+            label="Gsuite"
+            inputProps={{ maxLength: 48 }}  
+            {...register("gsuiteRemarks", {})}
+            />}
           labelPlacement="top"
           {...register("gsuite-options", {})}
         />
@@ -1231,6 +1331,7 @@ function Applications() {
           value="delete"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
+          {...register("domain-controller-options", {})}
         />
         </TableCell>
         <TableCell align="center">
@@ -1253,6 +1354,19 @@ function Applications() {
         <FormControlLabel
           value="admin"
           control={<Checkbox  size="small" />}
+          labelPlacement="top"
+          {...register("domain-controller-options", {})}
+        />
+        </TableCell>
+        <TableCell align="center">
+        <FormControlLabel
+          control={<TextField 
+            type='text' 
+            color="secondary" 
+            label="Domain Controller"
+            inputProps={{ maxLength: 48 }}  
+            {...register("domainControllerRemarks", {})}
+            />}
           labelPlacement="top"
           {...register("domain-controller-options", {})}
         />
@@ -1292,6 +1406,7 @@ function Applications() {
           value="delete"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
+          {...register("oss-user-management-options", {})}
         />
         </TableCell>
         <TableCell align="center">
@@ -1314,6 +1429,19 @@ function Applications() {
         <FormControlLabel
           value="admin"
           control={<Checkbox  size="small" />}
+          labelPlacement="top"
+          {...register("oss-user-management-options", {})}
+        />
+        </TableCell>
+        <TableCell align="center">
+        <FormControlLabel
+          control={<TextField 
+            type='text' 
+            color="secondary" 
+            label="OSS User Management"
+            inputProps={{ maxLength: 48 }}  
+            {...register("ossUserManageMentRemarks", {})}
+            />}
           labelPlacement="top"
           {...register("oss-user-management-options", {})}
         />
@@ -1353,6 +1481,7 @@ function Applications() {
           value="delete"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
+          {...register("vcenter-options", {})}
         />
         </TableCell>
         <TableCell align="center">
@@ -1375,6 +1504,19 @@ function Applications() {
         <FormControlLabel
           value="admin"
           control={<Checkbox  size="small" />}
+          labelPlacement="top"
+          {...register("vcenter-options", {})}
+        />
+        </TableCell>
+        <TableCell align="center">
+        <FormControlLabel
+          control={<TextField 
+            type='text' 
+            color="secondary" 
+            label="Vcenter"
+            inputProps={{ maxLength: 48 }}  
+            {...register("vcenterRemarks", {})}
+            />}
           labelPlacement="top"
           {...register("vcenter-options", {})}
         />
@@ -1414,6 +1556,7 @@ function Applications() {
           value="delete"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
+          {...register("smartsheet-options", {})}
         />
         </TableCell>
         <TableCell align="center">
@@ -1436,6 +1579,19 @@ function Applications() {
         <FormControlLabel
           value="admin"
           control={<Checkbox  size="small" />}
+          labelPlacement="top"
+          {...register("smartsheet-options", {})}
+        />
+        </TableCell>
+        <TableCell align="center">
+        <FormControlLabel
+          control={<TextField 
+            type='text' 
+            color="secondary" 
+            label="Smart Sheet"
+            inputProps={{ maxLength: 48 }}  
+            {...register("smartSheetRemarks", {})}
+            />}
           labelPlacement="top"
           {...register("smartsheet-options", {})}
         />
@@ -1474,6 +1630,7 @@ function Applications() {
           value="delete"
           control={<Checkbox  size="small" />}
           labelPlacement="top"
+          {...register("tableau-options", {})}
         />
         </TableCell>
         <TableCell align="center">

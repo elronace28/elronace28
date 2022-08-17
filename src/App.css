@@ -16,29 +16,16 @@ input[type="number"] {
 }
 .header {
   padding: 100px;
+  padding-right: 200px;
   text-align: flex;
   background-color: #f2f2f2;
-  font-size: 15px;
-  font-family: 'Arial';
-
 }
 
 .tableapplication{
-  display: flex;
+    display: flex;
     justify-content: center;
     align-items: center;
- 
-  margin-top: 1%;
-}
-
-.navbar {
-  overflow: hidden;
-  background-color: #333;
-  position: fixed;
-  top: 0;
-  width: 100%;
-}
-
-.textfield{
-  color:#f2f2f2;
+    width: 1050px;
+    margin-top: 1%;
+  
 }
