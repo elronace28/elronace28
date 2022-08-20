@@ -1,72 +1,35 @@
-// import { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer';
+import Applications from "./Components/Applications";
+import Numbers from "./Components/Numbers";
+import Info from "./Components/Info";
+import NewAccount from "./Components/NewAccount";
+import ConvergeOrSubsidiary from "./Components/ConvergeOrSubsidiary";
+import ImmidiateHead from "./Components/ImmidiateHead";
+import Locations from "./Components/Locations";
+import EAR from "./Components/EAR";
+import GadgetTools from "./Components/GadgetTools";
+
 import { PDFDocument, rgb } from "pdf-lib";
 import { useForm, useFieldArray } from "react-hook-form";
-import React, { useState } from "react";
 import "./App.css";
 import Box from "@mui/material/Box";
 import {
-  // Alert,
-  Autocomplete,
   Button,
-  Chip,
   Grid,
   IconButton,
-  // IconButton,
-  // Snackbar,
-  // Menu,
-  // MenuItem,
-  // Paper,
   Stack,
-  styled,
-  // Table,
-  // TableBody,
-  // TableCell,
-  // TableContainer,
-  // TableHead,
-  // TableRow,
-  TextareaAutosize,
-  // Toolbar,
 } from "@mui/material";
 import {
-  // Checkbox,  
-  FormControl,
-  FormControlLabel,
-  FormLabel,
-  Radio,
-  RadioGroup,
   TextField,
 } from "@mui/material";
-import { purple } from "@mui/material/colors";
 import FilePresentIcon from "@mui/icons-material/FilePresent";
-import Applications from "./Components/Applications";
 import NoteAddIcon from '@mui/icons-material/NoteAdd';
 import CancelIcon from '@mui/icons-material/Cancel';
-import ErrorOutlineOutlinedIcon from '@mui/icons-material/ErrorOutlineOutlined';
 
-//Other Select Location
-const otherLocations = [
-  { label: "Laguna" },
-  { label: "Pampanga" },
-  { label: "Pasig" },
-  { label: "Rizal" },
-  { label: "Antipolo" },
-  { label: "Bulacan" },
-];
-const immidiateHead = [
-  { label: "Steven Maverick Paradeza" },
-  { label: "Jominee Mangaser" },
-  { label: 'Fregie A. Chanjueco'},
-  { label: "Erwin M. Apolonio" },
-  { label: "Sir Budds" },
-];
-//Button style for Generate PDF
-const ColorButton = styled(Button)(({ theme }) => ({
-  color: theme.palette.getContrastText(purple[500]),
-  backgroundColor: purple[500],
-  "&:hover": {
-    backgroundColor: purple[700],
-  },
-}));
+
+
+
+
+
 
 
 //PDF COORDINATE
@@ -186,7 +149,7 @@ firstPage.drawText(data.jobTitle, {
 )
 firstPage.drawText(data.immidiateHead, {
   x: 140,
-  y: 655,
+  y: 647,
   size: 7,
 },
 )
@@ -375,12 +338,15 @@ firstPage.drawText(data.smartSheetRemarks, {
 },
 )
 
-  firstPage.drawText(data.toString('otherTools'), {
-  x: 367,
-  y: 376,
-  size: 5,
-},
-)
+const obj = (`${data.otherTools}`)
+const myJSON = JSON.stringify(obj);
+document.getElementsByName(obj).innerHTML = myJSON;
+  firstPage.drawText(obj, {
+    x: 285,
+    y: 348,
+    size: 7,
+  },
+  )
 
 
   const svgPath = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18px" height="18px" viewBox="0 0 18 18" version="1.1">
@@ -631,31 +597,6 @@ firstPage.drawText(data.smartSheetRemarks, {
 };
 
 function App() {
-
-
-  
-  //
-  // const [open, setSuccess] = React.useState(false);
-
-  // const handleChange = () => {
-  //   setSuccess(true);
-  // };
-
-  // const handleClose = (event, reason) => {
-  //   if (reason === 'clickaway') {
-  //     return;
-  //   }
-
-  //   setSuccess(false);
-  // };
-
-  // const [page, setPage] = useState("add")
-  
-
-  // const handleCancel = () => {
-  //     setPage("");
-  // };
-
   
   const {
     register,
@@ -665,7 +606,7 @@ function App() {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      toolList: [{ type: "text", value: "", name: "otherTools" }]
+      toolList: [{  value: "", name: "otherTools: " }]
     }
   });
 
@@ -681,41 +622,22 @@ function App() {
   }
   console.log(watch('toolList'));
  
-  // Other Location Auto Complete
-  // Location Radio Button
-  const [value2, setValue2] = useState("");
-
   //PDF Trigger Download File  
   const onClick=(data) => Generatepdf(data);
   if (Generatepdf === true) {
     return false;
   }
 
+  
   return (
     
     <form onSubmit={handleSubmit(onClick)}>
- {/* <Snackbar open={open} autoHideDuration={2000} onClose={handleClose} >
-        <Alert 
-              onClose={handleClose} 
-              severity={errors?.lastName ?'error' : 'success'}
-              sx={{ width: '100%' }}
-              >
-              {errors?.lastName?.type === 'required' && ('Fill out the required fields')}
-              {errors?.lastName ? null : 'success' &&('Successfully Added')}    
-             
-        </Alert>
-      </Snackbar> */}
+<Grid container spacing={3} alignItems="center">
+{Array.from(Array(1)).map((_, index) => (
+  <Grid item  xs="auto" key={index}>
 
-    
- <Grid container spacing={3} alignItems="center">
-        {Array.from(Array(1)).map((_, index) => (
-          <Grid item  xs="auto" key={index}>
-
-
-     
-     
       <div className="header">
-        <Box
+    <Box
           sx={{
             display: "block",
             width: "100%",
@@ -728,507 +650,39 @@ function App() {
         >
        
           <h1>Employee Account Request Form</h1>
-          <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              "& > :not(style)": { m: 3 },
-            }}
-          >
-            
-            <TextField
-              type='text'
-              color='success'
-              label={errors?.employeeNumber ? "Employee Number!" : 'Employee Number' }
-              onKeyDown={(evt) =>
-                ["e", "E", "+", "-"].includes(evt.key) && evt.preventDefault()}
-              error={errors?.employeeNumber}
-              helperText = {errors?.employeeNumber ? errors?.employeeNumber.message : null   
-                           }
-              {...register("employeeNumber", {
-                required: <Chip label="This field is required" 
-                style={{ color: "red"}} 
-                icon={<ErrorOutlineOutlinedIcon style={{ color: "red"}} />
-                 }/>,
-                pattern:{ 
-                  value:/[0-9]{3}/,
-                message: <Chip label="Please follow the requested format" 
-                style={{ color: "red"}} 
-                icon={<ErrorOutlineOutlinedIcon style={{ color: "red"}} />
-              }/>,
-              },
-              })}
-            />
-          </Box>
-  
-          <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              "& > :not(style)": { m: 3 },
-            }}
-          >
-            <TextField
-              type="text"
-              color="secondary"
-              label="Ticket Number"
-              {...register("ticketNumber", {
-              })}
-            />
-          </Box>
-          <h2>Full Name</h2>
-          <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              "& > :not(style)": { m: 2, width: "35%" },
-            }}
-          >
-            <TextField
-              type="text"
-              color="success"
-              label={errors?.lastName ? "Last Name!" : 'Last Name' }
-              error={errors?.lastName}
-              helperText= {errors?.lastName ? errors?.lastName.message : null }
-              {...register("lastName", {
-                required: <Chip label="This field is required" 
-                style={{ color: "red"}} 
-                icon={<ErrorOutlineOutlinedIcon style={{ color: "red"}} />
-                 }/>,
-                pattern:{ 
-                  value:/^[ A-Za-z ]{3}/,
-                message: <Chip label="Please follow the requested format" 
-                style={{ color: "red"}} 
-                icon={<ErrorOutlineOutlinedIcon style={{ color: "red"}} />
-              }/>,
-              },
-              })}
-            />
-             
-             
-            
-            <TextField
-              type="text"
-              color="success"
-              error={errors?.firstName}
-              label={errors?.firstName ? "First Name!" : 'First Name' }
-              helperText={errors?.firstName ? errors?.firstName.message : null }
-              {...register("firstName", {
-                required: <Chip label="This field is required" 
-                style={{ color: "red"}} 
-                icon={<ErrorOutlineOutlinedIcon style={{ color: "red"}} />
-                 }/>,
-                pattern:{ 
-                  value:/^[A-Za-z ]{4,32}/,
-                message: <Chip label="Please follow the requested format" 
-                style={{ color: "red"}} 
-                icon={<ErrorOutlineOutlinedIcon style={{ color: "red"}} />
-              }/>,
-              },
-              })}
-            />
-  
-            <TextField
-              type="text"
-              color="success"
-              error={errors?.middleName}
-              label={errors?.middleName ? "Middle Name!" : 'Middle Name' }
-              helperText= {errors?.middleName ? errors?.middleName.message : null }
-              {...register("middleName", {
-                required: <Chip label="This field is required" 
-                style={{ color: "red"}} 
-                icon={<ErrorOutlineOutlinedIcon style={{ color: "red"}} />
-                 }/>,
-                pattern:{ 
-                  value:/^[A-Za-z ]{1,32}/,
-                message: <Chip label="Please follow the requested format" 
-                style={{ color: "red"}} 
-                icon={<ErrorOutlineOutlinedIcon style={{ color: "red"}} />
-              }/>,
-              },
-              })}
-            />
-          </Box>
-
-          <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              "& > :not(style)": { m: 2, width: "50%" },
-            }}
-          >
-            <TextField
-              type="email"
-              color="success"
-              placeholder="@example.com"
-              error={errors?.emailInput}
-              label={errors?.emailInput ? "Email Address!" : 'Email Address' }
-              helperText= {errors?.emailInput ? errors?.emailInput.message : null }
-              {...register("emailInput", {
-                required: <Chip label="This field is required" 
-                style={{ color: "red"}} 
-                icon={<ErrorOutlineOutlinedIcon style={{ color: "red"}} />
-                 }/>,
-                pattern:{ 
-                  value:/.+@.+\..+$/,
-                message: <Chip label="Please follow the requested format" 
-                style={{ color: "red"}} 
-                icon={<ErrorOutlineOutlinedIcon style={{ color: "red"}} />
-              }/>,
-              },
-              })}
-            />
-           
-            <TextField
-              type="text"
-              color="success"
-              error={errors?.departmentInput}
-              label={errors?.departmentInput ? "Department!" : 'Department' }
-              helperText= {errors?.departmentInput ? errors?.departmentInput.message : null }
-              {...register("departmentInput", {
-                required: <Chip label="This field is required" 
-                style={{ color: "red"}} 
-                icon={<ErrorOutlineOutlinedIcon style={{ color: "red"}} />
-                 }/>,
-                pattern:{ 
-                  value:/^[A-Za-z ]{2,32}/,
-                message: <Chip label="Please follow the requested format" 
-                style={{ color: "red"}} 
-                icon={<ErrorOutlineOutlinedIcon style={{ color: "red"}} />
-              }/>,
-              },
-              })}
-            />
-          </Box>
-          <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              "& > :not(style)": { m: 2, width: "50%" },
-            }}
-          >
-            <TextField
-              type="number"
-              color="success"
-              placeholder="09********"
-              error={errors?.contactNumber}
-              label={errors?.contactNumber ? "09*********!" : 'Contact Number' }
-              helperText= {errors?.contactNumber ? errors?.contactNumber.message : null }
-              onKeyDown={(evt) =>
-                ["e", "E", "+", "-"].includes(evt.key) && evt.preventDefault()
-              }
-              {...register("contactNumber", {
-                required: <Chip label="This field is required" 
-                style={{ color: "red"}} 
-                icon={<ErrorOutlineOutlinedIcon style={{ color: "red"}} />
-                 }/>,
-                pattern:{ 
-                  value:/[0-9]{10}/,
-                message: <Chip label="Please follow the requested format" 
-                style={{ color: "red"}} 
-                icon={<ErrorOutlineOutlinedIcon style={{ color: "red"}} />
-              }/>,
-              },
-              })}
-            />
-             
-            <TextField
-              inputProps={{ pattern: "[A-Za-z ]{1,32}" }}
-              type="text"
-              color="success"
-              error={errors?.jobTitle}
-              label={errors?.jobTitle ? "Job Title" : 'Job Title' }
-              helperText= {errors?.jobTitle ? errors?.jobTitle.message : null }
-              {...register("jobTitle", {
-                required: <Chip label="This field is required" 
-                style={{ color: "red"}} 
-                icon={<ErrorOutlineOutlinedIcon style={{ color: "red"}} />
-                 }/>,
-                pattern:{ 
-                  value:/^[A-Za-z ]{5,32}/,
-                message: <Chip label="Please follow the requested format" 
-                style={{ color: "red"}} 
-                icon={<ErrorOutlineOutlinedIcon style={{ color: "red"}} />
-              }/>,
-              },
-              })}
-            />
-          </Box>
+          <Numbers 
+          register={register}
+          errors={errors} />
           
-                  <Autocomplete 
-                    id="immidiateHead"
-                    freeSolo
-                    name = 'immidiateHead'
-                    options={immidiateHead}
-                    sx={{ m: 2, width: 520 }}
-                    renderInput={(params) => (
-                      <TextField {...params}  label={errors?.immidiateHead ? "Immidiate Head!" : 'Immidiate Head' } 
-                            color='success'
-                            error={errors?.immidiateHead}
-                            helperText= {errors?.immidiateHead ? errors?.immidiateHead.message : null }
-                          {...register("immidiateHead", {
-                            required: <Chip label="This field is required" 
-                            style={{ color: "red"}} 
-                            icon={<ErrorOutlineOutlinedIcon style={{ color: "red"}} />
-                            }/>,
-                            pattern:{ 
-                              value:/^[A-Za-z ]/,
-                            message: <Chip label="Please follow the requested format" 
-                            style={{ color: "red"}} 
-                            icon={<ErrorOutlineOutlinedIcon style={{ color: "red"}} />
-                          }/>,
-                          },
-                          })}                   
-                      />
-                    )}
-                  />
-          <div>
-            <FormControl>
-              <FormLabel sx={{ m: 1 }}>
-                <h3>New Account?</h3>
-              </FormLabel>
-              {/* New Account? */}
-              <RadioGroup
-                aria-labelledby="newAccountRadio"
-                defaultValue="newAccountRadio"
-                sx={{ m: 1 }}
-              >
-                {errors?.newAccountRadio?.type === "required" && (
-                <Chip label="This field is required" 
-                style={{ color: "red"}} 
-                icon={<ErrorOutlineOutlinedIcon style={{ color: "red"}} />
-                 }/>
-                )}
-                <FormControlLabel
-                  value="yesRadioButton"
-                  color="secondary"
-                  control={<Radio />}
-                  label="Yes"
-                  {...register("newAccountRadio", { required: true })}
-                />
+          <h2>Full Name</h2>
+          <Info
+          register={register}
+          errors={errors}/>
 
-                <FormControlLabel
-                  value="noRadioButton"
-                  color="secondary"
-                  control={<Radio />}
-                  label="No"
-                  {...register("newAccountRadio", { required: true })}
-                />
-              </RadioGroup>
-            </FormControl>
-          </div>
-          {/* Select Converge or Sub */}
-          <div>
-            <FormControl>
-              <FormLabel sx={{ m: 1 }}>
-              Select(Converge and Subsidiary)
-              </FormLabel>
-              {errors?.selectRadioButton?.type === "required" && (
-                <Chip label="This field is required" 
-                style={{ color: "red"}} 
-                icon={<ErrorOutlineOutlinedIcon style={{ color: "red"}} />
-                 }/>
-              )}
-              <RadioGroup
-                aria-labelledby="selectRadioButton"
-                name="selectRadioButton"
-                defaultValue="selectRadioButton"
-                sx={{ m: 2 }}
-                className=""
-                >
-                <FormControlLabel
-                  value="convergeRadioButton"
-                  control={<Radio />}
-                  name="selectRadioButton"
-                  label="Converge"
-                  id="converge"
-                  {...register("selectRadioButton", { required: true })}
-                />
-                <FormControlLabel
-                  value="subsidiaryRadioButton"
-                  control={<Radio />}
-                  name="selectRadioButton"
-                  label="Subsidiary"
-                  id="subsidiary"
-                  {...register("selectRadioButton", { required: true })}
-                />
-              </RadioGroup>
-            </FormControl>
-          </div>
-                 {/* Location Radio Button */}
-                      <h2>Location</h2>
-          <div>
-            <FormControl>
-              <RadioGroup
-                aria-labelledby="locationRadioButton"
-                name="locationRadioButton"
-                defaultValue="locationRadioButton"
-                >
-                {errors?.locationRadioButton?.type === "required" && (
-                <Chip label="This field is required" 
-                 style={{ color: "red"}} 
-                 icon={<ErrorOutlineOutlinedIcon style={{ color: "red"}} />
-                 }
-                />
-                )}
-                <FormControlLabel
-                  control={<Radio />}
-                  sx={{ m: 1 }}
-                  value="Metro Manila"
-                  label="Metro Manila"
-                  {...register("locationRadioButton", { required: true })}
-                  checked={value2 === "Metro Manila"}
-                  onChange={(locationRadioButton) =>
-                    setValue2(locationRadioButton.currentTarget.value)
-                  }
-                />
+          <ImmidiateHead
+          register={register}
+          errors={errors}/>
+                 
+          <NewAccount 
+          register={register}
+          errors={errors}/>
 
-                <FormControlLabel
-                  control={<Radio />}
-                  sx={{ m: 1 }}
-                  value="Other Location"
-                  label="Others"
-                  {...register("locationRadioButton", { required: true })}
-                  checked={value2 === "Other Location"}
-                  onChange={(locationRadioButton) =>
-                    setValue2(locationRadioButton.currentTarget.value)
-                  } 
-                />
-
-                {value2 === "Other Location" && (
-                  <Stack spacing={2} sx={{ width: 300 }}>
-                  <Autocomplete 
-                    id="othersAutoComplete"
-                    freeSolo
-                    name = 'othersAutoComplete'
-                    options={otherLocations}
-                    sx={{ m: 1, width: 300 }}
-                    renderInput={(params) => (
-                      <TextField {...params} label="Select Location" 
-                      helperText= {errors?.othersAutoComplete ? errors?.othersAutoComplete.message : null }
-                          {...register("othersAutoComplete", {
-                            required: <Chip label="This field is required" 
-                            style={{ color: "red"}} 
-                            icon={<ErrorOutlineOutlinedIcon style={{ color: "red"}} />
-                            }/>,
-                            pattern:{ 
-                              value:/^[A-Za-z ]/,
-                            message: <Chip label="Please follow the requested format" 
-                            style={{ color: "red"}} 
-                            icon={<ErrorOutlineOutlinedIcon style={{ color: "red"}} />
-                          }/>,
-                          },
-                          })}                   
-                      />
-                    )}
-                  />
-                  </Stack>
-                )}
-                
-              </RadioGroup>
-            </FormControl>
-          </div>
+          <ConvergeOrSubsidiary 
+          register={register}
+          errors={errors}/>
+          
+          <h2>Location</h2>
+          <Locations
+          register={register}
+          errors={errors}/>
 
          <h1>Workstation: To be filled by BUH</h1>
-         <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              "& > :not(style)": { m: 3, width: "50%" },
-            }}
-          >
-            {/* Workstation: To be filled by BUH */}
-            <TextField
-              color="secondary"
-              label="Windows Desktop"
-              {...register("windowsDesktop", {})}
-            />
-             <TextField
-              color="secondary"
-              label="Windows Laptop"
-              {...register("windowsLaptop", {})}
-            />
-             <TextField
-              color="secondary"
-              label="MAC Apple"
-              {...register("appleMac", {})}
-            />
-          </Box>
-          {/* Justification */}
-          <h3>Justification(if any)</h3>
-          <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              "& > :not(style)": { m: 2 },
-            }}
-          >
-          <TextareaAutosize
-      aria-label="minimum height"
-      minRows={3}
-      type ="text"
-      name="justificationInput"
-      placeholder="Input Here"
-      style={{ width: 200 }}
-      {...register("justificationInput", {})}
-    />
-    </Box>
+         <GadgetTools
+          register={register}/>
+
           <h2>Enterprise Access Request</h2>
-          <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              "& > :not(style)": { m: 3, width: "50%" },
-            }}
-          >
-            {/* Enterprise Access Request */}
-            <TextField
-              color="secondary"
-              label="NT Login"
-              {...register("ntLogin", {})}
-            />
-            </Box>
-            <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              "& > :not(style)": { m: 3, width: "50%" },
-            }}
-          >
-          
-            
-             <TextField
-              color="secondary"
-              label="Email ID"
-              {...register("emailId", {})}
-            /> 
-             </Box>
-            <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              "& > :not(style)": { m: 3, width: "50%" },
-            }}
-          >
-             <TextField
-              color="secondary"
-              label="File Server Access"
-              {...register("fileServerAccess", {})}
-            />
-            </Box>
-            <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              "& > :not(style)": { m: 3, width: "50%" },
-            }}
-          >
-            <TextField
-              color="secondary"
-              label="VPN"
-              {...register("vpnInput", {})}
-            />
-          </Box>
+          <EAR
+          register={register}/>
          
           {/* Specify Tools */}
         <h3>Other Tools (Please specify)</h3>
@@ -1268,33 +722,32 @@ function App() {
          )}
       </section>
     {/* Applications Table */}
-    <Applications register={register} />
+          <Applications 
+          register={register} />
+          
           <Box
             sx={{
               display: "flex",
-
               "& > :not(style)": { m: 3 },
             }}
-          >
+            >
             <Stack spacing={2} direction="row">
-              <ColorButton
+              <Button
+                color="secondary"
                 variant="contained"
                 type="submit"
                 // onClick={handleChange}
                 endIcon={<FilePresentIcon />}
-              >
-               
+                > 
                 Generate PDF
-              </ColorButton>
+              </Button>
             </Stack>
           </Box>
-        </Box>
-        
-        </div>
-      </Grid>
-      
+    </Box> 
+      </div>
+  </Grid>
         ))}
-      </Grid>
+</Grid>
     </form>
     
   );
