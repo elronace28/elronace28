@@ -7,28 +7,17 @@ import ImmidiateHead from "./Components/ImmidiateHead";
 import Locations from "./Components/Locations";
 import EAR from "./Components/EAR";
 import GadgetTools from "./Components/GadgetTools";
-
+import OtherTools from "./Components/OtherTools";
 import { PDFDocument, rgb } from "pdf-lib";
-import { useForm, useFieldArray } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import "./App.css";
 import Box from "@mui/material/Box";
 import {
   Button,
   Grid,
-  IconButton,
   Stack,
 } from "@mui/material";
-import {
-  TextField,
-} from "@mui/material";
 import FilePresentIcon from "@mui/icons-material/FilePresent";
-import NoteAddIcon from '@mui/icons-material/NoteAdd';
-import CancelIcon from '@mui/icons-material/Cancel';
-
-
-
-
-
 
 
 
@@ -338,10 +327,10 @@ firstPage.drawText(data.smartSheetRemarks, {
 },
 )
 
-const obj = (`${data.otherTools}`)
-const myJSON = JSON.stringify(obj);
-document.getElementsByName(obj).innerHTML = myJSON;
-  firstPage.drawText(obj, {
+// const obj = (`${data.otherTools}`)
+// const myJSON = JSON.stringify(obj);
+// document.getElementsByName(obj).innerHTML = myJSON;
+  firstPage.drawText(data.toolList.value, {
     x: 285,
     y: 348,
     size: 7,
@@ -601,26 +590,17 @@ function App() {
   const {
     register,
     handleSubmit,
-    watch,
-    control,
+    // watch,
     formState: { errors },
   } = useForm({
     defaultValues: {
-      toolList: [{  value: "", name: "otherTools: " }]
+      toolList: [{  value: "", name: "otherTools " }]
     }
   });
-
-  const { fields, append, remove } = useFieldArray({
-    control,
-    name: "toolList"
-    
-  });
-  // Specify Tools 
-  
   
   if (register === "") {
   }
-  console.log(watch('toolList'));
+  // console.log(watch('toolList'));
  
   //PDF Trigger Download File  
   const onClick=(data) => Generatepdf(data);
@@ -686,42 +666,9 @@ function App() {
          
           {/* Specify Tools */}
         <h3>Other Tools (Please specify)</h3>
-        
-              {fields.map((item, index) => {
-               return (
-          <ul key={item.id}>
-            
-            <TextField 
-              type="text"
-              color="secondary"
-              label='Input Here (Optional)'
-              defaultValue={`${item.otherTools}`}
-              {...register(`toolList.${index}.value`,{
-              })}
-            />
-              {fields.length > 1 && 
-              (
-              <IconButton color='error' onClick={() => remove(index)}>
-                <CancelIcon />
-              </IconButton>
-              )}
-               
-           </ul>
-              );
-              })}
-      <section>
-              {fields.length -1 <= 8 && (
-            <IconButton 
-                  color='success'
-                  onClick={() => {
-                  append({ otherTools: ""});
-                 }}
-              > Add Tools
-              <NoteAddIcon/>
-            </IconButton>
-         )}
-      </section>
-    {/* Applications Table */}
+        <OtherTools
+        register={register}/>
+
           <Applications 
           register={register} />
           
